@@ -9,6 +9,8 @@
     "db:migrate": "prisma migrate deploy",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
+    "db:reset": "prisma db push --force-reset && prisma db seed",
+    "db:tunnel": "ssh -i ~/.ssh/uberspace-mktcode mktcode@alnilam.uberspace.de -N -L 3306:127.0.0.1:3306",
     "dev": "next dev",
     "postinstall": "prisma generate",
     "lint": "next lint",
