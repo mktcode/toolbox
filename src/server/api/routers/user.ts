@@ -11,7 +11,7 @@ import {
   protectedProcedure,
 } from "~/server/api/trpc";
 
-export const postRouter = createTRPCRouter({
+export const userRouter = createTRPCRouter({
   userBalance: protectedProcedure
     .query(async ({ ctx }) => {
       const stripeSecretKey = process.env.STRIPE_SECRET_KEY

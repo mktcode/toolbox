@@ -6,7 +6,7 @@ import {
   protectedProcedure,
 } from "~/server/api/trpc";
 
-export const postRouter = createTRPCRouter({
+export const topUpRouter = createTRPCRouter({
   createTopUp: protectedProcedure
     .query(async ({ ctx }) => {
       const user = ctx.session.user
