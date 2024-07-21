@@ -33,7 +33,7 @@ export default function ProjectsPage() {
           </p>
           <div className="flex mt-12">
             <input type="text" placeholder="Enter your email" className="bg-transparent w-full max-w-96 text-white mr-3 py-4 px-8 border border-white rounded mt-6 transition-all" />
-            <Link href="/app">
+            <Link href="/">
               <button className="bg-white font-semibold text-xl text-black hover:text-gray-700 py-4 px-8 rounded mt-6 transition-all">
                 Sign up for beta access!
               </button>
@@ -154,7 +154,7 @@ export default function ProjectsPage() {
                 <li>$1/100,000 Tokens</li>
                 <li>Limited ChatGPT Plus features</li>
               </ul>
-              <Link href="/app">
+              <Link href="/projects">
                 <button className="w-full px-6 py-4 bg-white text-gray-900 rounded-md hover:bg-gray-100 text-xl">
                   Get Started
                 </button>
