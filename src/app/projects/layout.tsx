@@ -29,9 +29,12 @@ export default async function ProjectsLayout({
             <h1 className="text-xl font-bold">
               Senior
             </h1>
-            <select className="rounded-md px-3 py-1 ml-8 text-gray-400 bg-gray-50 text-sm">
+            <select className="rounded-md px-3 py-1 ml-8 font-semibold text-xl bg-white">
               <option>My Project</option>
             </select>
+            <button className="rounded-md px-3 py-1 ml-4 text-gray-400 bg-gray-50">
+              +
+            </button>
             <div className="ml-auto">
               {session && <span className="text-gray-400 text-sm">
                 Logged in as {session.user?.name}
