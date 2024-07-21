@@ -20,9 +20,9 @@ export const projectRouter = createTRPCRouter({
       });
     }),
   
-    getLatest: protectedProcedure.query(({ ctx }) => {
-      return ctx.db.project.findFirst({
-        orderBy: { createdAt: "desc" },
+  getAll: protectedProcedure
+    .query(({ ctx }) => {
+      return ctx.db.project.findMany({
         where: { user: { id: ctx.session.user.id } },
       });
     }),

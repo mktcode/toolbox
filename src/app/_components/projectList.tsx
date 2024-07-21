@@ -4,12 +4,12 @@ import { useState } from "react";
 
 import { api } from "~/trpc/react";
 
-export function LatestPost() {
-  const [latestPost] = api.project.getLatest.useSuspenseQuery();
+export function ProjectList() {
+  const [projects] = api.project.getAll.useSuspenseQuery();
 
   const utils = api.useUtils();
   const [name, setName] = useState("");
-  const createPost = api.project.create.useMutation({
+  const createProject = api.project.create.useMutation({
     onSuccess: async () => {
       await utils.project.invalidate();
       setName("");
@@ -18,17 +18,17 @@ export function LatestPost() {
 
   return (
     <div className="w-full max-w-xs">
-      {latestPost ? (
-        <p className="truncate">Your most recent post: {latestPost.name}</p>
-      ) : (
-        <p>You have no posts yet.</p>
-      )}
+      {projects.map((project) => (
+        <div key={project.id} className="p-4 border rounded-md">
+          {project.name}
+        </div>
+      ))}
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          createPost.mutate({ name });
+          createProject.mutate({ name });
         }}
-        className="flex flex-col gap-2"
+        className="flex flex-col gap-2 mt-6"
       >
         <input
           type="text"
@@ -40,9 +40,9 @@ export function LatestPost() {
         <button
           type="submit"
           className="rounded-full bg-gray-200 px-10 py-3 font-semibold transition hover:bg-gray-300"
-          disabled={createPost.isPending}
+          disabled={createProject.isPending}
         >
-          {createPost.isPending ? "Submitting..." : "Submit"}
+          {createProject.isPending ? "Submitting..." : "Submit"}
         </button>
       </form>
     </div>
