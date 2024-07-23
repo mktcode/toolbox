@@ -1,9 +1,12 @@
 import "~/styles/globals.css";
+import { api, HydrateClient } from "~/trpc/server";
+import { getServerAuthSession } from "~/server/auth";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "~/trpc/react";
+import Navbar from "../_components/navbar";
 
 export const metadata: Metadata = {
   title: "Senior - Project Management",
@@ -14,14 +17,17 @@ export const metadata: Metadata = {
 export default async function ProjectsLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  void api.project.getAll.prefetch();
 
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
         <TRPCReactProvider>
-          
-          {children}
-          </TRPCReactProvider>
+          <HydrateClient>
+            <Navbar />
+            {children}
+          </HydrateClient>
+        </TRPCReactProvider>
       </body>
     </html>
   );
