@@ -1,6 +1,5 @@
 import "~/styles/globals.css";
 import { api, HydrateClient } from "~/trpc/server";
-import { getServerAuthSession } from "~/server/auth";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
