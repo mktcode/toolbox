@@ -5,7 +5,7 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "~/trpc/react";
-import Navbar from "../_components/navbar";
+import Navbar from "./_components/navbar";
 
 export const metadata: Metadata = {
   title: "Senior - Project Management",
