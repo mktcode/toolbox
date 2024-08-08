@@ -35,6 +35,8 @@ export const env = createEnv({
     SMTP_PORT: z.string(),
     SMTP_USER: z.string(),
     SMTP_PASS: z.string(),
+    UNLEASH_SERVER_API_URL: z.string(),
+    UNLEASH_SERVER_API_TOKEN: z.string(),
   },
 
   /**
@@ -68,6 +70,8 @@ export const env = createEnv({
     SMTP_PORT: process.env.SMTP_PORT,
     SMTP_USER: process.env.SMTP_USER,
     SMTP_PASS: process.env.SMTP_PASS,
+    UNLEASH_SERVER_API_URL: process.env.UNLEASH_SERVER_API_URL,
+    UNLEASH_SERVER_API_TOKEN: process.env.UNLEASH_SERVER_API_TOKEN,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
