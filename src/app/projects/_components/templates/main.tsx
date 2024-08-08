@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
+import { api } from "~/trpc/react";
 
 type FormField = {
   name: string;
@@ -39,8 +40,18 @@ function parseMultiLineFormField(match: string): FormField {
 }
 
 export default function Templates() {
+  const utils = api.useUtils();
+  const [templates] = api.template.getAll.useSuspenseQuery();
+  const [name, setName] = useState("");
   const [template, setTemplate] = useState("");
   const [formFields, setFormFields] = useState<FormField[]>([]);
+
+  const createTemplate = api.template.create.useMutation({
+    onSuccess: async () => {
+      await utils.template.invalidate();
+      setName("");
+    },
+  });
 
   useEffect(() => {
     const singleLineFields = template.match(singleLineRegex)?.map(parseSingleLineFormField) ?? [];
@@ -49,16 +60,23 @@ export default function Templates() {
     setFormFields([...singleLineFields, ...multiLineFields]);
   }, [template]);
 
+  const isDisabled = name.length === 0 || template.length === 0;
+
   return <div className="border rounded-md p-4 w-full max-w-screen-md">
+    <h1 className="mb-6">Templates</h1>
+    {templates.map((template) => (
+      <div key={template.id} className="p-4 border rounded-md">
+        {template.name}
+      </div>
+    ))}
     <h1 className="mb-6">New Template</h1>
     <div className="flex flex-col">
+      <input type="text" placeholder="Title" value={name} onChange={(e) => setName(e.target.value)} />
       <textarea
         value={template}
-        className="w-full min-h-60"
+        className="w-full min-h-60 mt-6"
         onChange={(e) => setTemplate(e.target.value)}
-      >
-
-      </textarea>
+      />
       <div className="text-sm text-gray-500 mt-2">
         {"Use {= First Name =} or {[ description ]} to add single or multi line form fields."}
       </div>
@@ -75,10 +93,17 @@ export default function Templates() {
         </div>
       </div>}
       <div className="grid grid-cols-2 gap-4 mt-4">
-        <button className="mt-6 secondary" disabled={template.length === 0}>
-          Save to Favorites
+        <button
+          className="mt-6 secondary"
+          disabled={isDisabled}
+          onClick={(e) => {
+            e.preventDefault();
+            createTemplate.mutate({ name, body: template });
+          }}
+        >
+          Save
         </button>
-        <button className="mt-6" disabled={template.length === 0}>
+        <button className="mt-6" disabled={isDisabled}>
           Send
         </button>
       </div>
