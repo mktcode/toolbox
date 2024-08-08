@@ -39,7 +39,6 @@ export function ProjectList() {
         />
         <button
           type="submit"
-          className="rounded-full bg-gray-200 px-10 py-3 font-semibold transition hover:bg-gray-300"
           disabled={createProject.isPending}
         >
           {createProject.isPending ? "Submitting..." : "Submit"}
