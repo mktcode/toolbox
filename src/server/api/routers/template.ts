@@ -20,6 +20,21 @@ export const templateRouter = createTRPCRouter({
         },
       });
     }),
+  update: protectedProcedure
+    .input(z.object({
+      id: z.string().min(1),
+      name: z.string().min(1),
+      body: z.string().min(1),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.template.update({
+        where: { id: input.id },
+        data: {
+          name: input.name,
+          body: input.body,
+        },
+      });
+    }),
   
   getAll: protectedProcedure
     .query(({ ctx }) => {

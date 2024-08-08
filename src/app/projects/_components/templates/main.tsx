@@ -45,11 +45,18 @@ export default function Templates() {
   const [name, setName] = useState("");
   const [template, setTemplate] = useState("");
   const [formFields, setFormFields] = useState<FormField[]>([]);
+  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(null);
 
   const createTemplate = api.template.create.useMutation({
+    onSuccess: async (data) => {
+      await utils.template.invalidate();
+      setSelectedTemplateId(data.id);
+    },
+  });
+
+  const updateTemplate = api.template.update.useMutation({
     onSuccess: async () => {
       await utils.template.invalidate();
-      setName("");
     },
   });
 
@@ -60,16 +67,26 @@ export default function Templates() {
     setFormFields([...singleLineFields, ...multiLineFields]);
   }, [template]);
 
-  const isDisabled = name.length === 0 || template.length === 0;
+  const isDisabled = name.length === 0 || template.length === 0 || createTemplate.isPending || updateTemplate.isPending;
 
-  return <div className="border rounded-md p-4 w-full max-w-screen-md">
+  return <div className="w-full max-w-screen-md">
     <h1 className="mb-6">Templates</h1>
-    {templates.map((template) => (
-      <div key={template.id} className="p-4 border rounded-md">
-        {template.name}
-      </div>
-    ))}
-    <h1 className="mb-6">New Template</h1>
+    <div className="space-y-2">
+      {templates.map((template) => (
+        <div
+          key={template.id}
+          className="p-4 border rounded-md cursor-pointer"
+          onClick={() => {
+            setSelectedTemplateId(template.id);
+            setName(template.name);
+            setTemplate(template.body);
+          }}
+        >
+          {template.name}
+        </div>
+      ))}
+    </div>
+    <h1 className="my-6">New Template</h1>
     <div className="flex flex-col">
       <input type="text" placeholder="Title" value={name} onChange={(e) => setName(e.target.value)} />
       <textarea
@@ -92,18 +109,28 @@ export default function Templates() {
           })}
         </div>
       </div>}
-      <div className="grid grid-cols-2 gap-4 mt-4">
-        <button
-          className="mt-6 secondary"
-          disabled={isDisabled}
+      <div className="flex gap-4 mt-6 w-full items-center">
+        {<button
+          className="secondary"
           onClick={(e) => {
             e.preventDefault();
+            setSelectedTemplateId(null);
             createTemplate.mutate({ name, body: template });
           }}
         >
-          Save
-        </button>
-        <button className="mt-6" disabled={isDisabled}>
+          {createTemplate.isPending ? "Creating..." : selectedTemplateId ? "Save As New" : "Save"}
+        </button>}
+        {selectedTemplateId && <button
+          className="secondary"
+          disabled={isDisabled}
+          onClick={(e) => {
+            e.preventDefault();
+            updateTemplate.mutate({ id: selectedTemplateId, name, body: template });
+          }}
+        >
+          {updateTemplate.isPending ? "Updating..." : "Update"}
+        </button>}
+        <button disabled={isDisabled} className="grow">
           Send
         </button>
       </div>
