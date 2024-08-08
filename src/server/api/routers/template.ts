@@ -35,7 +35,13 @@ export const templateRouter = createTRPCRouter({
         },
       });
     }),
-  
+  delete: protectedProcedure
+    .input(z.object({ id: z.string().min(1) }))
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.template.delete({
+        where: { id: input.id },
+      });
+    }),
   getAll: protectedProcedure
     .query(({ ctx }) => {
       return ctx.db.template.findMany({

@@ -1,5 +1,6 @@
 'use client';
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { api } from "~/trpc/react";
 
@@ -60,6 +61,17 @@ export default function Templates() {
     },
   });
 
+  const deleteTemplate = api.template.delete.useMutation({
+    onSuccess: async (data) => {
+      await utils.template.invalidate();
+      if (selectedTemplateId === data.id) {
+        setSelectedTemplateId(null);
+        setName("");
+        setTemplate("");
+      }
+    }
+  });
+
   useEffect(() => {
     const singleLineFields = template.match(singleLineRegex)?.map(parseSingleLineFormField) ?? [];
     const multiLineFields = template.match(multiLineRegex)?.map(parseMultiLineFormField) ?? [];
@@ -71,27 +83,45 @@ export default function Templates() {
 
   return <div className="w-full max-w-screen-md">
     <h1 className="mb-6">Templates</h1>
-    <div className="space-y-2">
+    <div className="space-y-2 mb-6">
       {templates.map((template) => (
         <div
           key={template.id}
-          className="p-4 border rounded-md cursor-pointer"
-          onClick={() => {
-            setSelectedTemplateId(template.id);
-            setName(template.name);
-            setTemplate(template.body);
-          }}
+          className="flex justify-between items-center space-x-2"
         >
-          {template.name}
+          <button
+            className="grow"
+            onClick={(e) => {
+              e.preventDefault();
+              setSelectedTemplateId(template.id);
+              setName(template.name);
+              setTemplate(template.body);
+            }}
+          >
+            {template.name}
+          </button>
+          <Link
+            className="button secondary"
+            href={`/templates/${template.id}`}
+            target="_blank"
+          >
+            Open in new tab
+          </Link>
+          <button className="secondary" onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            deleteTemplate.mutate({ id: template.id });
+          }}>
+            {deleteTemplate.isPending && deleteTemplate.variables.id === template.id ? "Deleting..." : "Delete"}
+          </button>
         </div>
       ))}
     </div>
-    <h1 className="my-6">New Template</h1>
     <div className="flex flex-col">
       <input type="text" placeholder="Title" value={name} onChange={(e) => setName(e.target.value)} />
       <textarea
         value={template}
-        className="w-full min-h-60 mt-6"
+        className="w-full min-h-60 mt-3"
         onChange={(e) => setTemplate(e.target.value)}
       />
       <div className="text-sm text-gray-500 mt-2">
