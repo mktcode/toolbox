@@ -1,3 +1,4 @@
+# This workflow will test and deploy the application to the production server.
 name: CI
 
 on:
