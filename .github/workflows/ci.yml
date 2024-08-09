@@ -76,7 +76,9 @@ jobs:
         cache: 'npm'
     
     - name: Set deployment key
-      run: echo "${{ secrets.DEPLOYMENT_SSH_KEY }}" > ~/.ssh/uberspace-mktcode && chmod 600 ~/.ssh/uberspace-mktcode
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.DEPLOYMENT_SSH_KEY }}" > ~/.ssh/uberspace-mktcode && chmod 600 ~/.ssh/uberspace-mktcode
     
     - run: npm ci
     - run: npm run build
