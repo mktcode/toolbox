@@ -18,13 +18,10 @@ jobs:
       with:
         node-version: 22
         cache: 'npm'
-        
+    
+    - run: node test.js
     - run: npm ci
     - run: npm run lint
-
-    - name: Set env
-      run: echo "REACT_APP_API_URL=https://api.example.com" >> .env
-
     - run: npm run build
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
