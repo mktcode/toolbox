@@ -1,6 +1,7 @@
-import { projectRouter } from "~/server/api/routers/project";
-import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
+import { createCallerFactory, createTRPCRouter } from "./trpc";
+import { projectRouter } from "./routers/project";
 import { templateRouter } from "./routers/template";
+import { openaiRouter } from "./routers/openai";
 
 /**
  * This is the primary router for your server.
@@ -10,6 +11,7 @@ import { templateRouter } from "./routers/template";
 export const appRouter = createTRPCRouter({
   project: projectRouter,
   template: templateRouter,
+  openai: openaiRouter,
 });
 
 // export type definition of API

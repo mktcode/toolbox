@@ -45,3 +45,12 @@ export function parseFields(template: string) {
 
   return fields;
 }
+
+export function replaceFields(template: string, values: Record<string, string>) {
+  return Object.entries(values).reduce((acc, [name, value]) => {
+    const singleLineMatchRegExp = new RegExp(`{=\\s*${name}\\s*=}`, "ig");
+    const multiLineMatchRegExp = new RegExp(`{\\[\\s*${name}\\s*\\]}`, "ig");
+
+    return acc.replace(singleLineMatchRegExp, value).replace(multiLineMatchRegExp, value);
+  }, template);
+}
