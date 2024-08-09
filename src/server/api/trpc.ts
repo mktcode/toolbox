@@ -13,6 +13,7 @@ import { ZodError } from "zod";
 
 import { getServerAuthSession } from "~/server/auth";
 import { db } from "~/server/db";
+import { getFlags } from "../unleash";
 
 /**
  * 1. CONTEXT
@@ -27,14 +28,18 @@ import { db } from "~/server/db";
  * @see https://trpc.io/docs/server/context
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
+  const flags = await getFlags();
   const session = await getServerAuthSession();
 
   return {
     db,
+    flags,
     session,
     ...opts,
   };
 };
+
+export type TRPCContext = Awaited<ReturnType<typeof createTRPCContext>>;
 
 /**
  * 2. INITIALIZATION
@@ -105,4 +110,23 @@ export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
       session: { ...ctx.session, user: ctx.session.user },
     },
   });
+});
+
+function checkFlag(ctx: TRPCContext, flag: string) {
+  if (!ctx.flags.isEnabled(flag)) {
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "Feature is not enabled.",
+    });
+  }
+}
+
+export const flaggedPublicProcedure = (flag: string) => publicProcedure.use(({ ctx, next }) => {
+  checkFlag(ctx, flag);
+  return next();
+});
+
+export const flaggedProtectedProcedure = (flag: string) => protectedProcedure.use(({ ctx, next }) => {
+  checkFlag(ctx, flag);
+  return next();
 });
