@@ -38,5 +38,12 @@ export function parseFields(template: string) {
   const singleLineFields = template.match(singleLineRegex)?.map(parseSingleLineFormField) ?? [];
   const multiLineFields = template.match(multiLineRegex)?.map(parseMultiLineFormField) ?? [];
 
-  return [...singleLineFields, ...multiLineFields];
+  const uniqueSingleLineFields = singleLineFields.filter((field, index) => singleLineFields.findIndex((f) => f.name === field.name) === index);
+  const uniqueMultiLineFields = multiLineFields.filter((field, index) => multiLineFields.findIndex((f) => f.name === field.name) === index);
+
+  const fields = [...uniqueSingleLineFields, ...uniqueMultiLineFields];
+
+  console.log(fields);
+
+  return fields;
 }
