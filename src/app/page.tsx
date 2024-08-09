@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { getFlags } from "~/server/unleash";
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const flags = await getFlags();
+
   return (
     <div>
       <div className="relative bg-cover h-screen flex flex-col" style={{ backgroundImage: "url('/landing-bg.jpg')" }}>
@@ -201,6 +204,17 @@ export default function ProjectsPage() {
           </div>
         </div>
       </div>
+
+      {flags.isEnabled("landingpage.philosphy") && <div className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+          <h1 className="mb-6 text-5xl">
+            Philosophy
+          </h1>
+          <div className="text-2xl text-gray-500 leading-normal">
+          This is no ordinary product. It&apos;s a solution designed primarily to serve the developers who built it, rather than just the end customer. After years in the software industry, we&apos;ve repeatedly encountered the same issues. Junior developers struggle to grow because management and product decisions are made by those with little understanding of software development. Senior developers are reduced to emergency bug fixers, while juniors remain stuck at the &quot;quick and dirty&quot; level.
+          </div>
+        </div>
+      </div>}
 
       <div className="bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
