@@ -48,4 +48,11 @@ export const templateRouter = createTRPCRouter({
         where: { user: { id: ctx.session.user.id } },
       });
     }),
+  getOne: protectedProcedure
+    .input(z.object({ id: z.string().min(1) }))
+    .query(async ({ ctx, input }) => {
+      return ctx.db.template.findUnique({
+        where: { id: input.id },
+      });
+    }),
 });
