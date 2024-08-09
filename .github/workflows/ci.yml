@@ -84,6 +84,11 @@ jobs:
         ssh-keyscan -H alnilam.uberspace.de >> ~/.ssh/known_hosts
         echo "${{ secrets.DEPLOYMENT_SSH_KEY }}" > ~/.ssh/uberspace-mktcode && chmod 600 ~/.ssh/uberspace-mktcode
     
+    - name: Debug
+      run: |
+        echo $UNLEASH_SERVER_API_URL
+        echo $UNLEASH_SERVER_API_TOKEN
+    
     - run: npm ci
     - run: npm run build
     - run: npm run deploy
