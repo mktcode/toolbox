@@ -43,7 +43,5 @@ export function parseFields(template: string) {
 
   const fields = [...uniqueSingleLineFields, ...uniqueMultiLineFields];
 
-  console.log(fields);
-
   return fields;
 }
