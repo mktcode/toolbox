@@ -12,13 +12,13 @@ export default async function TemplatePage({ params }: { params: { id: string } 
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center">
-      {isTemplatesEnabled && <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-        {session?.user && <div>
+      {isTemplatesEnabled && <>
+        {session?.user && <div className="w-full">
           {template && <Main template={template} />}
           {!template && <h1>Template not found.</h1>}
         </div>}
         {!session?.user && <h1>Please log in to view this page.</h1>}
-      </div>}
+      </>}
       {!isTemplatesEnabled && <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
         <h1>Feature not allowed or enabled.</h1>
       </div>}
