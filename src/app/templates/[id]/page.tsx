@@ -7,7 +7,7 @@ import { api } from "~/trpc/server";
 export default async function TemplatePage({ params }: { params: { id: string } }) {
   const session = await getServerAuthSession();
   const flags = await getFlags();
-  const isTemplatesEnabled = flags.isEnabled('senior.templates');
+  const isTemplatesEnabled = flags.isEnabled('templates');
   const template = await api.template.getOne({ id: params.id });
 
   return (

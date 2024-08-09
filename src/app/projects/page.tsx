@@ -6,8 +6,8 @@ import Templates from "./_components/templates/main";
 export default async function ProjectsPage() {
   const session = await getServerAuthSession();
   const flags = await getFlags();
-  const isTemplatesEnabled = flags.isEnabled('senior.templates');
-  const isProjectsEnabled = flags.isEnabled('senior.projects');
+  const isTemplatesEnabled = flags.isEnabled('templates');
+  const isProjectsEnabled = flags.isEnabled('projects');
 
   return (
       <main className="flex min-h-screen flex-col items-center justify-center">
