@@ -65,6 +65,8 @@ jobs:
       SMTP_PASS: ${{ secrets.SMTP_PASS }}
       UNLEASH_SERVER_API_URL: ${{ secrets.UNLEASH_SERVER_API_URL }}
       UNLEASH_SERVER_API_TOKEN: ${{ secrets.UNLEASH_SERVER_API_TOKEN }}
+      DEPLOYMENT_SSH_KEY: ${{ secrets.DEPLOYMENT_SSH_KEY }}
+      
     steps:
     - name: Checkout
       uses: actions/checkout@v4
