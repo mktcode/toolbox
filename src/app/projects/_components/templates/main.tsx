@@ -124,9 +124,6 @@ export default function Templates() {
         >
           {updateTemplate.isPending ? "Updating..." : "Update"}
         </button>}
-        <button disabled={isDisabled} className="grow">
-          Send
-        </button>
       </div>
     </div>
   </div>;
