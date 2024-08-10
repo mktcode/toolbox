@@ -3,6 +3,13 @@ name: CI
 on:
   push:
     branches: [ "main" ]
+    paths-ignore:
+      - '.github/**'
+      - 'docs/**'
+      - '**.md'
+      - '.env.example'
+      - '.gitignore'
+      - 'package.json'
 
 jobs:
   test:
