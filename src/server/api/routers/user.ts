@@ -12,7 +12,7 @@ import {
 } from "~/server/api/trpc";
 
 export const userRouter = createTRPCRouter({
-  userBalance: protectedProcedure
+  balance: protectedProcedure
     .query(async ({ ctx }) => {
       const stripeSecretKey = process.env.STRIPE_SECRET_KEY
       if (!stripeSecretKey) {
@@ -119,6 +119,7 @@ export const userRouter = createTRPCRouter({
         totalTokenCost,
         totalTopUp,
         balance: totalTopUp - totalTokenCost,
+        formattedBalance: (totalTopUp - totalTokenCost).toFixed(2),
       }
     }),
 });

@@ -4,6 +4,7 @@ import { api, HydrateClient } from "~/trpc/server";
 import { type Metadata } from "next";
 
 import Navbar from "./_components/navbar";
+import { getServerAuthSession } from "~/server/auth";
 
 export const metadata: Metadata = {
   title: "Senior - Dashboard",
@@ -14,8 +15,11 @@ export const metadata: Metadata = {
 export default async function ProjectsLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  void api.project.getAll.prefetch();
-  void api.template.getAll.prefetch();
+  const session = await getServerAuthSession();
+  if (session) {
+    void api.project.getAll.prefetch();
+    void api.template.getAll.prefetch();
+  }
 
   return (
     <HydrateClient>

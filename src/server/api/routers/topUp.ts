@@ -7,8 +7,8 @@ import {
 } from "~/server/api/trpc";
 
 export const topUpRouter = createTRPCRouter({
-  createTopUp: protectedProcedure
-    .query(async ({ ctx }) => {
+  create: protectedProcedure
+    .mutation(async ({ ctx }) => {
       const user = ctx.session.user
 
       if (!user.stripeCustomerId) {
@@ -42,6 +42,13 @@ export const topUpRouter = createTRPCRouter({
           user: { connect: { id: user.id } },
         },
       })
+
+      if (!checkoutSession.url) {
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'Stripe checkout session URL not found'
+        })
+      }
 
       return checkoutSession.url
     }),
