@@ -17,7 +17,6 @@ export default async function ProjectsLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const session = await getServerAuthSession();
   if (session) {
-    void api.project.getAll.prefetch();
     void api.template.getAll.prefetch();
   }
 

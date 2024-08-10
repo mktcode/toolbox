@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getFlags } from "~/server/unleash";
 import Philosophy from "./_components/philosophy";
 
-export default async function ProjectsPage() {
+export default async function HomePage() {
   const flags = await getFlags();
 
   return (

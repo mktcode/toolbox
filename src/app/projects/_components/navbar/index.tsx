@@ -1,5 +1,4 @@
 import Link from "next/link";
-import ProjectSelect from "./../projectSelect";
 import { getServerAuthSession } from "~/server/auth";
 import TopupButton from "./topupButton";
 import Balance from "./balance";
@@ -15,10 +14,6 @@ export default async function Navbar() {
       <h1 className="text-xl font-bold">
         Senior
       </h1>
-      { session?.user && <ProjectSelect /> }
-      { session?.user && <button className="rounded-md px-3 py-1 ml-4 text-gray-400 bg-gray-50">
-        +
-      </button> }
       <div className="ml-auto flex items-center">
         {session?.user && <>
           <Balance />
