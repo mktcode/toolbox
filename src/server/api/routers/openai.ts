@@ -12,7 +12,7 @@ export const openaiRouter = createTRPCRouter({
     .input(z.object({
       message: z.string().min(1),
     }))
-    .mutation(async ({ input }) => {
+    .mutation(async ({ ctx, input }) => {
       if (!process.env.OPENAI_API_KEY) {
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
@@ -34,7 +34,33 @@ export const openaiRouter = createTRPCRouter({
         ],
       })
 
-      const result = completion.choices[0]?.message?.content ?? null;
+      const result = completion.choices[0]?.message?.content;
+
+      if (!result) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "OpenAI API did not return a result.",
+        })
+      }
+
+      if (!completion.usage) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "OpenAI API did not return usage information.",
+        })
+      }
+
+      await ctx.db.tokenUsage.create({
+        data: {
+          user: {
+            connect: {
+              id: ctx.session.user.id,
+            },
+          },
+          input: completion.usage.prompt_tokens,
+          output: completion.usage.completion_tokens,
+        },
+      });
 
       return {
         result,
