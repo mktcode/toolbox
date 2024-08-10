@@ -15,12 +15,12 @@ export default async function Navbar() {
       <h1 className="text-xl font-bold">
         Senior
       </h1>
-      { session && <ProjectSelect /> }
-      { session && <button className="rounded-md px-3 py-1 ml-4 text-gray-400 bg-gray-50">
+      { session?.user && <ProjectSelect /> }
+      { session?.user && <button className="rounded-md px-3 py-1 ml-4 text-gray-400 bg-gray-50">
         +
       </button> }
       <div className="ml-auto flex items-center">
-        {session && <>
+        {session?.user && <>
           <Balance />
           <TopupButton />
         </>}

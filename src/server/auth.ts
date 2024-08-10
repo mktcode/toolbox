@@ -25,10 +25,9 @@ declare module "next-auth" {
     } & DefaultSession["user"];
   }
 
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
+  interface User {
+    stripeCustomerId?: string;
+  }
 }
 
 /**
@@ -43,6 +42,7 @@ export const authOptions: NextAuthOptions = {
       user: {
         ...session.user,
         id: user.id,
+        stripeCustomerId: user.stripeCustomerId,
       },
     }),
   },
