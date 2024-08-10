@@ -14,7 +14,7 @@ button.secondary,
 
 button.small,
 .button.small {
-  @apply py-1 px-2;
+  @apply py-1 px-2 text-sm;
 }
 
 textarea {

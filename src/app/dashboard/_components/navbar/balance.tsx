@@ -6,7 +6,7 @@ export default function Balance() {
   const { data: balance } = api.user.balance.useQuery();
 
   return (
-    <span className="text-gray-400 ml-6 font-bold text-xl">
+    <span className="text-gray-400 ml-6 text-xl">
       {balance && <>${balance.formattedBalance} €</>}
       {!balance && <>... €</>}
     </span>
