@@ -85,24 +85,12 @@ export default function Templates() {
       <input type="text" placeholder="Title" value={name} onChange={(e) => setName(e.target.value)} />
       <textarea
         value={template}
-        className="w-full min-h-60 mt-3"
+        className="w-full min-h-40 mt-3"
         onChange={(e) => setTemplate(e.target.value)}
       />
       <div className="text-sm text-gray-500 mt-2">
         {"Use {= First Name =} or {[ description ]} to add single or multi line form fields."}
       </div>
-      {formFields.length > 0 && <div className="mt-4">
-        <h2>Form Fields</h2>
-        <div className="flex flex-col">
-          {formFields.map((field, index) => {
-            return <div key={index} className="flex flex-col mt-2">
-              <label>{field.label}</label>
-              {field.type === "text" && <input className="mt-1" />}
-              {field.type === "textarea" && <textarea className="mt-1" />}
-            </div>;
-          })}
-        </div>
-      </div>}
       <div className="flex gap-4 mt-6 w-full items-center">
         {<button
           className="secondary"
@@ -125,6 +113,18 @@ export default function Templates() {
           {updateTemplate.isPending ? "Updating..." : "Update"}
         </button>}
       </div>
+      {formFields.length > 0 && <div className="mt-4">
+        <h2 className="mt-12">Form Fields Preview</h2>
+        <div className="flex flex-col">
+          {formFields.map((field, index) => {
+            return <div key={index} className="flex flex-col mt-2">
+              <label>{field.label}</label>
+              {field.type === "text" && <input className="mt-1" />}
+              {field.type === "textarea" && <textarea className="mt-1" />}
+            </div>;
+          })}
+        </div>
+      </div>}
     </div>
   </div>;
 }
