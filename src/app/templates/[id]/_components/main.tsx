@@ -30,9 +30,9 @@ export default function Main(params: { template: Template }) {
   console.log(values);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-12 px-4">
-      {template && <div className="flex w-full min-h-screen">
-        <div className="pr-12 py-12">
+    <div className="flex flex-col items-center justify-center gap-12 px-6">
+      {template && <div className="flex flex-col md:flex-row w-full min-h-screen">
+        <div className="md:pr-6 py-12 w-full md:max-w-96 xl:max-w-screen-sm">
           <h1>{template.name}</h1>
           <div className="flex flex-col">
             {fields.map((field, index) => {
@@ -47,7 +47,7 @@ export default function Main(params: { template: Template }) {
                 )}
                 {field.type === "textarea" && (
                   <textarea
-                    className="mt-1"
+                    className="mt-1 min-h-28"
                     value={values[field.name]}
                     onChange={(e) => setValue(field.name, e.target.value)}
                   />
@@ -67,7 +67,7 @@ export default function Main(params: { template: Template }) {
             </button>
           </div>
         </div>
-        <div className="pl-12 py-12 border-l grow">
+        <div className="md:pl-12 py-12 md:border-l md:border-t-0 border-t grow">
           <h1>Result</h1>
           {result && <div className="mt-2">{result}</div>}
           {!result && <div className="mt-2 text-gray-400">No result yet.</div>}
