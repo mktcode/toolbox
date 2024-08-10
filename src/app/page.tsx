@@ -181,7 +181,7 @@ export default async function HomePage() {
                 <li>All ChatGPT Plus features</li>
               </ul>
               <button disabled={true} className="w-full px-6 py-4 bg-white text-gray-900 rounded-md hover:bg-gray-100 text-xl">
-                Subscribe
+                Coming soon
               </button>
             </div>
             <div className="rounded-lg p-6 text-white border border-purple-200/30">
@@ -198,8 +198,8 @@ export default async function HomePage() {
                 <li>$0.25/100,000 Tokens</li>
                 <li>All ChatGPT Plus features</li>
               </ul>
-              <button className="w-full px-6 py-4 bg-white text-gray-900 rounded-md hover:bg-gray-100 text-xl">
-                Subscribe
+              <button disabled={true} className="w-full px-6 py-4 bg-white text-gray-900 rounded-md hover:bg-gray-100 text-xl">
+                Coming soon
               </button>
             </div>
           </div>
