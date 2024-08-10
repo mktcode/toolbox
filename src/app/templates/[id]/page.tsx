@@ -3,9 +3,14 @@ import { getFlags } from "~/server/unleash";
 import Main from "./_components/main";
 
 import { api } from "~/trpc/server";
+import { redirect } from "next/navigation";
 
 export default async function TemplatePage({ params }: { params: { id: string } }) {
   const session = await getServerAuthSession();
+  if (!session) {
+    redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent(`/templates/${params.id}`)}`);
+  }
+
   const flags = await getFlags();
   const isTemplatesEnabled = flags.isEnabled('templates');
   const template = await api.template.getOne({ id: params.id });
