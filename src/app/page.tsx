@@ -169,7 +169,7 @@ export default async function HomePage() {
                 Power
               </h3>
               <p className="text-3xl font-bold mb-1">
-                $10<span className="text-xl font-normal">/month</span>
+                $15<span className="text-xl font-normal">/month</span>
               </p>
               <div className="mb-3">
                 $0.50/100,000 Tokens
@@ -189,7 +189,7 @@ export default async function HomePage() {
                 Team
               </h3>
               <p className="text-3xl font-bold mb-4">
-                $25<span className="text-xl font-normal">/month</span>
+                $45<span className="text-xl font-normal">/month</span>
               </p>
               <ul className="mb-8 text-lg">
                 <li>
