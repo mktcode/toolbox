@@ -151,12 +151,14 @@ export default async function HomePage() {
               <p className="text-3xl font-bold mb-4">
                 $0<span className="text-xl font-normal">/month</span>
               </p>
+              <div className="mb-3">
+                $0.50/100,000 Tokens
+              </div>
               <ul className="mb-8 text-lg">
                 <li>
                   1 user
                 </li>
-                <li>$1/100,000 Tokens</li>
-                <li>Limited ChatGPT Plus features</li>
+                <li>Limited features</li>
               </ul>
               <Link href="/dashboard">
                 <button className="w-full px-6 py-4 bg-white text-gray-900 rounded-md hover:bg-gray-100 text-xl">
@@ -166,19 +168,19 @@ export default async function HomePage() {
             </div>
             <div className="rounded-lg p-6 text-white border border-blue-200/30">
               <h3 className="text-xl font-semibold mb-4 text-blue-400">
-                Power
+                Power User
               </h3>
               <p className="text-3xl font-bold mb-1">
-                $15<span className="text-xl font-normal">/month</span>
+                $10<span className="text-xl font-normal">/month</span>
               </p>
               <div className="mb-3">
-                $0.50/100,000 Tokens
+                $0.25/100,000 Tokens
               </div>
               <ul className="mb-8 text-lg">
                 <li>
                   1 user
                 </li>
-                <li>All ChatGPT Plus features</li>
+                <li>All features</li>
               </ul>
               <button disabled={true} className="w-full px-6 py-4 bg-white text-gray-900 rounded-md hover:bg-gray-100 text-xl">
                 Coming soon
@@ -188,15 +190,17 @@ export default async function HomePage() {
               <h3 className="text-xl font-semibold mb-4 text-purple-400">
                 Team
               </h3>
-              <p className="text-3xl font-bold mb-4">
+              <p className="text-3xl font-bold mb-1">
                 $45<span className="text-xl font-normal">/month</span>
               </p>
+              <div className="mb-3">
+                $0.20/100,000 Tokens
+              </div>
               <ul className="mb-8 text-lg">
                 <li>
-                  Unlimited users
+                  ∞ users
                 </li>
-                <li>$0.25/100,000 Tokens</li>
-                <li>All ChatGPT Plus features</li>
+                <li>All features</li>
               </ul>
               <button disabled={true} className="w-full px-6 py-4 bg-white text-gray-900 rounded-md hover:bg-gray-100 text-xl">
                 Coming soon
