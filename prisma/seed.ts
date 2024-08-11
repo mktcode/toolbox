@@ -8,15 +8,6 @@ async function main() {
     data: {
       name: 'mktcode',
       email: 'kontakt@markus-kottlaender.de',
-      stripeCustomerId: 'cus_Q4R0E13x321U4j',
-    }
-  })
-
-  await prisma.topUp.create({
-    data: {
-      amount: 10000,
-      userId: admin.id,
-      stripeCheckoutSessionId: 'cs_test_a1X5JQzM23Ys6oDWJKCRfGEU6qqIzBYaLiPPVQG7xNMfDefNL9Y0r2wxrR',
     }
   })
 
