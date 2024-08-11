@@ -208,7 +208,7 @@ export default async function HomePage() {
         </div>
       </div>
 
-      <FlagEnabled key="landingpage.philosphy">
+      <FlagEnabled flag="landingpage.philosphy">
         <Philosophy />
       </FlagEnabled>
 

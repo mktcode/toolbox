@@ -16,7 +16,7 @@ export default async function Navbar() {
       <h1 className="text-xl font-bold mr-12">
         Senior
       </h1>
-      <FlagEnabled key="dashboard.nav">
+      <FlagEnabled flag="dashboard.nav">
         <Nav />
       </FlagEnabled>
       <div className="ml-auto flex items-center">

@@ -1,9 +1,9 @@
 import { getFlags } from "~/server/unleash";
 
-export default async function FlagDisabled({ key, children }: { key: string, children: React.ReactNode }) {
+export default async function FlagDisabled({ flag, children }: { flag: string, children: React.ReactNode }) {
   const flags = await getFlags();
 
-  if (flags.isEnabled(key)) {
+  if (flags.isEnabled(flag)) {
     return null;
   }
 
