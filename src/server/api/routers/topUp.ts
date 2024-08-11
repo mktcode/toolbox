@@ -15,6 +15,14 @@ export const topUpRouter = createTRPCRouter({
         throw new Error('User has no Stripe ID')
       }
 
+      const priceId = process.env.STRIPE_TOPUP_PRICE_ID
+      if (!priceId) {
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'Stripe top-up price ID not found'
+        })
+      }
+
       const stripeSecretKey = process.env.STRIPE_SECRET_KEY
       if (!stripeSecretKey) {
         throw new TRPCError({
@@ -29,7 +37,7 @@ export const topUpRouter = createTRPCRouter({
         mode: 'payment',
         line_items: [
           {
-            price: 'price_1OH2AUCpwCCYrzpUSXvJ9dFv',
+            price: priceId,
             quantity: 1,
           }
         ],
