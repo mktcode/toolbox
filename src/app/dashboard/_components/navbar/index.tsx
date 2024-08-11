@@ -3,7 +3,7 @@ import { getServerAuthSession } from "~/server/auth";
 import TopupButton from "./topupButton";
 import Balance from "./balance";
 import Nav from "./nav";
-import Enabled from "~/app/_components/enabled";
+import Flag from "~/app/_components/flag";
 
 export default async function Navbar() {
   const session = await getServerAuthSession();
@@ -16,9 +16,7 @@ export default async function Navbar() {
       <h1 className="text-xl font-bold mr-12">
         Senior
       </h1>
-      <Enabled flag="dashboard.nav">
-        <Nav />
-      </Enabled>
+      <Flag name="dashboard.nav" enabled={<Nav />} />
       <div className="ml-auto flex items-center">
         {session?.user && <>
           <Balance />

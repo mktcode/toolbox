@@ -3,8 +3,7 @@ import Main from "./_components/main";
 
 import { api } from "~/trpc/server";
 import { redirect } from "next/navigation";
-import Enabled from "~/app/_components/enabled";
-import Disabled from "~/app/_components/disabled";
+import Flag from "~/app/_components/flag";
 
 export default async function TemplatePage({ params }: { params: { id: string } }) {
   const session = await getServerAuthSession();
@@ -16,18 +15,16 @@ export default async function TemplatePage({ params }: { params: { id: string } 
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center">
-      <Enabled flag="templates">
-        {session?.user && <div className="w-full">
+      <Flag
+        name="templates"
+        enabled={session?.user && <div className="w-full">
           {template && <Main template={template} />}
           {!template && <h1>Template not found.</h1>}
         </div>}
-        {!session?.user && <h1>Please log in to view this page.</h1>}
-      </Enabled>
-      <Disabled flag="templates">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
+        disabled={<div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
           <h1>Feature not allowed or enabled.</h1>
-        </div>
-      </Disabled>
+        </div>}
+      />
     </main>
   );
 }
