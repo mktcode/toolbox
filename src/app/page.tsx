@@ -2,7 +2,7 @@ import Link from "next/link";
 import Philosophy from "./_components/philosophy";
 import Flag from "./_components/flag";
 
-export default async function HomePage() {
+export default function HomePage() {
   return (
     <div>
       <div className="relative bg-cover h-screen flex flex-col" style={{ backgroundImage: "url('/landing-bg.jpg')" }}>
