@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Philosophy from "./_components/philosophy";
-import FlagEnabled from "./_components/flagEnabled";
+import Enabled from "./_components/enabled";
 
 export default async function HomePage() {
   return (
@@ -208,9 +208,9 @@ export default async function HomePage() {
         </div>
       </div>
 
-      <FlagEnabled flag="landingpage.philosphy">
+      <Enabled flag="landingpage.philosphy">
         <Philosophy />
-      </FlagEnabled>
+      </Enabled>
 
       <div className="bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
