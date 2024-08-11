@@ -3,11 +3,10 @@ import { getServerAuthSession } from "~/server/auth";
 import TopupButton from "./topupButton";
 import Balance from "./balance";
 import Nav from "./nav";
-import { getFlags } from "~/server/unleash";
+import FlagEnabled from "~/app/_components/flagEnabled";
 
 export default async function Navbar() {
   const session = await getServerAuthSession();
-  const flags = await getFlags();
 
   return (
     <div className="flex items-center pr-4 py-2 border-b fixed w-full bg-white">
@@ -17,7 +16,9 @@ export default async function Navbar() {
       <h1 className="text-xl font-bold mr-12">
         Senior
       </h1>
-      {flags.isEnabled('dashboard.nav') && <Nav />}
+      <FlagEnabled key="dashboard.nav">
+        <Nav />
+      </FlagEnabled>
       <div className="ml-auto flex items-center">
         {session?.user && <>
           <Balance />

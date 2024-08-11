@@ -1,10 +1,8 @@
 import Link from "next/link";
-import { getFlags } from "~/server/unleash";
 import Philosophy from "./_components/philosophy";
+import FlagEnabled from "./_components/flagEnabled";
 
 export default async function HomePage() {
-  const flags = await getFlags();
-
   return (
     <div>
       <div className="relative bg-cover h-screen flex flex-col" style={{ backgroundImage: "url('/landing-bg.jpg')" }}>
@@ -210,7 +208,9 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {flags.isEnabled("landingpage.philosphy") && <Philosophy />}
+      <FlagEnabled key="landingpage.philosphy">
+        <Philosophy />
+      </FlagEnabled>
 
       <div className="bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
