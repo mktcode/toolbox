@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 import { type FormField, parseFields } from "~/app/_lib/templates";
 import { api } from "~/trpc/react";
 
-
-
 export default function Templates() {
   const utils = api.useUtils();
   const [templates] = api.template.getAll.useSuspenseQuery();
