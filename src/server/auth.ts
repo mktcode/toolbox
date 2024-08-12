@@ -22,11 +22,13 @@ declare module "next-auth" {
     user: {
       id: string;
       stripeCustomerId?: string;
+      currentBalance: number;
     } & DefaultSession["user"];
   }
 
   interface User {
     stripeCustomerId?: string;
+    currentBalance: number;
   }
 }
 
@@ -43,6 +45,7 @@ export const authOptions: NextAuthOptions = {
         ...session.user,
         id: user.id,
         stripeCustomerId: user.stripeCustomerId,
+        currentBalance: user.currentBalance,
       },
     }),
   },

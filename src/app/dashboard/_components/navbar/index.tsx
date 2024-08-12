@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { getServerAuthSession } from "~/server/auth";
 import TopupButton from "./topupButton";
-import Balance from "./balance";
 import Nav from "./nav";
 import Flag from "~/app/_components/flag";
 
@@ -19,7 +18,7 @@ export default async function Navbar() {
       <Flag name="dashboard.nav" enabled={<Nav />} />
       <div className="ml-auto flex items-center">
         {session?.user && <>
-          <Balance />
+          {session.user.currentBalance.toFixed(2)} €
           <TopupButton />
         </>}
         <Link

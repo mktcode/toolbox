@@ -1,3 +1,4 @@
+import { TopUp } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import Stripe from "stripe";
 
@@ -12,7 +13,8 @@ import {
 } from "~/server/api/trpc";
 
 export const userRouter = createTRPCRouter({
-  balance: protectedProcedure
+  // TODO: refactor and decouple this
+  updateBalance: protectedProcedure
     .query(async ({ ctx }) => {
       const stripeSecretKey = process.env.STRIPE_SECRET_KEY
       if (!stripeSecretKey) {
@@ -61,28 +63,30 @@ export const userRouter = createTRPCRouter({
         status: 'complete',
       })
 
-      for (const session of unsyncedTopUps.data) {
+      for (const checkoutSession of unsyncedTopUps.data) {
         const topUp = await ctx.db.topUp.findFirst({
-          where: { stripeCheckoutSessionId: session.id },
+          where: { stripeCheckoutSessionId: checkoutSession.id },
         })
 
         if (!topUp) {
           await ctx.db.topUp.create({
             data: {
-              stripeCheckoutSessionId: session.id,
+              stripeCheckoutSessionId: checkoutSession.id,
               user: { connect: { id: user.id } },
-              amount: (session.amount_total ?? 0) / 100,
+              amount: (checkoutSession.amount_total ?? 0) / 100,
             },
           })
         }
       }
 
+      type TopUpWithStripeCheckoutSessionId = TopUp & { stripeCheckoutSessionId: string }
       const unconfirmedTopUps = await ctx.db.topUp.findMany({
         where: {
           userId: user.id,
+          stripeCheckoutSessionId: { not: null }, // TS doesn't get this
           confirmedAt: null,
         },
-      })
+      }) as TopUpWithStripeCheckoutSessionId[] // See: https://github.com/prisma/prisma/discussions/20190
 
       for (const topUp of unconfirmedTopUps) {
         const session = await stripe.checkout.sessions.retrieve(topUp.stripeCheckoutSessionId)
@@ -104,7 +108,7 @@ export const userRouter = createTRPCRouter({
         where: { userId: user.id },
       })
       const topUps = await ctx.db.topUp.findMany({
-        where: { userId: user.id },
+        where: { userId: user.id, confirmedAt: { not: null } },
       })
 
       const totalTokenCost = tokenUsage.reduce((acc, { input, output }) => {

@@ -13,6 +13,14 @@ export const openaiRouter = createTRPCRouter({
       message: z.string().min(1),
     }))
     .mutation(async ({ ctx, input }) => {
+      const user = ctx.session.user;
+      if (user.currentBalance === 0) {
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "Insufficient balance.",
+        })
+      }
+      
       if (!process.env.OPENAI_API_KEY) {
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
@@ -54,7 +62,7 @@ export const openaiRouter = createTRPCRouter({
         data: {
           user: {
             connect: {
-              id: ctx.session.user.id,
+              id: user.id,
             },
           },
           input: completion.usage.prompt_tokens,
