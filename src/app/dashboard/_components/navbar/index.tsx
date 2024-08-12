@@ -1,6 +1,4 @@
 import { getServerAuthSession } from "~/server/auth";
-import Nav from "./nav";
-import Flag from "~/app/_components/flag";
 import User from "./user";
 import Link from "next/link";
 
@@ -21,7 +19,6 @@ export default async function Navbar() {
           Senior
         </h1>
       </Link>
-      <Flag name="dashboard.nav" enabled={<Nav />} />
       <User />
     </nav>
   )

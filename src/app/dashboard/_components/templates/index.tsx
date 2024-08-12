@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { type FormField, parseFields } from "~/app/_lib/templates";
 import { api } from "~/trpc/react";
+import Grid from "./grid";
 
 export default function Templates() {
   const utils = api.useUtils();
@@ -45,6 +46,7 @@ export default function Templates() {
 
   return <div className="w-full max-w-screen-md">
     <h1 className="mb-6">Templates</h1>
+    <Grid />
     <div className="space-y-2 mb-6">
       {templates.map((template) => (
         <div
