@@ -1,16 +1,15 @@
 import { z } from "zod";
 
-import {
-  createTRPCRouter,
-  protectedProcedure,
-} from "~/server/api/trpc";
+import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 
 export const templateRouter = createTRPCRouter({
   create: protectedProcedure
-    .input(z.object({
-      name: z.string().min(1),
-      body: z.string().min(1),
-    }))
+    .input(
+      z.object({
+        name: z.string().min(1),
+        body: z.string().min(1),
+      }),
+    )
     .mutation(async ({ ctx, input }) => {
       return ctx.db.template.create({
         data: {
@@ -21,11 +20,13 @@ export const templateRouter = createTRPCRouter({
       });
     }),
   update: protectedProcedure
-    .input(z.object({
-      id: z.string().min(1),
-      name: z.string().min(1),
-      body: z.string().min(1),
-    }))
+    .input(
+      z.object({
+        id: z.string().min(1),
+        name: z.string().min(1),
+        body: z.string().min(1),
+      }),
+    )
     .mutation(async ({ ctx, input }) => {
       return ctx.db.template.update({
         where: { id: input.id },
@@ -42,12 +43,11 @@ export const templateRouter = createTRPCRouter({
         where: { id: input.id },
       });
     }),
-  getAll: protectedProcedure
-    .query(({ ctx }) => {
-      return ctx.db.template.findMany({
-        where: { user: { id: ctx.session.user.id } },
-      });
-    }),
+  getAll: protectedProcedure.query(({ ctx }) => {
+    return ctx.db.template.findMany({
+      where: { user: { id: ctx.session.user.id } },
+    });
+  }),
   getOne: protectedProcedure
     .input(z.object({ id: z.string().min(1) }))
     .query(async ({ ctx, input }) => {

@@ -7,6 +7,7 @@ The paid version of ChatGPT allows me to create my own GPTs and Claude allows to
 But it's both not what I want. GPTs are too complex and Claude too simple.
 
 Example:
+
 - "My {language} is not very good. Help me sound more natural:\n{text}"
 - "I need help with {topic1,topic2,topic3}:\n{description}"
 - "Provide feedback on this user story:\n{story}\n\nFocus on {clarity,conciseness,consistency,correctness,completeness,concreteness,coherence}"

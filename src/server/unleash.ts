@@ -10,5 +10,5 @@ export const getFlags = async () => {
   const { toggles } = evaluateFlags(definitions);
   const flags = flagsClient(toggles);
 
-  return flags
+  return flags;
 };

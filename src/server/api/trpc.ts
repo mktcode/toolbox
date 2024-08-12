@@ -121,12 +121,14 @@ function checkFlag(ctx: TRPCContext, flag: string) {
   }
 }
 
-export const flaggedPublicProcedure = (flag: string) => publicProcedure.use(({ ctx, next }) => {
-  checkFlag(ctx, flag);
-  return next();
-});
+export const flaggedPublicProcedure = (flag: string) =>
+  publicProcedure.use(({ ctx, next }) => {
+    checkFlag(ctx, flag);
+    return next();
+  });
 
-export const flaggedProtectedProcedure = (flag: string) => protectedProcedure.use(({ ctx, next }) => {
-  checkFlag(ctx, flag);
-  return next();
-});
+export const flaggedProtectedProcedure = (flag: string) =>
+  protectedProcedure.use(({ ctx, next }) => {
+    checkFlag(ctx, flag);
+    return next();
+  });

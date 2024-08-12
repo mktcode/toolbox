@@ -1,31 +1,30 @@
 import { z } from "zod";
 import { OpenAI } from "openai";
 
-import {
-  createTRPCRouter,
-  protectedProcedure,
-} from "~/server/api/trpc";
+import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { TRPCError } from "@trpc/server";
 
 export const openaiRouter = createTRPCRouter({
   complete: protectedProcedure
-    .input(z.object({
-      message: z.string().min(1),
-    }))
+    .input(
+      z.object({
+        message: z.string().min(1),
+      }),
+    )
     .mutation(async ({ ctx, input }) => {
       const user = ctx.session.user;
       if (user.currentBalance === 0) {
         throw new TRPCError({
           code: "UNAUTHORIZED",
           message: "Insufficient balance.",
-        })
+        });
       }
-      
+
       if (!process.env.OPENAI_API_KEY) {
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "OpenAI API key is not set.",
-        })
+        });
       }
 
       const openai = new OpenAI({
@@ -33,14 +32,14 @@ export const openaiRouter = createTRPCRouter({
       });
 
       const completion = await openai.chat.completions.create({
-        model: 'gpt-4o-mini',
+        model: "gpt-4o-mini",
         messages: [
           {
-            role: 'user',
+            role: "user",
             content: input.message,
           },
         ],
-      })
+      });
 
       const result = completion.choices[0]?.message?.content;
 
@@ -48,14 +47,14 @@ export const openaiRouter = createTRPCRouter({
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "OpenAI API did not return a result.",
-        })
+        });
       }
 
       if (!completion.usage) {
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "OpenAI API did not return usage information.",
-        })
+        });
       }
 
       await ctx.db.tokenUsage.create({

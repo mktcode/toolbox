@@ -12,12 +12,8 @@ export const metadata: Metadata = {
 export default async function TemplateLayout({
   children,
   params,
-}: Readonly<{ children: React.ReactNode, params: { id: string } }>) {
+}: Readonly<{ children: React.ReactNode; params: { id: string } }>) {
   void api.template.getOne.prefetch({ id: params.id });
 
-  return (
-    <HydrateClient>
-      {children}
-    </HydrateClient>
-  );
+  return <HydrateClient>{children}</HydrateClient>;
 }

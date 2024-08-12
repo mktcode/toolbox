@@ -12,7 +12,10 @@ const multiLineRegex = new RegExp(/\{\[\s*([\w\s-]*)\s*\]\}/, "ig");
 
 export function parseSingleLineFormField(match: string): FormField {
   const name = match.replace(singleLineRegex, "$1");
-  const label = name.split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+  const label = name
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 
   return {
     name,
@@ -24,7 +27,10 @@ export function parseSingleLineFormField(match: string): FormField {
 
 export function parseMultiLineFormField(match: string): FormField {
   const name = match.replace(multiLineRegex, "$1");
-  const label = name.split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+  const label = name
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 
   return {
     name: name,
@@ -35,22 +41,35 @@ export function parseMultiLineFormField(match: string): FormField {
 }
 
 export function parseFields(template: string) {
-  const singleLineFields = template.match(singleLineRegex)?.map(parseSingleLineFormField) ?? [];
-  const multiLineFields = template.match(multiLineRegex)?.map(parseMultiLineFormField) ?? [];
+  const singleLineFields =
+    template.match(singleLineRegex)?.map(parseSingleLineFormField) ?? [];
+  const multiLineFields =
+    template.match(multiLineRegex)?.map(parseMultiLineFormField) ?? [];
 
-  const uniqueSingleLineFields = singleLineFields.filter((field, index) => singleLineFields.findIndex((f) => f.name === field.name) === index);
-  const uniqueMultiLineFields = multiLineFields.filter((field, index) => multiLineFields.findIndex((f) => f.name === field.name) === index);
+  const uniqueSingleLineFields = singleLineFields.filter(
+    (field, index) =>
+      singleLineFields.findIndex((f) => f.name === field.name) === index,
+  );
+  const uniqueMultiLineFields = multiLineFields.filter(
+    (field, index) =>
+      multiLineFields.findIndex((f) => f.name === field.name) === index,
+  );
 
   const fields = [...uniqueSingleLineFields, ...uniqueMultiLineFields];
 
   return fields;
 }
 
-export function replaceFields(template: string, values: Record<string, string>) {
+export function replaceFields(
+  template: string,
+  values: Record<string, string>,
+) {
   return Object.entries(values).reduce((acc, [name, value]) => {
     const singleLineMatchRegExp = new RegExp(`{=\\s*${name}\\s*=}`, "ig");
     const multiLineMatchRegExp = new RegExp(`{\\[\\s*${name}\\s*\\]}`, "ig");
 
-    return acc.replace(singleLineMatchRegExp, value).replace(multiLineMatchRegExp, value);
+    return acc
+      .replace(singleLineMatchRegExp, value)
+      .replace(multiLineMatchRegExp, value);
   }, template);
 }
