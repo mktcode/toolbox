@@ -14,7 +14,7 @@ export default function TopupButton() {
   return (
     <MenuItem>
       <button className="usermenu-item" onClick={() => createTopUp.mutate()}>
-        <ArrowUpCircleIcon className="size-4 fill-white/30" />
+        <ArrowUpCircleIcon className="size-4 fill-gray-300" />
         {createTopUp.isPending ? 'Redirecting...' : 'Top up'}
       </button>
     </MenuItem>
