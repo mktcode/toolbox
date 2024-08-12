@@ -180,7 +180,7 @@ export default function HomePage() {
                 </li>
                 <li>All features</li>
               </ul>
-              <button disabled={true} className="w-full px-6 py-4 bg-white text-gray-900 rounded-md hover:bg-gray-100 text-xl">
+              <button disabled={true} className="opacity-50 w-full px-6 py-4 bg-white text-gray-900 rounded-md hover:bg-gray-100 text-xl">
                 Coming soon
               </button>
             </div>
@@ -200,7 +200,7 @@ export default function HomePage() {
                 </li>
                 <li>All features</li>
               </ul>
-              <button disabled={true} className="w-full px-6 py-4 bg-white text-gray-900 rounded-md hover:bg-gray-100 text-xl">
+              <button disabled={true} className="opacity-50 w-full px-6 py-4 bg-white text-gray-900 rounded-md hover:bg-gray-100 text-xl">
                 Coming soon
               </button>
             </div>

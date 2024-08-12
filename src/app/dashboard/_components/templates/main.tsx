@@ -86,12 +86,12 @@ export default function Templates() {
         className="w-full min-h-40 mt-3"
         onChange={(e) => setTemplate(e.target.value)}
       />
-      <div className="text-sm text-gray-500 mt-2">
-        {"Use {= First Name =} or {[ description ]} to add single or multi line form fields."}
+      <div className="text-sm text-gray-500 mt-2 space-x-2">
+        <button className="secondary">add text field</button>
+        <button className="secondary">add choice field</button>
       </div>
       <div className="flex gap-4 mt-6 w-full items-center">
         {<button
-          className="secondary"
           onClick={(e) => {
             e.preventDefault();
             setSelectedTemplateId(null);
@@ -101,7 +101,6 @@ export default function Templates() {
           {createTemplate.isPending ? "Creating..." : selectedTemplateId ? "Save As New" : "Save"}
         </button>}
         {selectedTemplateId && <button
-          className="secondary"
           disabled={isDisabled}
           onClick={(e) => {
             e.preventDefault();

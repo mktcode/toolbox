@@ -1,5 +1,7 @@
 'use client';
 
+import { MenuItem } from "@headlessui/react";
+import { ArrowUpCircleIcon } from "@heroicons/react/16/solid";
 import { api } from "~/trpc/react";
 
 export default function TopupButton() {
@@ -10,8 +12,11 @@ export default function TopupButton() {
   });
 
   return (
-    <button className="small ml-6" onClick={() => createTopUp.mutate()}>
-      {createTopUp.isPending ? 'opening new window...' : 'topup'}
-    </button>
+    <MenuItem>
+      <button className="usermenu-item" onClick={() => createTopUp.mutate()}>
+        <ArrowUpCircleIcon className="size-4 fill-white/30" />
+        {createTopUp.isPending ? 'Redirecting...' : 'Top up'}
+      </button>
+    </MenuItem>
   )
 }
