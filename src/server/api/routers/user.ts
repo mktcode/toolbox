@@ -1,4 +1,4 @@
-import { TopUp } from "@prisma/client";
+import { type TopUp } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import Stripe from "stripe";
 
