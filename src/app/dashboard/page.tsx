@@ -9,6 +9,8 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import { redirect } from "next/navigation";
+import { getServerAuthSession } from "~/server/auth";
 
 const user = {
   name: "Tom Cook",
@@ -30,7 +32,12 @@ function classNames(...classes: (string | boolean | undefined)[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const session = await getServerAuthSession();
+  if (!session) {
+    redirect("/api/auth/signin");
+  }
+
   return (
     <>
       <div className="min-h-full">
