@@ -20,10 +20,5 @@ export default async function ProjectsLayout({
     void api.template.getAll.prefetch();
   }
 
-  return (
-    <HydrateClient>
-      <Navbar />
-      {children}
-    </HydrateClient>
-  );
+  return <HydrateClient>{children}</HydrateClient>;
 }

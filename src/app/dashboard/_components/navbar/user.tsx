@@ -17,7 +17,7 @@ export default async function User() {
 
   return (
     <Menu>
-      <MenuButton className="ml-auto inline-flex items-center gap-2 rounded-md bg-gray-50 px-3 py-1.5 text-sm/6 font-semibold text-gray-900 focus:outline-none data-[hover]:bg-gray-100 data-[open]:bg-gray-100 data-[focus]:outline-1 data-[focus]:outline-white">
+      <MenuButton className="ml-auto inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm/6 font-semibold text-gray-900 focus:outline-none data-[hover]:bg-gray-50 data-[open]:bg-gray-50 data-[focus]:outline-1 data-[focus]:outline-white">
         <Image
           src="/img/avatar-placeholder.jpg"
           alt="Avatar"

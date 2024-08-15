@@ -7,6 +7,18 @@ await import("./src/env.js");
 /** @type {import("next").NextConfig} */
 const config = {
   output: "standalone",
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "tailwindui.com",
+      },
+    ],
+  },
 };
 
 export default config;
