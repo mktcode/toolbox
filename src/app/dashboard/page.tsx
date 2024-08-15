@@ -19,8 +19,8 @@ const user = {
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: "Chat", href: "#", current: true },
-  { name: "Templates", href: "#", current: false },
+  { name: "Chat", href: "/dashboard/chat", current: true },
+  { name: "Templates", href: "/dashboard/templates", current: false },
 ];
 const userNavigation = [
   { name: "Your Profile", href: "#" },
@@ -202,10 +202,11 @@ export default async function DashboardPage() {
         <header className="bg-white shadow">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-              Chat
+              Discussion about AI in Software Development
             </h1>
           </div>
         </header>
+
         <main className="mx-auto flex w-full max-w-7xl grow flex-col px-4 py-6 sm:px-6 lg:px-8">
           <div className="mt-auto rounded-md shadow-md transition-all">
             <textarea
