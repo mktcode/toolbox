@@ -25,11 +25,11 @@ export default async function DashboardPage() {
           <div className="mt-auto rounded-md shadow-md transition-all">
             <textarea
               className="block w-full resize-none rounded-md rounded-b-none border-none p-6 text-lg focus:border-gray-400 focus:ring-gray-400"
-              rows={6}
+              rows={5}
               placeholder="Chat with the AI ..."
             />
             <div className="flex rounded-b-md bg-gray-100 p-2">
-              <button className="ml-auto rounded-md bg-gray-800 px-4 py-2 text-white">
+              <button className="ml-auto rounded-md bg-indigo-800 px-4 py-2 text-white">
                 Send
               </button>
             </div>
