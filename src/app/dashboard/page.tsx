@@ -1,3 +1,4 @@
+import { MicrophoneIcon, PaperClipIcon } from "@heroicons/react/20/solid";
 import { redirect } from "next/navigation";
 import { getServerAuthSession } from "~/server/auth";
 
@@ -25,6 +26,12 @@ export default async function DashboardPage() {
             placeholder="Chat with the AI ..."
           />
           <div className="flex rounded-b-md bg-gray-100 p-2">
+            <button className="rounded-md px-4 py-2 hover:bg-gray-200">
+              <MicrophoneIcon className="h-6 w-6 text-gray-400" />
+            </button>
+            <button className="rounded-md px-4 py-2 hover:bg-gray-200">
+              <PaperClipIcon className="h-6 w-6 text-gray-400" />
+            </button>
             <button className="ml-auto rounded-md bg-indigo-800 px-4 py-2 text-white">
               Send
             </button>
