@@ -7,6 +7,7 @@ export const templateRouter = createTRPCRouter({
     .input(
       z.object({
         name: z.string().min(1),
+        description: z.string().optional(),
         body: z.string().min(1),
       }),
     )
@@ -14,6 +15,7 @@ export const templateRouter = createTRPCRouter({
       return ctx.db.template.create({
         data: {
           name: input.name,
+          description: input.description,
           body: input.body,
           user: { connect: { id: ctx.session.user.id } },
         },

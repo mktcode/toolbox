@@ -1,6 +1,5 @@
 import { getServerAuthSession } from "~/server/auth";
 import User from "./user";
-import Link from "next/link";
 
 export default async function Navbar() {
   const session = await getServerAuthSession();

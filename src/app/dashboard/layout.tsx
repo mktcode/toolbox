@@ -3,7 +3,6 @@ import { api, HydrateClient } from "~/trpc/server";
 
 import { type Metadata } from "next";
 
-import Navbar from "./_components/navbar";
 import { getServerAuthSession } from "~/server/auth";
 
 export const metadata: Metadata = {
