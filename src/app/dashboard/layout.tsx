@@ -4,6 +4,7 @@ import { api, HydrateClient } from "~/trpc/server";
 import { type Metadata } from "next";
 
 import { getServerAuthSession } from "~/server/auth";
+import Navbar from "./_components/navbar";
 
 export const metadata: Metadata = {
   title: "Senior - Dashboard",
@@ -19,5 +20,12 @@ export default async function ProjectsLayout({
     void api.template.getAll.prefetch();
   }
 
-  return <HydrateClient>{children}</HydrateClient>;
+  return (
+    <HydrateClient>
+      <div className="flex min-h-full flex-col">
+        <Navbar />
+        {children}
+      </div>
+    </HydrateClient>
+  );
 }
