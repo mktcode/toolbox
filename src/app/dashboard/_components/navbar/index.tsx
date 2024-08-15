@@ -10,6 +10,7 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Navbar() {
   const session = await getServerAuthSession();
@@ -44,18 +45,20 @@ export default async function Navbar() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <Image
-                alt="Your Company"
-                src="/img/logo.svg"
-                className="h-8 w-8"
-                width={32}
-                height={32}
-              />
+              <Link href="/">
+                <Image
+                  alt="Your Company"
+                  src="/img/logo.svg"
+                  className="h-8 w-8"
+                  width={32}
+                  height={32}
+                />
+              </Link>
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
                     href={item.href}
                     aria-current={item.current ? "page" : undefined}
@@ -67,7 +70,7 @@ export default async function Navbar() {
                     )}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
