@@ -14,7 +14,7 @@ interface Props {
 
 export default function NavLink({ href, children }: PropsWithChildren<Props>) {
   const pathname = usePathname();
-  const isCurrent = pathname === href;
+  const isCurrent = pathname.startsWith(href);
 
   return (
     <Link
