@@ -21,7 +21,3 @@ h2 {
 h3 {
   @apply text-xl font-bold;
 }
-
-.usermenu-item {
-  @apply flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-[focus]:bg-gray-100;
-}
