@@ -52,7 +52,6 @@ export default function Templates() {
 
   return (
     <div className="w-full max-w-screen-md">
-      <h1 className="mb-6">Templates</h1>
       <Grid />
       <div className="mb-6 space-y-2">
         {templates.map((template) => (
