@@ -31,13 +31,21 @@ async function main() {
     },
   });
 
-  await prisma.template.create({
-    data: {
-      name: "Native Speaker",
-      description: "Refine your text with the quality of a native speaker.",
-      body: "Hello, {{name}}!",
-      userId: admin.id,
-    },
+  await prisma.template.createMany({
+    data: [
+      {
+        name: "Native Speaker",
+        description: "Refine your text with the quality of a native speaker.",
+        body: "Hello, {{name}}!",
+        userId: admin.id,
+      },
+      {
+        name: "AI",
+        description: "Let the AI help you with your text.",
+        body: "Hello, {{name}}!",
+        userId: admin.id,
+      },
+    ],
   });
 }
 
