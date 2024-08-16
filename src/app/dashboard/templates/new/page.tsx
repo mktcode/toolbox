@@ -4,6 +4,7 @@ import { DashboardHeader, DashboardHeaderH1 } from "../../_components/layout";
 import { CheckIcon } from "@heroicons/react/20/solid";
 import NewTemplate from "../../_components/templates/new";
 import Link from "next/link";
+import { PencilIcon } from "@heroicons/react/24/outline";
 
 export default async function DashboardPage() {
   // TODO: This should get replaced everywhere with some central middleware soon!
@@ -15,7 +16,12 @@ export default async function DashboardPage() {
   return (
     <>
       <DashboardHeader>
-        <DashboardHeaderH1>New Template</DashboardHeaderH1>
+        <DashboardHeaderH1>
+          New Template
+          <button className="button shy ml-2">
+            <PencilIcon className="h-6 w-6 opacity-30" />
+          </button>
+        </DashboardHeaderH1>
         <div className="ml-auto flex">
           <Link href="/dashboard/templates">
             <button className="button shy mr-2">Cancel</button>

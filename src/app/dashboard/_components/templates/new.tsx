@@ -36,22 +36,6 @@ export default function NewTemplate() {
     <div className="space-y-3">
       <div className="rounded-lg bg-white p-8 shadow-sm">
         <label
-          htmlFor="first-name"
-          className="block font-medium leading-6 text-gray-900"
-        >
-          Name
-        </label>
-        <div className="mb-6 mt-2">
-          <input
-            id="first-name"
-            name="first-name"
-            type="text"
-            autoComplete="given-name"
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          />
-        </div>
-
-        <label
           htmlFor="about"
           className="block font-medium leading-6 text-gray-900"
         >
@@ -122,12 +106,10 @@ export default function NewTemplate() {
             </Radio>
           ))}
         </RadioGroup>
-      </div>
 
-      <div className="rounded-lg bg-white p-8 shadow-sm">
         <label
           htmlFor="about"
-          className="block font-medium leading-6 text-gray-900"
+          className="mt-6 block font-medium leading-6 text-gray-900"
         >
           Prompt Form
         </label>
@@ -137,7 +119,7 @@ export default function NewTemplate() {
           content when using the template.
         </p>
         <div className="mt-2 rounded-md border p-4">
-          <div className="pb-2 pt-6 text-center text-gray-300">
+          <div className="pb-2 pt-6 text-center text-xl text-gray-300">
             No form fields added yet.
           </div>
           <div className="mt-6 flex justify-center gap-x-2">
