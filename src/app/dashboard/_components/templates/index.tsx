@@ -7,22 +7,15 @@ import {
   TrashIcon,
 } from "@heroicons/react/20/solid";
 import Link from "next/link";
-import { useState } from "react";
 import { api } from "~/trpc/react";
 
 export default function Templates() {
   const utils = api.useUtils();
   const [templates] = api.template.getAll.useSuspenseQuery();
-  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(
-    null,
-  );
 
   const deleteTemplate = api.template.delete.useMutation({
-    onSuccess: async (data) => {
+    onSuccess: async () => {
       await utils.template.invalidate();
-      if (selectedTemplateId === data.id) {
-        setSelectedTemplateId(null);
-      }
     },
   });
 
@@ -31,7 +24,7 @@ export default function Templates() {
       {templates.map((template) => (
         <div
           key={template.id}
-          className="flex flex-col overflow-hidden rounded bg-white shadow-lg"
+          className="flex flex-col overflow-hidden rounded-lg bg-white shadow-lg"
         >
           <div className="flex items-center justify-between p-4">
             <h2 className="text-xl font-bold">{template.name}</h2>

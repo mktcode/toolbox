@@ -1,7 +1,7 @@
 import { MicrophoneIcon, PaperClipIcon } from "@heroicons/react/20/solid";
 import { redirect } from "next/navigation";
 import { getServerAuthSession } from "~/server/auth";
-import DashboardHeader from "./_components/layout";
+import { DashboardHeader, DashboardHeaderH1 } from "./_components/layout";
 
 export default async function DashboardPage() {
   const session = await getServerAuthSession();
@@ -12,7 +12,9 @@ export default async function DashboardPage() {
   return (
     <>
       <DashboardHeader>
-        Discussion about AI in Software Development
+        <DashboardHeaderH1>
+          Discussion about AI in Software Development
+        </DashboardHeaderH1>
       </DashboardHeader>
 
       <main className="mx-auto flex w-full max-w-7xl grow flex-col px-4 py-6 sm:px-6 lg:px-8">
