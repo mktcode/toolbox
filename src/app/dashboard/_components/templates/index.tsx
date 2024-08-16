@@ -33,7 +33,7 @@ export default function Templates() {
               <span className="text-sm text-gray-400">24</span>
             </div>
           </div>
-          <p className="mb-4 px-4 text-base text-gray-700">
+          <p className="mb-4 px-4 text-base text-gray-500">
             {template.description}
           </p>
           <div className="mt-auto flex items-center justify-between space-x-2 bg-gray-50 p-2">
