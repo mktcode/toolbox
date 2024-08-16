@@ -28,9 +28,9 @@ export default function Templates() {
         >
           <div className="flex items-center justify-between p-4">
             <h2 className="text-xl font-bold">{template.name}</h2>
-            <div className="flex rounded-md border px-2 py-1">
-              <HeartIcon className="mr-1 h-5 w-5 text-gray-300" />
+            <div className="flex rounded-md px-2 py-1">
               <span className="text-sm text-gray-400">24</span>
+              <HeartIcon className="ml-1 h-5 w-5 text-gray-300" />
             </div>
           </div>
           <p className="mb-4 px-4 text-base text-gray-500">
