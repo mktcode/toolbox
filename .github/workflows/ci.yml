@@ -62,7 +62,7 @@ jobs:
           echo "UNLEASH_SERVER_API_TOKEN=\"${{ secrets.UNLEASH_SERVER_API_TOKEN }}\"" >> .env
 
       - run: npm ci
-      - run: npm run lint
+      - run: npm run lint:ci
       - run: npm run build
 
   deploy:
