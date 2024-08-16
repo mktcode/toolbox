@@ -18,7 +18,7 @@ export default function NavLinkMobile({
   children,
 }: PropsWithChildren<Props>) {
   const pathname = usePathname();
-  const isCurrent = pathname === href;
+  const isCurrent = pathname.startsWith(href);
 
   return (
     <DisclosureButton
