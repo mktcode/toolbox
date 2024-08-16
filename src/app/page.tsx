@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Philosophy from "./_components/landingpage/philosophy";
-import Flag from "./_components/flag";
 import Features from "./_components/landingpage/features";
 import Features2 from "./_components/landingpage/features2";
 import Pricing from "./_components/landingpage/pricing";
@@ -10,7 +9,7 @@ export default function HomePage() {
   return (
     <div>
       <Hero />
-      <Flag name="landingpage.philosphy" enabled={<Philosophy />} />
+      <Philosophy />
       <Pricing />
       <Features />
       <Features2 />
