@@ -5,7 +5,6 @@ const prisma = new PrismaClient();
 const WELCOME_AMOUNT = 1000;
 
 async function main() {
-  // Auth
   const admin = await prisma.user.create({
     data: {
       name: "mktcode",
@@ -28,6 +27,15 @@ async function main() {
       amount: WELCOME_AMOUNT,
       note: "Welcome!",
       confirmedAt: new Date(),
+      userId: admin.id,
+    },
+  });
+
+  await prisma.template.create({
+    data: {
+      name: "Native Speaker",
+      description: "Refine your text with the quality of a native speaker.",
+      body: "Hello, {{name}}!",
       userId: admin.id,
     },
   });
