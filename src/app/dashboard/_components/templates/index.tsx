@@ -3,7 +3,6 @@
 import {
   ArrowTopRightOnSquareIcon,
   HeartIcon,
-  PencilIcon,
   PencilSquareIcon,
   TrashIcon,
 } from "@heroicons/react/20/solid";
