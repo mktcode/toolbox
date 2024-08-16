@@ -22,7 +22,7 @@ export default async function ProjectsLayout({
 
   return (
     <HydrateClient>
-      <div className="flex min-h-full flex-col">
+      <div className="flex min-h-full flex-col bg-gray-200">
         <Navbar />
         {children}
       </div>
