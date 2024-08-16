@@ -3,18 +3,20 @@
 import { DisclosureButton } from "@headlessui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { type PropsWithChildren } from "react";
 
 function classNames(...classes: (string | boolean | undefined)[]) {
   return classes.filter(Boolean).join(" ");
 }
 
+interface Props {
+  href: string;
+}
+
 export default function NavLinkMobile({
   href,
   children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) {
+}: PropsWithChildren<Props>) {
   const pathname = usePathname();
   const isCurrent = pathname === href;
 

@@ -2,18 +2,17 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { type PropsWithChildren } from "react";
 
 function classNames(...classes: (string | boolean | undefined)[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function NavLink({
-  href,
-  children,
-}: {
+interface Props {
   href: string;
-  children: React.ReactNode;
-}) {
+}
+
+export default function NavLink({ href, children }: PropsWithChildren<Props>) {
   const pathname = usePathname();
   const isCurrent = pathname === href;
 
