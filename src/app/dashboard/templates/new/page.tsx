@@ -2,7 +2,7 @@ import { getServerAuthSession } from "~/server/auth";
 import { redirect } from "next/navigation";
 import { DashboardHeader, DashboardHeaderH1 } from "../../_components/layout";
 import { CheckIcon } from "@heroicons/react/20/solid";
-import NewTemplate from "../../_components/templates/new";
+import NewTemplate from "./_components/new";
 import Link from "next/link";
 import { PencilIcon } from "@heroicons/react/24/outline";
 

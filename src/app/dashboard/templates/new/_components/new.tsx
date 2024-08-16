@@ -1,9 +1,9 @@
 "use client";
 
 import { Radio, RadioGroup } from "@headlessui/react";
-import { PlusIcon } from "@heroicons/react/20/solid";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
+import { Fields } from "./fields";
 
 export default function NewTemplate() {
   const models = [
@@ -107,32 +107,8 @@ export default function NewTemplate() {
           ))}
         </RadioGroup>
 
-        <label
-          htmlFor="about"
-          className="mt-6 block font-medium leading-6 text-gray-900"
-        >
-          Prompt Form
-        </label>
-        <p className="text-sm leading-6 text-gray-500">
-          Use form fields for dynamic content in the prompt. Use{" "}
-          <code>{"{{field_name}}"}</code> in the prompt template, to insert the
-          content when using the template.
-        </p>
-        <div className="mt-2 rounded-md border p-4">
-          <div className="pb-2 pt-6 text-center text-xl text-gray-300">
-            No form fields added yet.
-          </div>
-          <div className="mt-6 flex justify-center gap-x-2">
-            <button className="button shy">
-              <PlusIcon className="mr-1 h-4 w-4 opacity-30" />
-              Text Field
-            </button>
-            <button className="button shy">
-              <PlusIcon className="mr-1 h-4 w-4 opacity-30" />
-              Choice Field
-            </button>
-          </div>
-        </div>
+        <Fields />
+
         <label
           htmlFor="about"
           className="mt-6 block font-medium leading-6 text-gray-900"
