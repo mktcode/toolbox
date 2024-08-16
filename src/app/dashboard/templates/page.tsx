@@ -12,10 +12,8 @@ export default async function DashboardPage() {
   return (
     <>
       <DashboardHeader>Templates</DashboardHeader>
-      <main className="flex min-h-screen flex-col items-center justify-center">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-          <Templates />
-        </div>
+      <main className="mx-auto flex w-full max-w-7xl grow flex-col px-4 py-6 sm:px-6 lg:px-8">
+        <Templates />
       </main>
     </>
   );
