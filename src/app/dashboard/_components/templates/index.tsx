@@ -1,6 +1,12 @@
 "use client";
 
-import { HeartIcon } from "@heroicons/react/20/solid";
+import {
+  ArrowTopRightOnSquareIcon,
+  HeartIcon,
+  PencilIcon,
+  PencilSquareIcon,
+  TrashIcon,
+} from "@heroicons/react/20/solid";
 import Link from "next/link";
 import { useState } from "react";
 import { api } from "~/trpc/react";
@@ -26,26 +32,32 @@ export default function Templates() {
       {templates.map((template) => (
         <div
           key={template.id}
-          className="flex flex-col overflow-hidden rounded bg-white p-4 shadow-lg"
+          className="flex flex-col overflow-hidden rounded bg-white shadow-lg"
         >
-          <div className="mb-4 flex items-center justify-between">
+          <div className="flex items-center justify-between p-4">
             <h2 className="text-xl font-bold">{template.name}</h2>
             <div className="flex rounded-md border px-2 py-1">
               <HeartIcon className="mr-1 h-5 w-5 text-gray-300" />
               <span className="text-sm text-gray-400">24</span>
             </div>
           </div>
-          <p className="mb-4 text-base text-gray-700">{template.description}</p>
-          <div className="mt-auto flex items-center justify-between space-x-2">
-            <button className="button">Edit</button>
+          <p className="mb-4 px-4 text-base text-gray-700">
+            {template.description}
+          </p>
+          <div className="mt-auto flex items-center justify-between space-x-2 bg-gray-50 p-2">
+            <button className="button shy">
+              <PencilSquareIcon className="mr-1 h-4 w-4 opacity-30" />
+              Edit
+            </button>
             <button
-              className="button"
+              className="button shy"
               onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
                 deleteTemplate.mutate({ id: template.id });
               }}
             >
+              <TrashIcon className="mr-1 h-4 w-4 opacity-30" />
               {deleteTemplate.isPending &&
               deleteTemplate.variables.id === template.id
                 ? "Deleting..."
@@ -56,7 +68,8 @@ export default function Templates() {
               href={`/templates/${template.id}`}
               target="_blank"
             >
-              Open in new tab
+              <span className="pr-1">Open</span>
+              <ArrowTopRightOnSquareIcon className="ml-auto h-4 w-4" />
             </Link>
           </div>
         </div>
