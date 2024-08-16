@@ -29,9 +29,7 @@ export default async function DashboardPage() {
             <button className="rounded-md px-4 py-2 hover:bg-gray-200">
               <PaperClipIcon className="h-6 w-6 text-gray-400" />
             </button>
-            <button className="ml-auto rounded-md bg-indigo-800 px-4 py-2 text-white">
-              Send
-            </button>
+            <button className="button ml-auto">Send</button>
           </div>
         </div>
       </main>
