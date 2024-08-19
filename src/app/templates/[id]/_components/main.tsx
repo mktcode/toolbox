@@ -67,7 +67,7 @@ export default function Main(params: { template: Template }) {
                 );
               })}
               <button
-                className="mt-4"
+                className="button mt-4"
                 disabled={isDisabled}
                 onClick={() => {
                   complete.mutate({
@@ -75,7 +75,7 @@ export default function Main(params: { template: Template }) {
                   });
                 }}
               >
-                {complete.isPending ? "Completing..." : "Complete"}
+                {complete.isPending ? "Generating..." : "Run"}
               </button>
             </div>
           </div>
