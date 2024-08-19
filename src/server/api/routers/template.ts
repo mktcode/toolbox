@@ -9,6 +9,18 @@ export const templateRouter = createTRPCRouter({
         name: z.string().min(1),
         description: z.string().optional(),
         body: z.string().min(1),
+        fields: z.array(
+          z.object({
+            name: z.string().min(1),
+            type: z.enum(["text", "choice"]),
+            options: z.array(
+              z.object({
+                name: z.string().min(1),
+                value: z.string().min(1),
+              }),
+            ),
+          }),
+        ),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -18,6 +30,18 @@ export const templateRouter = createTRPCRouter({
           description: input.description,
           body: input.body,
           user: { connect: { id: ctx.session.user.id } },
+          fields: {
+            createMany: {
+              data: input.fields.map((field) => ({
+                name: field.name,
+                type: field.type,
+                options:
+                  field.type === "choice"
+                    ? { createMany: field.options }
+                    : undefined,
+              })),
+            },
+          },
         },
       });
     }),
@@ -55,6 +79,11 @@ export const templateRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       return ctx.db.template.findUnique({
         where: { id: input.id },
+        include: {
+          fields: {
+            include: { options: true },
+          },
+        },
       });
     }),
 });
