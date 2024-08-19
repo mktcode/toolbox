@@ -1,13 +1,21 @@
 "use client";
 
+import { SessionProvider } from "next-auth/react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { parseFields, replaceFields } from "~/app/_lib/templates";
 import { type Template } from "@prisma/client";
 import { useState } from "react";
 import { api } from "~/trpc/react";
+import { type Session } from "next-auth";
+import Header from "./header";
 
-export default function Main(params: { template: Template }) {
-  const { template } = params;
+export default function Main({
+  template,
+  session,
+}: {
+  template: Template;
+  session: Session;
+}) {
   const fields = parseFields(template.body);
   const [values, setValues] = useState<Record<string, string>>({});
   const [result, setResult] = useState<string | null>(null);
@@ -43,7 +51,9 @@ export default function Main(params: { template: Template }) {
       {template && (
         <div className="flex min-h-screen w-full flex-col md:flex-row">
           <div className="w-full py-12 md:max-w-96 md:pr-6 xl:max-w-screen-sm">
-            <h1>{template.name}</h1>
+            <SessionProvider session={session}>
+              <Header template={template} />
+            </SessionProvider>
             <div className="flex flex-col">
               {fields.map((field, index) => {
                 return (
