@@ -5,7 +5,7 @@ import Prompt from "./prompt";
 import useTemplateForm, {
   type TemplateWithFields,
 } from "../../../_lib/useTemplateForm";
-import { AiModel } from "../../../_components/aiModel";
+import { AiModel } from "../../../_components/form/aiModel";
 
 export default function EditTemplateForm({
   template,

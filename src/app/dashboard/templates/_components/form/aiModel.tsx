@@ -2,7 +2,7 @@ import { Radio, RadioGroup } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/20/solid";
 import useTemplateForm, {
   type TemplateWithFields,
-} from "../_lib/useTemplateForm";
+} from "../../_lib/useTemplateForm";
 
 const models = [
   {
