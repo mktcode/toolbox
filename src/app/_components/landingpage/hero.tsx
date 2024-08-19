@@ -130,7 +130,7 @@ export default function Hero() {
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-              Announcing our next round of funding.{" "}
+              We are looking for beta testers.{" "}
               <a href="#" className="font-semibold text-indigo-600">
                 <span aria-hidden="true" className="absolute inset-0" />
                 Read more <span aria-hidden="true">&rarr;</span>
@@ -139,14 +139,19 @@ export default function Hero() {
           </div>
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              Data to enrich your online business
+              Practical AI Tools for Real-World Success
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-              lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-              fugiat aliqua.
+              In the rapidly evolving world of AI, it’s easy to lose time and
+              money on uncertain ventures. We’re here to help you navigate this
+              landscape confidently. Our high-quality educational content and
+              adaptive tools are designed to grow with you, ensuring you stay
+              ahead of the curve—no matter where AI takes us next.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
+              <a href="https://discord.com" className="button shy">
+                Get in touch
+              </a>
               <a href="/dashboard" className="button">
                 Get started
               </a>

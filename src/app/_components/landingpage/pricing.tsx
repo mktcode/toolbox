@@ -16,8 +16,14 @@ export default function Pricing() {
             Simple no-tricks pricing
           </h2>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            Distinctio et nulla eum soluta et neque labore quibusdam. Saepe et
-            quasi iusto modi velit ut non voluptas in. Explicabo id ut laborum.
+            Generative AI consumes significant resources, which is reflected in
+            token usage. Instead of locking you into a subscription, we believe
+            a prepaid, pay-as-you-go model makes the most sense. This approach
+            can offer more flexibility and cost-effectiveness compared to
+            subscriptions from larger providers, depending on your specific
+            needs. While we leverage their APIs to ensure you receive the same
+            high level of intelligence, we pass the costs directly to you with
+            only a minimal margin.
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
