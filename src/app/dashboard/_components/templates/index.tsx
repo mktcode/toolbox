@@ -37,10 +37,12 @@ export default function Templates() {
             {template.description}
           </p>
           <div className="mt-auto flex items-center justify-between space-x-2 bg-gray-50 p-2">
-            <button className="button shy">
-              <PencilSquareIcon className="mr-1 h-4 w-4 opacity-30" />
-              Edit
-            </button>
+            <Link href={`/dashboard/templates/edit/${template.id}`}>
+              <button className="button shy">
+                <PencilSquareIcon className="mr-1 h-4 w-4 opacity-30" />
+                Edit
+              </button>
+            </Link>
             <button
               className="button shy"
               onClick={(e) => {
