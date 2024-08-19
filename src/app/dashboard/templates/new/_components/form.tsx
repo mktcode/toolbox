@@ -8,7 +8,8 @@ import useNewTemplate from "../_lib/useNewTemplate";
 import Prompt from "./prompt";
 
 export default function NewTemplateForm() {
-  const { description, setDescription } = useNewTemplate();
+  const { description, setDescription, isPublic, setIsPublic } =
+    useNewTemplate();
 
   const models = [
     {
@@ -59,25 +60,28 @@ export default function NewTemplateForm() {
           />
         </div>
 
-        <div className="relative flex gap-x-3">
+        <label
+          htmlFor="comments"
+          className="relative flex cursor-pointer gap-x-3 rounded-lg border p-3"
+        >
           <div className="flex h-6 items-center">
             <input
               id="comments"
               name="comments"
               type="checkbox"
-              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+              className="h-4 w-4 rounded-full border-gray-300 text-indigo-600 focus:ring-indigo-600"
+              checked={isPublic}
+              onChange={(e) => setIsPublic(e.target.checked)}
             />
           </div>
           <div className="text-sm leading-6">
-            <label htmlFor="comments" className="font-medium text-gray-900">
-              Make public
-            </label>
+            <div className="font-medium text-gray-900">Make public</div>
             <p className="text-gray-500">
               Allow everyone to use this template. You can always change this
               later.
             </p>
           </div>
-        </div>
+        </label>
 
         <legend className="mt-6 font-semibold leading-6 text-gray-900">
           Intelligence &amp; Cost
