@@ -4,11 +4,12 @@ import { Radio, RadioGroup } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import { Fields } from "./fields";
-import useNewTemplate from "../_lib/useNewTemplate";
 import Prompt from "./prompt";
+import useEditTemplate from "../_lib/useEditTemplate";
+import { type Template } from "@prisma/client";
 
-export default function NewTemplate() {
-  const { description, setDescription } = useNewTemplate();
+export default function EditTemplateForm({ template }: { template: Template }) {
+  const { description, setDescription } = useEditTemplate(template);
 
   const models = [
     {
@@ -113,7 +114,7 @@ export default function NewTemplate() {
         </RadioGroup>
 
         <Fields />
-        <Prompt />
+        <Prompt template={template} />
 
         <label
           htmlFor="about"

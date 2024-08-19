@@ -7,7 +7,7 @@ export const templateRouter = createTRPCRouter({
     .input(
       z.object({
         name: z.string().min(1),
-        description: z.string().optional(),
+        description: z.string().min(1),
         body: z.string().min(1),
         fields: z.array(
           z.object({
@@ -50,7 +50,22 @@ export const templateRouter = createTRPCRouter({
       z.object({
         id: z.string().min(1),
         name: z.string().min(1),
+        description: z.string().min(1),
         body: z.string().min(1),
+        fields: z.array(
+          z.object({
+            id: z.string().min(1).optional(),
+            name: z.string().min(1),
+            type: z.enum(["text", "choice"]),
+            options: z.array(
+              z.object({
+                id: z.string().min(1).optional(),
+                name: z.string().min(1),
+                value: z.string().min(1),
+              }),
+            ),
+          }),
+        ),
       }),
     )
     .mutation(async ({ ctx, input }) => {

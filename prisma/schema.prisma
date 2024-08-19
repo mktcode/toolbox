@@ -18,7 +18,7 @@ datasource db {
 model Template {
   id          String          @id @default(cuid())
   name        String
-  description String?
+  description String
   body        String
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt

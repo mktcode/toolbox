@@ -13,7 +13,7 @@ export default function Header({ template }: { template: Template }) {
       <h1>{template.name}</h1>
       {session?.user && session.user.id === template.userId && (
         <>
-          <Link href={`/dashboard/templates/${template.id}/edit`}>
+          <Link href={`/dashboard/templates/edit/${template.id}`}>
             <button className="button shy">
               <PencilIcon className="mr-2 h-4 w-4 opacity-30" />
               Edit
