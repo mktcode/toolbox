@@ -20,11 +20,21 @@ export default function useEditTemplate(template: Template) {
     `editTemplate.${template.id}.fields`,
     [], // Todo: Load fields from template, not done yet because of ts
   );
+  const [isPublic, setIsPublic] = useLocalStorage(
+    `editTemplate.${template.id}.isPublic`,
+    template.isPublic,
+  );
+  const [aiModel, setAiModel] = useLocalStorage(
+    `editTemplate.${template.id}.aiModel`,
+    template.aiModel,
+  );
 
   function resetForm() {
     setName(template.name);
     setDescription(template.description);
     setBody(template.body);
+    setIsPublic(template.isPublic);
+    setAiModel(template.aiModel);
     setFields([]);
   }
 
@@ -36,6 +46,10 @@ export default function useEditTemplate(template: Template) {
     setDescription,
     body,
     setBody,
+    isPublic,
+    setIsPublic,
+    aiModel,
+    setAiModel,
     fields,
     setFields,
     resetForm,

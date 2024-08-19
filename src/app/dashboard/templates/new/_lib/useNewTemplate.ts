@@ -12,12 +12,22 @@ export default function useNewTemplate() {
     "",
   );
   const [body, setBody] = useLocalStorage("newTemplate.body", "");
+  const [isPublic, setIsPublic] = useLocalStorage(
+    "newTemplate.isPublic",
+    false,
+  );
+  const [aiModel, setAiModel] = useLocalStorage(
+    "newTemplate.aiModel",
+    "gpt-4o",
+  );
   const [fields, setFields] = useLocalStorage("newTemplate.fields", []);
 
   function resetForm() {
     setName("My New Template");
     setDescription("");
     setBody("");
+    setIsPublic(false);
+    setAiModel("gpt-4o");
     setFields([]);
   }
 
@@ -28,6 +38,10 @@ export default function useNewTemplate() {
     setDescription,
     body,
     setBody,
+    isPublic,
+    setIsPublic,
+    aiModel,
+    setAiModel,
     fields,
     setFields,
     resetForm,

@@ -27,6 +27,7 @@ model Template {
   user     User    @relation(fields: [userId], references: [id])
   userId   String
   isPublic Boolean @default(false)
+  aiModel    String  @default("default")
 
   @@index([name])
 }
