@@ -3,7 +3,7 @@
 import { Fields } from "./fields";
 import useTemplateForm from "../../_lib/useTemplateForm";
 import Prompt from "./prompt";
-import { AiModel } from "./aiModel";
+import { AiModel } from "../../_components/aiModel";
 
 export default function NewTemplateForm() {
   const { description, setDescription, isPublic, setIsPublic } =

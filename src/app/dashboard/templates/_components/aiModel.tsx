@@ -1,6 +1,8 @@
 import { Radio, RadioGroup } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/20/solid";
-import useTemplateForm from "../../_lib/useTemplateForm";
+import useTemplateForm, {
+  type TemplateWithFields,
+} from "../_lib/useTemplateForm";
 
 const models = [
   {
@@ -26,8 +28,8 @@ const models = [
   },
 ];
 
-export function AiModel() {
-  const { aiModel, setAiModel } = useTemplateForm();
+export function AiModel({ template }: { template?: TemplateWithFields }) {
+  const { aiModel, setAiModel } = useTemplateForm(template);
 
   return (
     <>
