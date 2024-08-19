@@ -10,11 +10,18 @@ import {
 import useNewTemplate from "../_lib/useNewTemplate";
 import { api } from "~/trpc/react";
 import Spinner from "~/app/_components/spinner";
+import { useRouter } from "next/navigation";
 
 export default function NewTemplatePageHeader() {
-  const { name, description, body, fields } = useNewTemplate();
+  const router = useRouter();
+  const { name, description, body, fields, resetForm } = useNewTemplate();
 
-  const createTemplate = api.template.create.useMutation();
+  const createTemplate = api.template.create.useMutation({
+    onSuccess(data) {
+      router.push(`/templates/${data.id}`);
+      resetForm();
+    },
+  });
 
   return (
     <DashboardHeader>

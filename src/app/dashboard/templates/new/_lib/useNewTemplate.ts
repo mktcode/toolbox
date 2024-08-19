@@ -14,6 +14,13 @@ export default function useNewTemplate() {
   const [body, setBody] = useLocalStorage("newTemplate.body", "");
   const [fields, setFields] = useLocalStorage("newTemplate.fields", []);
 
+  function resetForm() {
+    setName("My New Template");
+    setDescription("");
+    setBody("");
+    setFields([]);
+  }
+
   return {
     name,
     setName,
@@ -23,5 +30,6 @@ export default function useNewTemplate() {
     setBody,
     fields,
     setFields,
+    resetForm,
   };
 }
