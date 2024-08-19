@@ -5,11 +5,16 @@ import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import { Fields } from "./fields";
 import Prompt from "./prompt";
-import useEditTemplate from "../_lib/useEditTemplate";
-import { type Template } from "@prisma/client";
+import useTemplateForm, {
+  type TemplateWithFields,
+} from "../../../_lib/useTemplateForm";
 
-export default function EditTemplateForm({ template }: { template: Template }) {
-  const { description, setDescription } = useEditTemplate(template);
+export default function EditTemplateForm({
+  template,
+}: {
+  template: TemplateWithFields;
+}) {
+  const { description, setDescription } = useTemplateForm(template);
 
   const models = [
     {

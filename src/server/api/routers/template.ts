@@ -14,7 +14,7 @@ export const templateRouter = createTRPCRouter({
         fields: z.array(
           z.object({
             name: z.string().min(1),
-            type: z.enum(["text", "choice"]),
+            type: z.enum(["TEXT", "CHOICE"]),
             options: z.array(
               z.object({
                 name: z.string().min(1),
@@ -38,7 +38,7 @@ export const templateRouter = createTRPCRouter({
                 name: field.name,
                 type: field.type,
                 options:
-                  field.type === "choice"
+                  field.type === "CHOICE"
                     ? { createMany: field.options }
                     : undefined,
               })),
@@ -60,7 +60,7 @@ export const templateRouter = createTRPCRouter({
           z.object({
             id: z.string().min(1).optional(),
             name: z.string().min(1),
-            type: z.enum(["text", "choice"]),
+            type: z.enum(["TEXT", "CHOICE"]),
             options: z.array(
               z.object({
                 id: z.string().min(1).optional(),

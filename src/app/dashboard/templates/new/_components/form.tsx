@@ -4,12 +4,12 @@ import { Radio, RadioGroup } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import { Fields } from "./fields";
-import useNewTemplate from "../_lib/useNewTemplate";
+import useTemplateForm from "../../_lib/useTemplateForm";
 import Prompt from "./prompt";
 
 export default function NewTemplateForm() {
   const { description, setDescription, isPublic, setIsPublic } =
-    useNewTemplate();
+    useTemplateForm();
 
   const models = [
     {

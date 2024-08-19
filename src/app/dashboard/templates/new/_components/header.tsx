@@ -7,14 +7,15 @@ import {
   DashboardHeader,
   DashboardHeaderH1,
 } from "~/app/dashboard/_components/layout";
-import useNewTemplate from "../_lib/useNewTemplate";
 import { api } from "~/trpc/react";
 import Spinner from "~/app/_components/spinner";
 import { useRouter } from "next/navigation";
+import useTemplateForm from "../../_lib/useTemplateForm";
 
 export default function NewTemplatePageHeader() {
   const router = useRouter();
-  const { name, description, body, fields, resetForm } = useNewTemplate();
+  const { name, description, body, isPublic, aiModel, fields, resetForm } =
+    useTemplateForm();
 
   const createTemplate = api.template.create.useMutation({
     onSuccess(data) {
@@ -38,7 +39,14 @@ export default function NewTemplatePageHeader() {
         <button
           className="button"
           onClick={() =>
-            createTemplate.mutate({ name, description, body, fields })
+            createTemplate.mutate({
+              name,
+              description,
+              body,
+              isPublic,
+              aiModel,
+              fields,
+            })
           }
         >
           {createTemplate.isPending && (

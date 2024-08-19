@@ -7,17 +7,19 @@ import {
   DashboardHeader,
   DashboardHeaderH1,
 } from "~/app/dashboard/_components/layout";
-import useEditTemplate from "../_lib/useEditTemplate";
 import { api } from "~/trpc/react";
 import Spinner from "~/app/_components/spinner";
-import { type Template } from "@prisma/client";
+import useTemplateForm, {
+  type TemplateWithFields,
+} from "../../../_lib/useTemplateForm";
 
 export default function EditTemplatePageHeader({
   template,
 }: {
-  template: Template;
+  template: TemplateWithFields;
 }) {
-  const { id, name, description, body, fields } = useEditTemplate(template);
+  const { name, description, body, isPublic, aiModel, fields } =
+    useTemplateForm(template);
 
   const editTemplate = api.template.update.useMutation();
 
@@ -36,7 +38,15 @@ export default function EditTemplatePageHeader({
         <button
           className="button"
           onClick={() =>
-            editTemplate.mutate({ id, name, description, body, fields })
+            editTemplate.mutate({
+              id: template.id,
+              name,
+              description,
+              body,
+              isPublic,
+              aiModel,
+              fields,
+            })
           }
         >
           {editTemplate.isPending && (

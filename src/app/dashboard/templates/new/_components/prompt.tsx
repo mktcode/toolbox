@@ -1,9 +1,9 @@
 "use client";
 
-import useNewTemplate from "../_lib/useNewTemplate";
+import useTemplateForm from "../../_lib/useTemplateForm";
 
 export default function Prompt() {
-  const { body, setBody } = useNewTemplate();
+  const { body, setBody } = useTemplateForm();
 
   return (
     <>

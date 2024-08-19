@@ -32,10 +32,15 @@ model Template {
   @@index([name])
 }
 
+enum TemplateFieldType {
+  TEXT
+  CHOICE
+}
+
 model TemplateField {
   id         String                @id @default(cuid())
   name       String
-  type       String
+  type       TemplateFieldType
   template   Template              @relation(fields: [templateId], references: [id])
   templateId String
   options    TemplateFieldOption[]
