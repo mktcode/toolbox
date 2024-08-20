@@ -1,9 +1,15 @@
 "use client";
 
-import useTemplateForm from "../../_lib/useTemplateForm";
+import useTemplateForm, {
+  type TemplateWithFields,
+} from "../../_lib/useTemplateForm";
 
-export default function Prompt() {
-  const { body, setBody } = useTemplateForm();
+export default function Prompt({
+  template,
+}: {
+  template?: TemplateWithFields;
+}) {
+  const { body, setBody } = useTemplateForm(template);
 
   return (
     <>

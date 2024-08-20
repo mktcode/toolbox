@@ -1,25 +1,11 @@
 import { PlusIcon, TrashIcon } from "@heroicons/react/20/solid";
+import useTemplateForm, {
+  type TemplateWithFields,
+} from "../../_lib/useTemplateForm";
 
-const fields = [
-  {
-    id: "text",
-    name: "Text Field",
-    type: "text",
-    description: "A simple text field for free-form text.",
-  },
-  {
-    id: "choice",
-    name: "Choice Field",
-    type: "choice",
-    description: "A multiple-choice field for predefined options.",
-    options: [
-      { id: "yes", name: "Yes" },
-      { id: "no", name: "No" },
-    ],
-  },
-];
+export function Fields({ template }: { template?: TemplateWithFields }) {
+  const { fields } = useTemplateForm(template);
 
-export function Fields() {
   return (
     <>
       <label
