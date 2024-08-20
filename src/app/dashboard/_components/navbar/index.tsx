@@ -50,6 +50,9 @@ export default async function Navbar() {
               </div>
             </div>
           </div>
+          <div className="ml-auto mr-2 text-sm font-medium text-gray-300 md:mr-0">
+            {user.currentBalance.toFixed(2)} €
+          </div>
           <div className="hidden md:block">
             <div className="ml-4 flex items-center md:ml-6">
               <button
