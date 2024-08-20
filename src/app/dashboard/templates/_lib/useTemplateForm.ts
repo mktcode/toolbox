@@ -14,7 +14,7 @@ export default function useTemplateForm(template?: TemplateWithFields) {
   const defaultBody = template?.body ?? "";
   const defaultIsPublic = template?.isPublic ?? false;
   const defaultAiModel = template?.aiModel ?? "gpt-4o";
-  const defaultFields = template?.fields;
+  const defaultFields = template?.fields ?? [];
 
   function key(name: string) {
     return template
