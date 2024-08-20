@@ -40,6 +40,7 @@ enum TemplateFieldType {
 model TemplateField {
   id         String                @id @default(cuid())
   name       String
+  description String
   type       TemplateFieldType
   template   Template              @relation(fields: [templateId], references: [id])
   templateId String
