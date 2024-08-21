@@ -5,7 +5,7 @@ export default function ResponseSchema() {
     <>
       <label
         htmlFor="about"
-        className="mt-6 block font-medium leading-6 text-gray-900"
+        className="block font-medium leading-6 text-gray-900"
       >
         Response Schema
       </label>

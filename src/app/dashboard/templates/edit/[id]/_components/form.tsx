@@ -23,6 +23,8 @@ export default function EditTemplateForm({
       <div className="mt-6 rounded-lg bg-white p-8 shadow-sm">
         <Fields template={template} />
         <Prompt template={template} />
+      </div>
+      <div className="mt-6 rounded-lg bg-white p-8 shadow-sm">
         <ResponseSchema />
       </div>
     </div>
