@@ -9,9 +9,7 @@ export type TemplateWithFields = Prisma.TemplateGetPayload<{
 
 export default function useTemplateForm(template: TemplateWithFields) {
   function key(name: string) {
-    return template
-      ? `editTemplate.${template.id}.${name}`
-      : `newTemplate.${name}`;
+    return `editTemplate.${template.id}.${name}`;
   }
 
   const [name, setName] = useLocalStorage(key("name"), template.name);
@@ -36,6 +34,7 @@ export default function useTemplateForm(template: TemplateWithFields) {
     setBody(template.body);
     setIsPublic(template.isPublic);
     setAiModel(template.aiModel);
+    setFields(template.fields);
   }
 
   return {
