@@ -28,7 +28,7 @@ const models = [
   },
 ];
 
-export function AiModel({ template }: { template?: TemplateWithFields }) {
+export function AiModel({ template }: { template: TemplateWithFields }) {
   const { aiModel, setAiModel } = useTemplateForm(template);
 
   return (

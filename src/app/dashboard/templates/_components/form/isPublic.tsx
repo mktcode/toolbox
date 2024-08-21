@@ -7,7 +7,7 @@ import useTemplateForm, {
 export default function IsPublic({
   template,
 }: {
-  template?: TemplateWithFields;
+  template: TemplateWithFields;
 }) {
   const { isPublic, setIsPublic } = useTemplateForm(template);
 

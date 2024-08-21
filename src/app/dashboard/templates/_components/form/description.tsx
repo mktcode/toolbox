@@ -7,7 +7,7 @@ import useTemplateForm, {
 export default function Description({
   template,
 }: {
-  template?: TemplateWithFields;
+  template: TemplateWithFields;
 }) {
   const { description, setDescription } = useTemplateForm(template);
 

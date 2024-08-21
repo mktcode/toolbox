@@ -3,7 +3,7 @@ import useTemplateForm, {
   type TemplateWithFields,
 } from "../../_lib/useTemplateForm";
 
-export function Fields({ template }: { template?: TemplateWithFields }) {
+export function Fields({ template }: { template: TemplateWithFields }) {
   const { fields } = useTemplateForm(template);
 
   return (

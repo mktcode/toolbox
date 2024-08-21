@@ -2,53 +2,28 @@ import { z } from "zod";
 
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 
+const defaults = {
+  name: "Untitled Template",
+  description: "",
+  body: "",
+  isPublic: false,
+  aiModel: "gpt-4o-mini",
+  fields: [],
+};
+
 export const templateRouter = createTRPCRouter({
-  create: protectedProcedure
-    .input(
-      z.object({
-        name: z.string().min(1),
-        description: z.string().min(1),
-        body: z.string().min(1),
-        isPublic: z.boolean(),
-        aiModel: z.string().min(1),
-        fields: z.array(
-          z.object({
-            name: z.string().min(1),
-            description: z.string(),
-            type: z.enum(["TEXT", "CHOICE"]),
-            options: z.array(
-              z.object({
-                name: z.string().min(1),
-                value: z.string().min(1),
-              }),
-            ),
-          }),
-        ),
-      }),
-    )
-    .mutation(async ({ ctx, input }) => {
-      return ctx.db.template.create({
-        data: {
-          name: input.name,
-          description: input.description,
-          body: input.body,
-          user: { connect: { id: ctx.session.user.id } },
-          fields: {
-            createMany: {
-              data: input.fields.map((field) => ({
-                name: field.name,
-                description: field.description,
-                type: field.type,
-                options:
-                  field.type === "CHOICE"
-                    ? { createMany: field.options }
-                    : undefined,
-              })),
-            },
-          },
-        },
-      });
-    }),
+  create: protectedProcedure.mutation(async ({ ctx }) => {
+    return ctx.db.template.create({
+      data: {
+        name: defaults.name,
+        description: defaults.description,
+        body: defaults.body,
+        user: { connect: { id: ctx.session.user.id } },
+        isPublic: defaults.isPublic,
+        aiModel: defaults.aiModel,
+      },
+    });
+  }),
   update: protectedProcedure
     .input(
       z.object({

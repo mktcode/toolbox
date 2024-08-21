@@ -6,18 +6,12 @@ import {
   PencilSquareIcon,
   TrashIcon,
 } from "@heroicons/react/20/solid";
+import { type Template } from "@prisma/client";
 import Link from "next/link";
 import { api } from "~/trpc/react";
 
-export default function Templates() {
-  const utils = api.useUtils();
-  const [templates] = api.template.getAll.useSuspenseQuery();
-
-  const deleteTemplate = api.template.delete.useMutation({
-    onSuccess: async () => {
-      await utils.template.invalidate();
-    },
-  });
+export default function Templates({ templates }: { templates: Template[] }) {
+  const deleteTemplate = api.template.delete.useMutation();
 
   return (
     <div className="mb-6 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">

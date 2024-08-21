@@ -4,11 +4,7 @@ import useTemplateForm, {
   type TemplateWithFields,
 } from "../../_lib/useTemplateForm";
 
-export default function Prompt({
-  template,
-}: {
-  template?: TemplateWithFields;
-}) {
+export default function Prompt({ template }: { template: TemplateWithFields }) {
   const { body, setBody } = useTemplateForm(template);
 
   return (
