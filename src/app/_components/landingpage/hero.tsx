@@ -139,14 +139,16 @@ export default function Hero() {
           </div>
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              Practical AI Tools for Real-World Success
+              Practical AI Tools
+              <br />
+              No bullshit.
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
               In the rapidly evolving world of AI, it’s easy to lose time and
               money on uncertain ventures. We’re here to help you navigate this
               landscape confidently. Our high-quality educational content and
               adaptive tools are designed to grow with you, ensuring you stay
-              ahead of the curve—no matter where AI takes us next.
+              ahead of the curve, no matter where AI takes us next. (Bullshit!)
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a href="https://discord.com" className="button shy">

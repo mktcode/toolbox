@@ -4,6 +4,7 @@ import {
   ServerIcon,
 } from "@heroicons/react/20/solid";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Philosophy() {
   return (
@@ -13,15 +14,20 @@ export default function Philosophy() {
           <div className="lg:pr-4">
             <div className="lg:max-w-lg">
               <p className="text-base font-semibold leading-7 text-indigo-600">
-                Deploy faster
+                Built with love
               </p>
               <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                A better workflow
+                Really! I&apos;m a solo dev. I just can&apos;t help it.
               </h1>
               <p className="mt-6 text-xl leading-8 text-gray-700">
-                Aliquet nec orci mattis amet quisque ullamcorper neque, nibh
-                sem. At arcu, sit dui mi, nibh dui, diam eget aliquam. Quisque
-                id at vitae feugiat egestas.
+                I have more than 20 years of experience in software development.
+                But I would never call myself a professional. I&apos;m a
+                hobbyist. And that&apos;s a good thing.
+                <br />
+                <br />
+                I'm building this not to become rich. (Liar!) Just to sustain
+                myself. I'm only one single person but I can react quickly to
+                your needs. At scale.
               </p>
             </div>
           </div>
@@ -38,14 +44,6 @@ export default function Philosophy() {
         <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
           <div className="lg:pr-4">
             <div className="max-w-xl text-base leading-7 text-gray-700 lg:max-w-lg">
-              <p>
-                Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget
-                risus enim. Mattis mauris semper sed amet vitae sed turpis id.
-                Id dolor praesent donec est. Odio penatibus risus viverra tellus
-                varius sit neque erat velit. Faucibus commodo massa rhoncus,
-                volutpat. Dignissim sed eget risus enim. Mattis mauris semper
-                sed amet vitae sed turpis id.
-              </p>
               <ul role="list" className="mt-8 space-y-8 text-gray-600">
                 <li className="flex gap-x-3">
                   <CloudArrowUpIcon
@@ -54,11 +52,24 @@ export default function Philosophy() {
                   />
                   <span>
                     <strong className="font-semibold text-gray-900">
-                      Push to deploy.
+                      Continuous Delivery.
                     </strong>{" "}
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Maiores impedit perferendis suscipit eaque, iste dolor
-                    cupiditate blanditiis ratione.
+                    Your feedback has real impact. Every day! I don't publish
+                    updates, fixes and release notes once a month or worse. I
+                    improve my product everyday, a little bit. And you can see
+                    it.{" "}
+                    <Link href={`/`} className="text-indigo-500">
+                      Sign up for beta access
+                    </Link>{" "}
+                    and sit next to me while I'm building stuff.{" "}
+                    <Link
+                      href={`https://maps.google.com`}
+                      target="_blank"
+                      className="text-indigo-500"
+                    >
+                      Literally
+                    </Link>
+                    .
                   </span>
                 </li>
                 <li className="flex gap-x-3">
@@ -68,10 +79,12 @@ export default function Philosophy() {
                   />
                   <span>
                     <strong className="font-semibold text-gray-900">
-                      SSL certificates.
+                      One Product. A thousand needs.
                     </strong>{" "}
-                    Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
-                    qui lorem cupidatat commodo.
+                    I'm adaptive and my software is too. I'm not building a
+                    product for a specific use case. I'm building a platform. A
+                    platform that can be used for a thousand different things.
+                    And I'm here to help you to find out how.
                   </span>
                 </li>
                 <li className="flex gap-x-3">
@@ -88,13 +101,6 @@ export default function Philosophy() {
                   </span>
                 </li>
               </ul>
-              <p className="mt-8">
-                Et vitae blandit facilisi magna lacus commodo. Vitae sapien duis
-                odio id et. Id blandit molestie auctor fermentum dignissim.
-                Lacus diam tincidunt ac cursus in vel. Mauris varius vulputate
-                et ultrices hac adipiscing egestas. Iaculis convallis ac tempor
-                et ut. Ac lorem vel integer orci.
-              </p>
               <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">
                 No server? No problem.
               </h2>
