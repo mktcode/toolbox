@@ -37,7 +37,7 @@ model TemplateField {
   name         String
   description  String
   defaultValue String                @default("")
-  template     Template              @relation(fields: [templateId], references: [id])
+  template     Template              @relation(fields: [templateId], references: [id], onDelete: Cascade)
   templateId   String
   options      TemplateFieldOption[]
   createdAt    DateTime              @default(now())
@@ -47,7 +47,7 @@ model TemplateField {
 model TemplateFieldOption {
   id        String        @id @default(cuid())
   value     String
-  field     TemplateField @relation(fields: [fieldId], references: [id])
+  field     TemplateField @relation(fields: [fieldId], references: [id], onDelete: Cascade)
   fieldId   String
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
