@@ -1,4 +1,3 @@
-import { getServerAuthSession } from "~/server/auth";
 import {
   Disclosure,
   DisclosureButton,
@@ -13,18 +12,8 @@ import NavLink from "./navLink";
 import NavLinkMobile from "./navLinkMobile";
 import { navigation } from "./_lib";
 import UserNav from "./userNav";
-import UserNavMobile from "./userNavMobile";
-import NavbarLoggedOut from "./loggedOut";
 
-export default async function Navbar() {
-  const session = await getServerAuthSession();
-
-  const user = session?.user;
-
-  if (!user) {
-    return <NavbarLoggedOut />;
-  }
-
+export default async function NavbarLoggedOut() {
   return (
     <Disclosure as="nav" className="bg-gray-800">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -51,37 +40,11 @@ export default async function Navbar() {
               </div>
             </div>
           </div>
-          <div className="ml-auto mr-2 text-sm font-medium text-gray-300 md:mr-0">
-            {user.currentBalance.toFixed(2)} €
-          </div>
           <div className="hidden md:block">
             <div className="ml-4 flex items-center md:ml-6">
-              <button
-                type="button"
-                className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-              >
-                <span className="absolute -inset-1.5" />
-                <span className="sr-only">View notifications</span>
-                <BellIcon aria-hidden="true" className="h-6 w-6" />
-              </button>
-
-              {/* Profile dropdown */}
-              <Menu as="div" className="relative ml-3">
-                <div>
-                  <MenuButton className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                    <span className="absolute -inset-1.5" />
-                    <span className="sr-only">Open user menu</span>
-                    <Image
-                      alt=""
-                      src={user.image ?? "/img/avatar-placeholder.jpg"}
-                      className="h-8 w-8 rounded-full"
-                      width={32}
-                      height={32}
-                    />
-                  </MenuButton>
-                </div>
-                <UserNav />
-              </Menu>
+              <Link href="/api/auth/signin">
+                <button className="button">Sign in</button>
+              </Link>
             </div>
           </div>
           <div className="-mr-2 flex md:hidden">
@@ -115,19 +78,11 @@ export default async function Navbar() {
             <div className="flex-shrink-0">
               <Image
                 alt=""
-                src={user.image ?? "/img/avatar-placeholder.jpg"}
+                src={"/img/avatar-placeholder.jpg"}
                 className="h-10 w-10 rounded-full"
                 width={40}
                 height={40}
               />
-            </div>
-            <div className="ml-3">
-              <div className="text-base font-medium leading-none text-white">
-                {user.name}
-              </div>
-              <div className="text-sm font-medium leading-none text-gray-400">
-                {user.email}
-              </div>
             </div>
             <button
               type="button"
@@ -138,7 +93,6 @@ export default async function Navbar() {
               <BellIcon aria-hidden="true" className="h-6 w-6" />
             </button>
           </div>
-          <UserNavMobile />
         </div>
       </DisclosurePanel>
     </Disclosure>

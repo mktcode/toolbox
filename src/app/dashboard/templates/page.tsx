@@ -10,7 +10,7 @@ export default async function DashboardPage() {
     redirect("/api/auth/signin");
   }
 
-  const templates = await api.template.getAll();
+  const templates = await api.template.getAllForUser();
 
   return (
     <>

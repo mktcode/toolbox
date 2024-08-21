@@ -1,6 +1,10 @@
 import { z } from "zod";
 
-import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 
 const defaults = {
   name: "Untitled Template",
@@ -68,9 +72,14 @@ export const templateRouter = createTRPCRouter({
         where: { id: input.id },
       });
     }),
-  getAll: protectedProcedure.query(({ ctx }) => {
+  getAllForUser: protectedProcedure.query(({ ctx }) => {
     return ctx.db.template.findMany({
       where: { user: { id: ctx.session.user.id } },
+    });
+  }),
+  getAllPublic: publicProcedure.query(({ ctx }) => {
+    return ctx.db.template.findMany({
+      where: { isPublic: true },
     });
   }),
   getOne: protectedProcedure
