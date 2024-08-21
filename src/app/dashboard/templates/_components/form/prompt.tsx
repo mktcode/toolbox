@@ -13,11 +13,10 @@ export default function Prompt({ template }: { template: TemplateWithFields }) {
         htmlFor="about"
         className="mt-6 block font-medium leading-6 text-gray-900"
       >
-        Prompt Template
+        Prompt
       </label>
       <p className="text-sm leading-6 text-gray-500">
-        Write the prompt and use <code>{"{{field_name}}"}</code> to insert
-        dynamic content from form fields.
+        Write the prompt and use the placeholders you created.
       </p>
       <div className="mb-6 mt-2">
         <textarea
