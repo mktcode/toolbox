@@ -31,7 +31,7 @@ export default async function Navbar() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <Link href="/">
+              <Link href="/dashboard">
                 <Image
                   alt="Your Company"
                   src="/img/logo.svg"

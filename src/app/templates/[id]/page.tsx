@@ -2,7 +2,6 @@ import { getServerAuthSession } from "~/server/auth";
 import Main from "./_components/main";
 
 import { api } from "~/trpc/server";
-import { redirect } from "next/navigation";
 
 export default async function TemplatePage({
   params,
@@ -10,13 +9,6 @@ export default async function TemplatePage({
   params: { id: string };
 }) {
   const session = await getServerAuthSession();
-
-  if (!session?.user) {
-    redirect(
-      `/api/auth/signin?callbackUrl=${encodeURIComponent(`/templates/${params.id}`)}`,
-    );
-  }
-
   const template = await api.template.getOne({ id: params.id });
 
   return (

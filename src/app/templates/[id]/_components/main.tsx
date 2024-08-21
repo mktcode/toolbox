@@ -1,6 +1,5 @@
 "use client";
 
-import { SessionProvider } from "next-auth/react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { parseFields, replaceFields } from "~/app/_lib/templates";
 import { type Template } from "@prisma/client";
@@ -8,13 +7,14 @@ import { useState } from "react";
 import { api } from "~/trpc/react";
 import { type Session } from "next-auth";
 import Header from "./header";
+import Link from "next/link";
 
 export default function Main({
   template,
   session,
 }: {
   template: Template;
-  session: Session;
+  session: Session | null;
 }) {
   const fields = parseFields(template.body);
   const [values, setValues] = useState<Record<string, string>>({});
@@ -51,9 +51,7 @@ export default function Main({
       {template && (
         <div className="flex min-h-screen w-full flex-col md:flex-row">
           <div className="w-full py-12 md:max-w-96 md:pr-6 xl:max-w-screen-sm">
-            <SessionProvider session={session}>
-              <Header template={template} />
-            </SessionProvider>
+            <Header template={template} session={session} />
             <div className="flex flex-col">
               {fields.map((field, index) => {
                 return (
@@ -76,17 +74,26 @@ export default function Main({
                   </div>
                 );
               })}
-              <button
-                className="button mt-4"
-                disabled={isDisabled}
-                onClick={() => {
-                  complete.mutate({
-                    message: parsedTemplate,
-                  });
-                }}
-              >
-                {complete.isPending ? "Generating..." : "Run"}
-              </button>
+              {session?.user && (
+                <button
+                  className="button mt-4"
+                  disabled={isDisabled}
+                  onClick={() => {
+                    complete.mutate({
+                      message: parsedTemplate,
+                    });
+                  }}
+                >
+                  {complete.isPending ? "Generating..." : "Run"}
+                </button>
+              )}
+              {!session?.user && (
+                <Link
+                  href={`/api/auth/signin?callbackUrl=/templates/${template.id}`}
+                >
+                  <button className="button mt-4 w-full">Sign in</button>
+                </Link>
+              )}
             </div>
           </div>
           <div className="grow border-t py-12 md:border-l md:border-t-0 md:pl-12">
