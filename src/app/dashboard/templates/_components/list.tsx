@@ -10,7 +10,7 @@ import { type Template } from "@prisma/client";
 import Link from "next/link";
 import { api } from "~/trpc/react";
 
-export default function Templates({ templates }: { templates: Template[] }) {
+export default function List({ templates }: { templates: Template[] }) {
   const deleteTemplate = api.template.delete.useMutation();
 
   return (

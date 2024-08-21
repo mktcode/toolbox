@@ -1,8 +1,8 @@
 import { getServerAuthSession } from "~/server/auth";
-import Templates from "./../_components/templates";
+import List from "./_components/list";
+import TemplateListPageHeader from "./_components/TemplateListPageHeader";
 import { redirect } from "next/navigation";
 import { api } from "~/trpc/server";
-import TemplateListPageHeader from "./_components/TemplateListPageHeader";
 
 export default async function DashboardPage() {
   const session = await getServerAuthSession();
@@ -16,7 +16,7 @@ export default async function DashboardPage() {
     <>
       <TemplateListPageHeader numberOfTemplates={templates.length} />
       <main className="mx-auto flex w-full max-w-7xl grow flex-col px-4 py-6 sm:px-6 lg:px-8">
-        <Templates templates={templates} />
+        <List templates={templates} />
       </main>
     </>
   );
