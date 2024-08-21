@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Philosophy from "./_components/landingpage/philosophy";
 import Features from "./_components/landingpage/features";
-import Features2 from "./_components/landingpage/features2";
 import Pricing from "./_components/landingpage/pricing";
 import Hero from "./_components/landingpage/hero";
 
@@ -12,7 +11,6 @@ export default function HomePage() {
       <Philosophy />
       <Pricing />
       <Features />
-      <Features2 />
 
       <div className="bg-white">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
