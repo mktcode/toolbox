@@ -146,6 +146,7 @@ export const templateRouter = createTRPCRouter({
         id: z.string().min(1),
         name: z.string().min(1),
         description: z.string(),
+        defaultValue: z.string(),
         options: z.array(
           z.object({
             id: z.string().min(1).optional(),
@@ -163,6 +164,7 @@ export const templateRouter = createTRPCRouter({
         data: {
           name: input.name,
           description: input.description,
+          defaultValue: input.defaultValue,
           options: {
             upsert: input.options.map((option) => ({
               where: { id: option.id },
