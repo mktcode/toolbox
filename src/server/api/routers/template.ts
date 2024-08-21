@@ -38,7 +38,6 @@ export const templateRouter = createTRPCRouter({
             id: z.string().min(1).optional(),
             name: z.string().min(1),
             description: z.string(),
-            type: z.enum(["TEXT", "CHOICE"]),
             options: z.array(
               z.object({
                 id: z.string().min(1).optional(),
@@ -83,6 +82,90 @@ export const templateRouter = createTRPCRouter({
           fields: {
             include: { options: true },
           },
+        },
+      });
+    }),
+
+  // Fields
+  createField: protectedProcedure
+    .input(
+      z.object({
+        templateId: z.string().min(1),
+        name: z.string().min(1),
+        description: z.string(),
+        options: z
+          .array(
+            z.object({
+              value: z.string().min(1),
+            }),
+          )
+          .optional(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.templateField.create({
+        data: {
+          name: input.name,
+          description: input.description,
+          template: { connect: { id: input.templateId } },
+          options: input.options
+            ? {
+                create: input.options.map((option) => ({
+                  value: option.value,
+                  field: { connect: { id: input.templateId } },
+                })),
+              }
+            : undefined,
+        },
+      });
+    }),
+  updateField: protectedProcedure
+    .input(
+      z.object({
+        id: z.string().min(1),
+        name: z.string().min(1),
+        description: z.string(),
+        options: z.array(
+          z.object({
+            id: z.string().min(1).optional(),
+            value: z.string().min(1),
+          }),
+        ),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.templateField.update({
+        where: {
+          id: input.id,
+          template: { user: { id: ctx.session.user.id } },
+        },
+        data: {
+          name: input.name,
+          description: input.description,
+          options: {
+            upsert: input.options.map((option) => ({
+              where: { id: option.id },
+              update: { value: option.value },
+              create: { value: option.value },
+            })),
+          },
+        },
+      });
+    }),
+  getAllFields: protectedProcedure
+    .input(z.object({ templateId: z.string().min(1) }))
+    .query(async ({ ctx, input }) => {
+      return ctx.db.templateField.findMany({
+        where: { templateId: input.templateId },
+      });
+    }),
+  deleteField: protectedProcedure
+    .input(z.object({ id: z.string().min(1) }))
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.templateField.delete({
+        where: {
+          id: input.id,
+          template: { user: { id: ctx.session.user.id } },
         },
       });
     }),
