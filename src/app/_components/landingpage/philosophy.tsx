@@ -82,9 +82,9 @@ export default function Philosophy() {
                       One Product. A thousand needs.
                     </strong>{" "}
                     I'm adaptive and my software is too. I'm not building a
-                    product for a specific use case. I'm building a platform. A
-                    platform that can be used for a thousand different things.
-                    And I'm here to help you to find out how.
+                    product for a specific use case. I'm building a framework
+                    for myself, to implement features on a per-customer level.
+                    The product can look very different depending on your needs.
                   </span>
                 </li>
                 <li className="flex gap-x-3">
