@@ -45,6 +45,7 @@ jobs:
           echo "DATABASE_URL=\"${{ secrets.DATABASE_URL }}\"" >> .env
           echo "STRIPE_PUBLIC_KEY=\"${{ secrets.STRIPE_PUBLIC_KEY }}\"" >> .env
           echo "STRIPE_SECRET_KEY=\"${{ secrets.STRIPE_SECRET_KEY }}\"" >> .env
+          echo "STRIPE_TOPUP_PRICE_ID=\"${{ secrets.STRIPE_TOPUP_PRICE_ID }}\"" >> .env
           echo "NEXTAUTH_URL=\"${{ secrets.NEXTAUTH_URL }}\"" >> .env
           echo "NEXTAUTH_SECRET=\"${{ secrets.NEXTAUTH_SECRET }}\"" >> .env
           echo "GITHUB_CLIENT_ID=\"${{ secrets.GH_CLIENT_ID }}\"" >> .env
@@ -95,6 +96,7 @@ jobs:
           echo "DATABASE_URL=\"${{ secrets.DATABASE_URL }}\"" >> .env
           echo "STRIPE_PUBLIC_KEY=\"${{ secrets.STRIPE_PUBLIC_KEY }}\"" >> .env
           echo "STRIPE_SECRET_KEY=\"${{ secrets.STRIPE_SECRET_KEY }}\"" >> .env
+          echo "STRIPE_TOPUP_PRICE_ID=\"${{ secrets.STRIPE_TOPUP_PRICE_ID }}\"" >> .env
           echo "NEXTAUTH_URL=\"${{ secrets.NEXTAUTH_URL }}\"" >> .env
           echo "NEXTAUTH_SECRET=\"${{ secrets.NEXTAUTH_SECRET }}\"" >> .env
           echo "GITHUB_CLIENT_ID=\"${{ secrets.GH_CLIENT_ID }}\"" >> .env
