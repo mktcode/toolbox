@@ -66,9 +66,9 @@ export default function Pricing() {
                   <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">
                     per 1 Million tokens
                   </span>
-                  <p className="mt-3 text-xs leading-5 text-gray-600">
+                  <span className="mt-3 text-xs leading-5 text-gray-600">
                     (Could be cheaper than $20 per month.)
-                  </p>
+                  </span>
                 </p>
                 <a
                   href="#"
