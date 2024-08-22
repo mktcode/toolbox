@@ -1,5 +1,7 @@
 "use client";
 
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { replaceFields } from "~/app/_lib/templates";
 import { useState } from "react";
@@ -9,6 +11,7 @@ import Header from "./header";
 import Link from "next/link";
 import Field from "./field";
 import { DocumentDuplicateIcon } from "@heroicons/react/20/solid";
+import PromptPreview from "./promptPreview";
 
 export default function Main({
   template,
@@ -81,12 +84,15 @@ export default function Main({
                 <button className="button mt-4 w-full">Sign in</button>
               </Link>
             )}
+            <PromptPreview parsedTemplate={parsedTemplate} />
           </div>
           <div className="grow border-t py-12 md:border-l md:border-t-0 md:pl-12">
             <h1>Result</h1>
             {result && (
               <>
-                <div className="mt-2">{result}</div>
+                <div className="my-6 rounded-xl border p-6 text-xl">
+                  <Markdown remarkPlugins={[remarkGfm]}>{result}</Markdown>
+                </div>
                 <CopyToClipboard
                   text={result}
                   onCopy={() => indicateSuccessfulCopy()}

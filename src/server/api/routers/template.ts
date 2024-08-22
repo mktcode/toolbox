@@ -38,20 +38,6 @@ export const templateRouter = createTRPCRouter({
         body: z.string().min(1),
         isPublic: z.boolean(),
         aiModel: z.string().min(1),
-        fields: z.array(
-          z.object({
-            id: z.string().min(1).optional(),
-            name: z.string().min(1),
-            description: z.string(),
-            options: z.array(
-              z.object({
-                id: z.string().min(1).optional(),
-                name: z.string().min(1),
-                value: z.string().min(1),
-              }),
-            ),
-          }),
-        ),
       }),
     )
     .mutation(async ({ ctx, input }) => {

@@ -18,8 +18,8 @@ datasource db {
 model Template {
   id          String          @id @default(cuid())
   name        String
-  description String
-  body        String
+  description String          @db.Text
+  body        String          @db.Text
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
   fields      TemplateField[]
@@ -35,8 +35,8 @@ model Template {
 model TemplateField {
   id           String                @id @default(cuid())
   name         String
-  description  String
-  defaultValue String                @default("")
+  description  String                @db.Text
+  defaultValue String                @db.Text @default("")
   template     Template              @relation(fields: [templateId], references: [id], onDelete: Cascade)
   templateId   String
   options      TemplateFieldOption[]
@@ -46,7 +46,7 @@ model TemplateField {
 
 model TemplateFieldOption {
   id        String        @id @default(cuid())
-  value     String
+  value     String        @db.Text
   field     TemplateField @relation(fields: [fieldId], references: [id], onDelete: Cascade)
   fieldId   String
   createdAt DateTime      @default(now())
@@ -61,11 +61,11 @@ model Account {
   provider                 String
   providerAccountId        String
   refresh_token            String?  @db.Text
-  access_token             String? // @db.Text
+  access_token             String?  @db.Text
   expires_at               Int?
   token_type               String?
   scope                    String?
-  id_token                 String? // @db.Text
+  id_token                 String?  @db.Text
   session_state            String?
   user                     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   refresh_token_expires_in Int?

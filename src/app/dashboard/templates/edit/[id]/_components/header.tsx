@@ -1,6 +1,9 @@
 "use client";
 
-import { CheckIcon } from "@heroicons/react/20/solid";
+import {
+  ArrowTopRightOnSquareIcon,
+  CheckIcon,
+} from "@heroicons/react/20/solid";
 import Link from "next/link";
 import { PencilIcon } from "@heroicons/react/24/outline";
 import {
@@ -32,8 +35,18 @@ export default function EditTemplatePageHeader({
         </button>
       </DashboardHeaderH1>
       <div className="ml-auto flex">
-        <Link href="/dashboard/templates">
-          <button className="button shy mr-2">Cancel</button>
+        <Link href="/dashboard/templates" className="mr-2">
+          <button className="button shy">Cancel</button>
+        </Link>
+        <Link
+          href={`/templates/${template.id}`}
+          className="mr-2"
+          target="_blank"
+        >
+          <button className="button shy">
+            Open
+            <ArrowTopRightOnSquareIcon className="ml-2 h-4 w-4 opacity-40" />
+          </button>
         </Link>
         <button
           className="button"
@@ -45,7 +58,6 @@ export default function EditTemplatePageHeader({
               body,
               isPublic,
               aiModel,
-              fields,
             })
           }
         >
