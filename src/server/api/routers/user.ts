@@ -2,12 +2,8 @@ import { type TopUp } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import Stripe from "stripe";
 
-export const tokenPrices = {
-  input: 1 / 10000,
-  output: 2 / 10000,
-};
-
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
+import { tokenPrices } from "~/server/tokenPrices";
 
 export const userRouter = createTRPCRouter({
   // TODO: refactor and decouple this
@@ -119,11 +115,18 @@ export const userRouter = createTRPCRouter({
       return acc + (amount ?? 0);
     }, 0);
 
+    const balance = totalTopUp - totalTokenCost;
+
+    await ctx.db.user.update({
+      where: { id: user.id },
+      data: { currentBalance: balance },
+    });
+
     return {
       totalTokenCost,
       totalTopUp,
-      balance: totalTopUp - totalTokenCost,
-      formattedBalance: (totalTopUp - totalTokenCost).toFixed(2),
+      balance,
+      formattedBalance: balance.toFixed(2),
     };
   }),
 });

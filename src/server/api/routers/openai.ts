@@ -3,6 +3,7 @@ import { OpenAI } from "openai";
 
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { TRPCError } from "@trpc/server";
+import { tokenPrices } from "~/server/tokenPrices";
 
 export const openaiRouter = createTRPCRouter({
   complete: protectedProcedure
@@ -67,6 +68,29 @@ export const openaiRouter = createTRPCRouter({
           input: completion.usage.prompt_tokens,
           output: completion.usage.completion_tokens,
         },
+      });
+
+      // update balance
+      const tokenUsage = await ctx.db.tokenUsage.findMany({
+        where: { userId: user.id },
+      });
+      const topUps = await ctx.db.topUp.findMany({
+        where: { userId: user.id, confirmedAt: { not: null } },
+      });
+
+      const totalTokenCost = tokenUsage.reduce((acc, { input, output }) => {
+        return acc + input * tokenPrices.input + output * tokenPrices.output;
+      }, 0);
+
+      const totalTopUp = topUps.reduce((acc, { amount }) => {
+        return acc + (amount ?? 0);
+      }, 0);
+
+      const balance = totalTopUp - totalTokenCost;
+
+      await ctx.db.user.update({
+        where: { id: user.id },
+        data: { currentBalance: balance },
       });
 
       return {
