@@ -198,7 +198,7 @@ export const templateRouter = createTRPCRouter({
     .input(
       z.object({
         fieldId: z.string().min(1),
-        value: z.string().min(1),
+        value: z.string(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -213,7 +213,7 @@ export const templateRouter = createTRPCRouter({
     .input(
       z.object({
         id: z.string().min(1),
-        value: z.string().min(1),
+        value: z.string(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
