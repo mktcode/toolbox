@@ -39,6 +39,12 @@ jobs:
           node-version: 22
           cache: "npm"
 
+      - name: Set deployment key
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H alnilam.uberspace.de >> ~/.ssh/known_hosts
+          echo "${{ secrets.DEPLOYMENT_SSH_KEY }}" > ~/.ssh/uberspace-mktcode && chmod 600 ~/.ssh/uberspace-mktcode
+
       - name: Make dotenv
         run: |
           touch .env
