@@ -1,3 +1,4 @@
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import {
@@ -97,7 +98,7 @@ export const templateRouter = createTRPCRouter({
   getOnePublic: publicProcedure
     .input(z.object({ id: z.string().min(1) }))
     .query(async ({ ctx, input }) => {
-      return ctx.db.template.findUnique({
+      const template = await ctx.db.template.findUnique({
         where: { id: input.id, isPublic: true },
         include: {
           fields: {
@@ -105,6 +106,15 @@ export const templateRouter = createTRPCRouter({
           },
         },
       });
+
+      if (!template) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Template not found.",
+        });
+      }
+
+      return template;
     }),
 
   // Fields
