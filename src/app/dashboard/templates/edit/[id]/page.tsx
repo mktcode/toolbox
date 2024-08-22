@@ -15,7 +15,6 @@ export default async function DashboardTemplatesEditPage({
 }: {
   params: { id: string };
 }) {
-  // TODO: This should get replaced everywhere with some central middleware soon!
   const session = await getServerAuthSession();
   if (!session) {
     redirect("/api/auth/signin");
