@@ -14,7 +14,7 @@ export const openaiRouter = createTRPCRouter({
     )
     .mutation(async ({ ctx, input }) => {
       const user = ctx.session.user;
-      if (user.currentBalance === 0) {
+      if (user.currentBalance <= 0) {
         throw new TRPCError({
           code: "UNAUTHORIZED",
           message: "Insufficient balance.",
@@ -86,7 +86,7 @@ export const openaiRouter = createTRPCRouter({
         return acc + (amount ?? 0);
       }, 0);
 
-      const balance = totalTopUp - totalTokenCost;
+      const balance = Math.max(totalTopUp - totalTokenCost, 0);
 
       await ctx.db.user.update({
         where: { id: user.id },
