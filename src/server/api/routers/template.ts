@@ -192,4 +192,54 @@ export const templateRouter = createTRPCRouter({
         },
       });
     }),
+
+  // Field Options
+  createFieldOption: protectedProcedure
+    .input(
+      z.object({
+        fieldId: z.string().min(1),
+        value: z.string().min(1),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.templateFieldOption.create({
+        data: {
+          value: input.value,
+          field: { connect: { id: input.fieldId } },
+        },
+      });
+    }),
+  updateFieldOption: protectedProcedure
+    .input(
+      z.object({
+        id: z.string().min(1),
+        value: z.string().min(1),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.templateFieldOption.update({
+        where: {
+          id: input.id,
+          field: { template: { user: { id: ctx.session.user.id } } },
+        },
+        data: { value: input.value },
+      });
+    }),
+  deleteFieldOption: protectedProcedure
+    .input(z.object({ id: z.string().min(1) }))
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.templateFieldOption.delete({
+        where: {
+          id: input.id,
+          field: { template: { user: { id: ctx.session.user.id } } },
+        },
+      });
+    }),
+  getAllFieldOptions: protectedProcedure
+    .input(z.object({ fieldId: z.string().min(1) }))
+    .query(async ({ ctx, input }) => {
+      return ctx.db.templateFieldOption.findMany({
+        where: { fieldId: input.fieldId },
+      });
+    }),
 });

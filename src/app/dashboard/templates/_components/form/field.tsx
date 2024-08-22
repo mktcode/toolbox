@@ -12,6 +12,7 @@ import { type TemplateField } from "@prisma/client";
 import { useEffect, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { useDebounce } from "@uidotdev/usehooks";
+import { FieldOptions } from "./fieldOptions";
 
 export function Field({
   field,
@@ -94,23 +95,7 @@ export function Field({
           </FormField>
         </div>
         <div>
-          <FormField>
-            <Label className="text-sm">Options</Label>
-            <div className="rounded-md border border-gray-200 p-6 text-center text-xl text-gray-300">
-              <div>No options predefined yet.</div>
-              <div className="mt-6 flex justify-center gap-x-2">
-                <button
-                  className="button shy"
-                  onClick={() => {
-                    // TODO
-                  }}
-                >
-                  <PlusIcon className="mr-1 h-4 w-4 opacity-30" />
-                  Add Option
-                </button>
-              </div>
-            </div>
-          </FormField>
+          <FieldOptions fieldId={field.id} />
         </div>
         <div>
           <FormField>
