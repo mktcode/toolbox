@@ -55,7 +55,7 @@ export function FieldOptions({ fieldId }: { fieldId: string }) {
               console.log("TODO");
               createFieldOption.mutate({
                 fieldId,
-                value: "asd",
+                value: "",
               });
             }}
           >
