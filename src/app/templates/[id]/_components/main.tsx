@@ -48,7 +48,7 @@ export default function Main({
     <div className="flex flex-col items-center justify-center gap-12 px-6">
       {template && (
         <div className="flex min-h-screen w-full flex-col md:flex-row">
-          <div className="w-full py-12 md:max-w-96 md:pr-6 xl:max-w-screen-sm">
+          <div className="w-full pb-12 pt-6 md:max-w-96 md:pr-6 xl:max-w-screen-sm">
             <Header template={template} session={session} />
             <div className="mt-6 flex flex-col space-y-3">
               {fields.map((field, index) => (

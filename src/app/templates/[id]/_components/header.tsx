@@ -14,10 +14,9 @@ export default function Header({
   session: Session | null;
 }) {
   return (
-    <div className="flex">
-      <h1>{template.name}</h1>
+    <>
       {session?.user && session.user.id === template.userId && (
-        <div className="ml-auto flex">
+        <div className="mb-3 flex space-x-2">
           <Link href={`/dashboard/templates`}>
             <button className="button shy">
               <ArrowLeftIcon className="mr-2 h-4 w-4 opacity-30" />
@@ -32,6 +31,7 @@ export default function Header({
           </Link>
         </div>
       )}
-    </div>
+      <h1>{template.name}</h1>
+    </>
   );
 }
