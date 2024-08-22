@@ -65,11 +65,8 @@ export function replaceFields(
   values: Record<string, string>,
 ) {
   return Object.entries(values).reduce((acc, [name, value]) => {
-    const singleLineMatchRegExp = new RegExp(`{=\\s*${name}\\s*=}`, "ig");
-    const multiLineMatchRegExp = new RegExp(`{\\[\\s*${name}\\s*\\]}`, "ig");
+    const placeholderRegExp = new RegExp(`{{\\s*${name}\\s*}}`, "ig");
 
-    return acc
-      .replace(singleLineMatchRegExp, value)
-      .replace(multiLineMatchRegExp, value);
+    return acc.replace(placeholderRegExp, value);
   }, template);
 }

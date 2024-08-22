@@ -7,17 +7,27 @@ import {
 } from "@headlessui/react";
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { type RouterOutputs } from "~/trpc/react";
 
 type FieldType = RouterOutputs["template"]["getOnePublic"]["fields"][0];
 type OptionType = FieldType["options"][0];
 
-export default function Field({ field }: { field: FieldType }) {
+export default function Field({
+  field,
+  onChange,
+}: {
+  field: FieldType;
+  onChange: (value: string) => void;
+}) {
   const options = field.options;
 
   const [input, setInput] = useState(field.defaultValue);
   const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
+
+  useEffect(() => {
+    onChange(input);
+  }, [input]);
 
   return (
     <Combobox
@@ -36,7 +46,9 @@ export default function Field({ field }: { field: FieldType }) {
             "focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-black/25",
           )}
           value={input}
-          onChange={(event) => setInput(event.target.value)}
+          onChange={(event) => {
+            setInput(event.target.value);
+          }}
         />
         {options.length !== 0 && (
           <ComboboxButton className="group absolute inset-y-0 right-0 px-2.5">

@@ -8,6 +8,7 @@ import { type Session } from "next-auth";
 import Header from "./header";
 import Link from "next/link";
 import Field from "./field";
+import { DocumentDuplicateIcon } from "@heroicons/react/20/solid";
 
 export default function Main({
   template,
@@ -18,7 +19,7 @@ export default function Main({
   session: Session | null;
 }) {
   const fields = template?.fields;
-  const [values] = useState<Record<string, string>>({});
+  const [values, setValues] = useState<Record<string, string>>({});
   const [result, setResult] = useState<string | null>(null);
   const [copiedResult, setCopiedResult] = useState<boolean>(false);
 
@@ -48,7 +49,16 @@ export default function Main({
             <Header template={template} session={session} />
             <div className="mt-6 flex flex-col space-y-3">
               {fields.map((field, index) => (
-                <Field key={index} field={field} />
+                <Field
+                  key={index}
+                  field={field}
+                  onChange={(value: string) => {
+                    setValues((prev) => ({
+                      ...prev,
+                      [field.name]: value,
+                    }));
+                  }}
+                />
               ))}
             </div>
             {session?.user && (
@@ -81,7 +91,8 @@ export default function Main({
                   text={result}
                   onCopy={() => indicateSuccessfulCopy()}
                 >
-                  <button>
+                  <button className="button mt-4">
+                    <DocumentDuplicateIcon className="mr-2 size-4 opacity-50" />
                     {copiedResult ? "Copied!" : "Copy to clipboard"}
                   </button>
                 </CopyToClipboard>
