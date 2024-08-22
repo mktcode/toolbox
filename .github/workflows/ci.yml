@@ -64,6 +64,7 @@ jobs:
       - run: npm ci
       - run: npm run lint:ci
       - run: npm run build
+      - run: npm run db:push
 
   deploy:
     needs: test
@@ -110,6 +111,6 @@ jobs:
           echo "UNLEASH_SERVER_API_URL=\"${{ secrets.UNLEASH_SERVER_API_URL }}\"" >> .env
           echo "UNLEASH_SERVER_API_TOKEN=\"${{ secrets.UNLEASH_SERVER_API_TOKEN }}\"" >> .env
 
-      - run: npm ci
-      - run: npm run build
-      - run: npm run deploy
+      - name: Deploy
+        run: npm run deploy
+        # TODO: https://www.prisma.io/blog/backend-prisma-typescript-orm-with-postgresql-deployment-bbba1ps7kip5
