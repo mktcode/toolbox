@@ -91,7 +91,9 @@ export default function Main({
             {result && (
               <>
                 <div className="my-6 rounded-xl border p-6 text-xl">
-                  <Markdown remarkPlugins={[remarkGfm]}>{result}</Markdown>
+                  <Markdown remarkPlugins={[remarkGfm]} className="space-y-2">
+                    {result}
+                  </Markdown>
                 </div>
                 <CopyToClipboard
                   text={result}
