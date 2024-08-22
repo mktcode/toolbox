@@ -26,10 +26,9 @@ export default function Pricing() {
               No subscription. Pay per use.
             </h3>
             <p className="mt-6 text-base leading-7 text-gray-600">
-              For the time being the tools will assume some basic knowledge of
-              prompt engineering. If you are unsatisfied with the results,
-              please let me know. Maybe I can help. There's no refund option,
-              yet.
+              I do not plan to offer any subscription model, ever. I want to
+              keep it simple and not artificially restict any features. Topping
+              up your balance as you need is all you need to do. yet.
             </p>
             <div className="mt-10 flex items-center gap-x-4">
               <h4 className="flex-none text-sm font-semibold leading-6 text-indigo-600">
