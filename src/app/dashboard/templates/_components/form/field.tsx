@@ -3,7 +3,6 @@
 import {
   CheckIcon,
   DocumentDuplicateIcon,
-  PlusIcon,
   TrashIcon,
 } from "@heroicons/react/20/solid";
 import { api } from "~/trpc/react";
