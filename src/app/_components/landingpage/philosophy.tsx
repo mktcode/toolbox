@@ -14,20 +14,19 @@ export default function Philosophy() {
           <div className="lg:pr-4">
             <div className="lg:max-w-lg">
               <p className="text-base font-semibold leading-7 text-indigo-600">
-                Built with love
+                Not many features, yet.
               </p>
               <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                Really! I&apos;m a solo dev. I just can&apos;t help it.
+                Chat, Custom Templates &amp; Batch-Processing
               </h1>
               <p className="mt-6 text-xl leading-8 text-gray-700">
-                I have more than 20 years of experience in software development.
-                But I would never call myself a professional. I&apos;m a
-                hobbyist. And that&apos;s a good thing.
-                <br />
-                <br />
-                I'm building this not to become rich. (Liar!) Just to sustain
-                myself. I'm only one single person but I can react quickly to
-                your needs. At scale.
+                As an average AI user you should not miss much. I've implemented
+                all the standard chat features and a bit more. Templates are
+                super useful for repetitive tasks. And batch-processing is a
+                huge time-saver for large amounts of data.
+              </p>
+              <p className="mt-6 text-xl leading-8 text-gray-700">
+                That's where we start.
               </p>
             </div>
           </div>
@@ -44,7 +43,7 @@ export default function Philosophy() {
         <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
           <div className="lg:pr-4">
             <div className="max-w-xl text-base leading-7 text-gray-700 lg:max-w-lg">
-              <ul role="list" className="mt-8 space-y-8 text-gray-600">
+              <ul role="list" className="mb-16 mt-8 space-y-8 text-gray-600">
                 <li className="flex gap-x-3">
                   <CloudArrowUpIcon
                     aria-hidden="true"
@@ -60,14 +59,6 @@ export default function Philosophy() {
                     it.{" "}
                     <Link href={`/`} className="text-indigo-500">
                       Sign up for beta access
-                    </Link>{" "}
-                    and sit next to me while I'm building stuff.{" "}
-                    <Link
-                      href={`https://maps.google.com`}
-                      target="_blank"
-                      className="text-indigo-500"
-                    >
-                      Literally
                     </Link>
                     .
                   </span>
@@ -81,10 +72,17 @@ export default function Philosophy() {
                     <strong className="font-semibold text-gray-900">
                       One Product. A thousand needs.
                     </strong>{" "}
-                    I'm adaptive and my software is too. I'm not building a
-                    product for a specific use case. I'm building a framework
-                    for myself, to implement features on a per-customer level.
-                    The product can look very different depending on your needs.
+                    I'm adaptive and my software is too. I can implement and
+                    deploy features on a per-customer basis. The product can
+                    look very different depending on your needs.{" "}
+                    <Link
+                      href={"https://discord.com"}
+                      target="_blank"
+                      className="text-indigo-500"
+                    >
+                      Let's talk.
+                    </Link>{" "}
+                    (Yes, it will cost extra.)
                   </span>
                 </li>
                 <li className="flex gap-x-3">
@@ -92,25 +90,39 @@ export default function Philosophy() {
                     aria-hidden="true"
                     className="mt-1 h-5 w-5 flex-none text-indigo-600"
                   />
-                  <span>
+                  <div>
                     <strong className="font-semibold text-gray-900">
-                      Database backups.
+                      Open Planning and Development.
                     </strong>{" "}
-                    Ac tincidunt sapien vehicula erat auctor pellentesque
-                    rhoncus. Et magna sit morbi lobortis.
-                  </span>
+                    There is a public{" "}
+                    <Link
+                      href="https://github.com/users/mktcode/projects/5"
+                      target="_blank"
+                      className="text-indigo-500"
+                    >
+                      Kanban board
+                    </Link>
+                    . You can see what I'm working on and how I'm preparing the
+                    next steps. Contributions are welcome but for the time being
+                    there will be only one core developer, thus just one "lane".{" "}
+                  </div>
                 </li>
               </ul>
-              <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">
-                No server? No problem.
-              </h2>
-              <p className="mt-6">
-                Id orci tellus laoreet id ac. Dolor, aenean leo, ac etiam
-                consequat in. Convallis arcu ipsum urna nibh. Pharetra, euismod
-                vitae interdum mauris enim, consequat vulputate nibh. Maecenas
-                pellentesque id sed tellus mauris, ultrices mauris. Tincidunt
-                enim cursus ridiculus mi. Pellentesque nam sed nullam sed diam
-                turpis ipsum eu a sed convallis diam.
+              <p className="text-base font-semibold leading-7 text-indigo-600">
+                Built with love
+              </p>
+              <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                Really! I&apos;m a solo dev. I just can&apos;t help it.
+              </h1>
+              <p className="mt-6 text-xl leading-8 text-gray-700">
+                I have more than 20 years of experience in software development.
+                But I would never call myself a professional. I&apos;m a
+                hobbyist. And that&apos;s a good thing.
+                <br />
+                <br />
+                I'm building this not to become rich. (Liar!) Just to sustain
+                myself. I'm only one single person but I can react quickly to
+                your needs. At scale.
               </p>
             </div>
           </div>

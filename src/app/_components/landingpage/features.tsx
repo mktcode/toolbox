@@ -10,26 +10,46 @@ const features = [
   {
     name: "Next.js",
     description:
-      "Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.",
+      "React. Oh no. I've been a hater, now I'm an understander. And Next.js... Thank you for server components. It was the right thing to do.",
     icon: CloudArrowUpIcon,
+    button: (
+      <Link href="https://nextjs.org" target="_blank">
+        <button className="button shy">Learn more</button>
+      </Link>
+    ),
   },
   {
     name: "Stripe",
     description:
-      "Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.",
+      "There would probably be no business here without Stripe. Let's be honest.",
     icon: LockClosedIcon,
+    button: (
+      <Link href="https://stripe.com" target="_blank">
+        <button className="button shy">Learn more</button>
+      </Link>
+    ),
   },
   {
     name: "GitHub",
     description:
-      "Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.",
+      "GitHub pulled me so much deeper into software development years ago. It's automating my deployments now.",
     icon: ArrowPathIcon,
+    button: (
+      <Link href="https://github.com" target="_blank">
+        <button className="button shy">Learn more</button>
+      </Link>
+    ),
   },
   {
     name: "Uberspace",
     description:
-      "Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.",
+      "The nicest hoster I've ever had. By admins for admins. It's more for smaller projects but that's what this still is.",
     icon: FingerPrintIcon,
+    button: (
+      <Link href="https://uberspace.de" target="_blank">
+        <button className="button shy">Learn more</button>
+      </Link>
+    ),
   },
 ];
 
@@ -39,24 +59,28 @@ export default function Features() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-base font-semibold leading-7 text-indigo-600">
-            The Stack
+            You don't need to pay.
           </h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            You don't need to pay.
-            <br />
             It's all free and open source.
           </p>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            Quis tellus eget adipiscing convallis sit sit eget aliquet quis.
-            Suspendisse eget egestas a elementum pulvinar et feugiat blandit at.
-            In mi viverra elit nunc.
+            Yes, I want to make money. But I couldn't look myself in the mirror
+            if I kept the source code closed. It's nothing special, just a
+            couple of popular building blocks and the big players providing the
+            AI in the background.
+          </p>
+          <p className="mt-6 text-lg leading-8 text-gray-600">
+            So when it comes to the AI, it's not very open source. I can add
+            Ollama-support. But not now. I mean, you can probably just swap the
+            URL to an Ollama instance and it should work.
           </p>
           <div className="mt-8 flex justify-center">
             <Link
               href="https://github.com/mktcode/senior-react"
               target="_blank"
             >
-              <button className="button">
+              <button className="button !shadow-lg">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -92,6 +116,7 @@ export default function Features() {
                 </dt>
                 <dd className="mt-2 text-base leading-7 text-gray-600">
                   {feature.description}
+                  <div className="mt-4">{feature.button}</div>
                 </dd>
               </div>
             ))}

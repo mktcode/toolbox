@@ -5,10 +5,10 @@ import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
-  { name: "Product", href: "#" },
-  { name: "Features", href: "#" },
+  { name: "The Product", href: "#" },
+  { name: "Pricing", href: "#" },
   { name: "Marketplace", href: "#" },
-  { name: "Company", href: "#" },
+  { name: "Blog", href: "#" },
 ];
 
 export default function Hero() {
@@ -141,21 +141,21 @@ export default function Hero() {
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
               Practical AI Tools
               <br />
-              No bullshit.
+              No hype.
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              In the rapidly evolving world of AI, it’s easy to lose time and
-              money on uncertain ventures. We’re here to help you navigate this
-              landscape confidently. Our high-quality educational content and
-              adaptive tools are designed to grow with you, ensuring you stay
-              ahead of the curve, no matter where AI takes us next. (Bullshit!)
+              In the rapidly evolving world of AI, it's easy to lose time and
+              money on uncertain ventures and experiments. This project aims to
+              mitigate that a bit, by being the experiment and letting you
+              participate. Together we can calmly sit back and watch the AI
+              world evolve. And implement what's useful.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a href="https://discord.com" className="button shy">
                 Get in touch
               </a>
-              <a href="/dashboard" className="button">
-                Get started
+              <a href="/dashboard" className="button !shadow-lg">
+                Start now. Get $1 for free!
               </a>
             </div>
           </div>
