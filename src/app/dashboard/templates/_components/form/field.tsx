@@ -11,6 +11,7 @@ import { Input, Label, Field as FormField, Textarea } from "@headlessui/react";
 import { type TemplateField } from "@prisma/client";
 import { useEffect, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
+import { useDebounce } from "@uidotdev/usehooks";
 
 export function Field({
   field,
@@ -20,16 +21,35 @@ export function Field({
   onDelete: () => void;
 }) {
   const [name, setName] = useState(field.name);
+  const debouncedName = useDebounce(name, 1000);
   const [description, setDescription] = useState(field.description);
+  const debouncedDescription = useDebounce(description, 1000);
   const [defaultValue, setDefaultValue] = useState(field.defaultValue);
+  const debouncedDefaultValue = useDebounce(defaultValue, 1000);
   const [copiedPlaceholder, setCopiedPlaceholder] = useState<boolean>(false);
   const [placeholder, setPlaceholder] = useState<string>(
     "{{ " + field.name + " }}",
   );
 
+  const updateField = api.template.updateField.useMutation();
+  const deleteField = api.template.deleteField.useMutation({
+    onSuccess: () => onDelete(),
+  });
+
   useEffect(() => {
     setPlaceholder("{{ " + name + " }}");
   }, [name]);
+
+  useEffect(() => {
+    updateField.mutate({
+      id: field.id,
+      name: debouncedName,
+      description: debouncedDescription,
+      defaultValue: debouncedDefaultValue,
+      options: [],
+    });
+    // TODO: This causes an update on initial render. Investigate how to do this correctly.
+  }, [debouncedName, debouncedDescription, debouncedDefaultValue]);
 
   function indicateSuccessfulCopy() {
     setCopiedPlaceholder(true);
@@ -37,11 +57,6 @@ export function Field({
       setCopiedPlaceholder(false);
     }, 1000);
   }
-
-  const updateField = api.template.updateField.useMutation();
-  const deleteField = api.template.deleteField.useMutation({
-    onSuccess: () => onDelete(),
-  });
 
   return (
     <div
@@ -56,7 +71,9 @@ export function Field({
               type="text"
               className="w-full rounded-md border border-gray-300 px-2 py-1"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
             />
           </FormField>
           <FormField>
