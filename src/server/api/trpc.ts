@@ -90,7 +90,13 @@ export const createTRPCRouter = t.router;
  * guarantee that a user querying is authorized, but you can still access user session data if they
  * are logged in.
  */
-export const publicProcedure = t.procedure;
+export const publicProcedure = t.procedure.use(({ ctx, next }) => {
+  return next({
+    ctx: {
+      session: ctx.session,
+    },
+  });
+});
 
 /**
  * Protected (authenticated) procedure
@@ -104,31 +110,10 @@ export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
   if (!ctx.session || !ctx.session.user) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
+
   return next({
     ctx: {
-      // infers the `session` as non-nullable
-      session: { ...ctx.session, user: ctx.session.user },
+      session: ctx.session,
     },
   });
 });
-
-function checkFlag(ctx: TRPCContext, flag: string) {
-  if (!ctx.flags.isEnabled(flag)) {
-    throw new TRPCError({
-      code: "FORBIDDEN",
-      message: "Feature is not enabled.",
-    });
-  }
-}
-
-export const flaggedPublicProcedure = (flag: string) =>
-  publicProcedure.use(({ ctx, next }) => {
-    checkFlag(ctx, flag);
-    return next();
-  });
-
-export const flaggedProtectedProcedure = (flag: string) =>
-  protectedProcedure.use(({ ctx, next }) => {
-    checkFlag(ctx, flag);
-    return next();
-  });
