@@ -39,7 +39,7 @@ export default async function NavbarLoggedOut() {
           </div>
           <div className="hidden md:block">
             <div className="ml-4 flex items-center md:ml-6">
-              <Link href="/api/auth/signin">
+              <Link href="/api/auth/signin?callbackUrl=/dashboard">
                 <button className="button">Sign in</button>
               </Link>
             </div>
