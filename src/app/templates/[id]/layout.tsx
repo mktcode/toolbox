@@ -13,7 +13,7 @@ export default async function TemplateLayout({
   children,
   params,
 }: Readonly<{ children: React.ReactNode; params: { id: string } }>) {
-  void api.template.getOnePublic.prefetch({ id: params.id });
+  void api.template.getOnePublicOrOwned.prefetch({ id: params.id });
 
   return <HydrateClient>{children}</HydrateClient>;
 }

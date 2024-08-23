@@ -81,11 +81,15 @@ export const templateRouter = createTRPCRouter({
         },
       });
     }),
-  getOnePublic: publicProcedure
+  getOnePublicOrOwned: publicProcedure
     .input(z.object({ id: z.string().min(1) }))
     .query(async ({ ctx, input }) => {
+      ctx.session?.user;
       const template = await ctx.db.template.findUnique({
-        where: { id: input.id, isPublic: true },
+        where: {
+          id: input.id,
+          OR: [{ user: { id: ctx.session?.user?.id } }, { isPublic: true }],
+        },
         include: {
           fields: {
             include: { options: true },

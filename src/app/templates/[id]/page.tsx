@@ -9,7 +9,7 @@ export default async function TemplatePage({
   params: { id: string };
 }) {
   const session = await getServerAuthSession();
-  const template = await api.template.getOnePublic({ id: params.id });
+  const template = await api.template.getOnePublicOrOwned({ id: params.id });
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center">
