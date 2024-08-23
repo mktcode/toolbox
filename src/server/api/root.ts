@@ -3,6 +3,7 @@ import { templateRouter } from "./routers/template";
 import { openaiRouter } from "./routers/openai";
 import { topUpRouter } from "./routers/topUp";
 import { userRouter } from "./routers/user";
+import { feedbackRouter } from "./routers/feedback";
 
 /**
  * This is the primary router for your server.
@@ -14,6 +15,7 @@ export const appRouter = createTRPCRouter({
   openai: openaiRouter,
   topUp: topUpRouter,
   user: userRouter,
+  feedback: feedbackRouter,
 });
 
 // export type definition of API
