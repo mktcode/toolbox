@@ -71,6 +71,25 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      */
   ],
+  events: {
+    createUser: async (message) => {
+      const WELCOME_AMOUNT = 1;
+      const createTopup = db.topUp.create({
+        data: {
+          amount: WELCOME_AMOUNT,
+          note: "Welcome!",
+          confirmedAt: new Date(),
+          userId: message.user.id,
+        },
+      });
+      const updateBalance = db.user.update({
+        where: { id: message.user.id },
+        data: { currentBalance: { increment: WELCOME_AMOUNT } },
+      });
+
+      await db.$transaction([createTopup, updateBalance]);
+    },
+  },
 };
 
 /**
