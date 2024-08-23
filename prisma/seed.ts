@@ -39,12 +39,6 @@ async function main() {
         body: "Hello, {{name}}!",
         userId: admin.id,
       },
-      {
-        name: "AI",
-        description: "Let the AI help you with your text.",
-        body: "Hello, {{name}}!",
-        userId: admin.id,
-      },
     ],
   });
 }
