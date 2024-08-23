@@ -21,7 +21,7 @@ export default function EditTemplatePageHeader({
 }: {
   template: TemplateWithFields;
 }) {
-  const { name, description, body, isPublic, aiModel, fields } =
+  const { name, description, body, isPublic, aiModel } =
     useTemplateForm(template);
 
   const editTemplate = api.template.update.useMutation();
