@@ -29,3 +29,7 @@ h3 {
 .button.shy {
   @apply border border-gray-100 bg-transparent text-indigo-600 shadow-none hover:border-indigo-100 hover:bg-indigo-100;
 }
+
+.button.mini {
+  @apply px-2.5 py-1.5 text-xs;
+}
