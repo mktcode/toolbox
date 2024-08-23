@@ -11,6 +11,11 @@ const config = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+      },
+      // TODO: Remove these
+      {
+        protocol: "https",
         hostname: "images.unsplash.com",
       },
       {
