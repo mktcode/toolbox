@@ -17,6 +17,7 @@ export default function UserNav() {
           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 data-[focus]:bg-gray-100"
           onClick={item.onClick}
         >
+          {<item.icon className="mr-3 inline-block h-4 w-4" />}
           {item.name}
         </Link>
       ))}
