@@ -15,6 +15,7 @@ import { navigation } from "./_lib";
 import UserNav from "./userNav";
 import UserNavMobile from "./userNavMobile";
 import NavbarLoggedOut from "./loggedOut";
+import FeedbackModal from "../feedback/modal";
 
 export default async function Navbar() {
   const session = await getServerAuthSession();
@@ -51,7 +52,10 @@ export default async function Navbar() {
               </div>
             </div>
           </div>
-          <div className="ml-auto mr-2 text-sm font-medium text-gray-300 md:mr-0">
+          <div className="ml-auto mr-6">
+            <FeedbackModal />
+          </div>
+          <div className="mr-2 text-sm font-medium text-gray-300 md:mr-0">
             {user.currentBalance.toFixed(2)} €
           </div>
           <div className="hidden md:block">
