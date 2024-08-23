@@ -34,8 +34,8 @@ export const templateRouter = createTRPCRouter({
       z.object({
         id: z.string().min(1),
         name: z.string().min(1),
-        description: z.string().min(1),
-        body: z.string().min(1),
+        description: z.string(),
+        body: z.string(),
         isPublic: z.boolean(),
         aiModel: z.string().min(1),
       }),
