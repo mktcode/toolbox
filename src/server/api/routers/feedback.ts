@@ -7,12 +7,14 @@ export const feedbackRouter = createTRPCRouter({
     .input(
       z.object({
         body: z.string(),
+        isPublic: z.boolean().default(false),
       }),
     )
     .mutation(async ({ ctx, input }) => {
       return ctx.db.feedback.create({
         data: {
           body: input.body,
+          isPublic: input.isPublic,
           user: { connect: { id: ctx.session.user.id } },
         },
       });
@@ -22,6 +24,7 @@ export const feedbackRouter = createTRPCRouter({
       z.object({
         id: z.string().min(1),
         body: z.string(),
+        isPublic: z.boolean().default(false),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -32,6 +35,7 @@ export const feedbackRouter = createTRPCRouter({
         },
         data: {
           body: input.body,
+          isPublic: input.isPublic,
         },
       });
     }),
