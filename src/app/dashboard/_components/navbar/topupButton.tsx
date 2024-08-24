@@ -5,7 +5,7 @@ import { ArrowUpCircleIcon } from "@heroicons/react/16/solid";
 import { api } from "~/trpc/react";
 
 export default function TopupButton() {
-  const createTopUp = api.topUp.create.useMutation({
+  const createTopUp = api.balance.createTopUp.useMutation({
     onSuccess: (url) => {
       window.open(url, "_blank");
     },

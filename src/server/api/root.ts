@@ -1,8 +1,7 @@
 import { createCallerFactory, createTRPCRouter } from "./trpc";
 import { templateRouter } from "./routers/template";
 import { openaiRouter } from "./routers/openai";
-import { topUpRouter } from "./routers/topUp";
-import { userRouter } from "./routers/user";
+import { balanceRouter } from "./routers/balance";
 import { feedbackRouter } from "./routers/feedback";
 
 /**
@@ -13,8 +12,7 @@ import { feedbackRouter } from "./routers/feedback";
 export const appRouter = createTRPCRouter({
   template: templateRouter,
   openai: openaiRouter,
-  topUp: topUpRouter,
-  user: userRouter,
+  balance: balanceRouter,
   feedback: feedbackRouter,
 });
 
