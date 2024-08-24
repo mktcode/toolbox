@@ -67,9 +67,10 @@ export default function Features() {
               It's all free and open source.
             </p>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Yes, I want to make money. But I couldn't look myself in the
+              Yes, I want to make money. But I couldn't look at myself in the
               mirror if I kept the source code closed. If you want your own
-              private instance, I'll be happy to help you set it up.
+              private instance, I'll be happy to help you set it up. There will
+              be a Docker image soon.
             </p>
             <div className="mt-8 flex justify-center">
               <Link href="https://discord.com" target="_blank" className="mr-4">

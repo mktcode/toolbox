@@ -16,9 +16,12 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="mt-24 text-center font-light text-gray-400">
             <p>
-              &copy; 2024 Markus Kottländer.
+              <span className="inline-block rotate-180">
+                <sub>&copy;</sub>
+              </span>{" "}
+              2024 Markus Kottländer.
               <br />
-              All rights reserved.
+              All rights reversed.
             </p>
           </div>
         </div>

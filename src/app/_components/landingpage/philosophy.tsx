@@ -37,8 +37,8 @@ export default function Philosophy() {
           <div className="-ml-12 -mt-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
             <Image
               alt=""
-              src="/img/dark-project-app-screenshot.png"
-              className="w-[48rem] max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem]"
+              src="/img/light-project-app-screenshot.png"
+              className="w-[48rem] max-w-none rounded-xl shadow-2xl sm:w-[57rem]"
               width={1080}
               height={640}
             />
@@ -122,11 +122,6 @@ export default function Philosophy() {
                   I have more than 20 years of experience in software
                   development. But I would never call myself a professional.
                   I&apos;m a hobbyist. And that&apos;s a good thing.
-                  <br />
-                  <br />
-                  I'm building this not to become rich. (Liar!) Just to sustain
-                  myself. I'm only one single person but I can react quickly to
-                  your needs. At scale.
                 </p>
               </div>
             </div>

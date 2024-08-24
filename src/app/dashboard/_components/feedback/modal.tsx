@@ -48,6 +48,10 @@ export default function FeedbackModal() {
               className="data-[closed]:transform-[scale(95%)] w-full max-w-xl rounded-xl bg-white p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:opacity-0"
             >
               <DialogTitle as="h2">What do you think?</DialogTitle>
+              <p className="mt-2 text-sm text-gray-500">
+                You can write in your native language. Try to be brief and
+                constructive. What should never change? What must?
+              </p>
               <Textarea
                 className="mt-3 w-full rounded-lg border-none bg-gray-50 p-3"
                 placeholder="Your feedback..."
