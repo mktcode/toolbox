@@ -10,7 +10,7 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { type RouterOutputs } from "~/trpc/react";
 
-type FieldType = RouterOutputs["template"]["getOnePublic"]["fields"][0];
+type FieldType = RouterOutputs["template"]["getOnePublicOrOwned"]["fields"][0];
 type OptionType = FieldType["options"][0];
 
 export default function Field({
