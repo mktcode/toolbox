@@ -110,7 +110,7 @@ export default function FeedbackModal() {
                           isPublic,
                         });
                       }}
-                      disabled={createFeedback.isPending}
+                      disabled={createFeedback.isPending || !body}
                     >
                       {createFeedback.isPending && <Spinner className="mr-2" />}
                       {createFeedback.isPending ? "Sending..." : "Send"}

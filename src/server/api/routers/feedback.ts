@@ -6,7 +6,7 @@ export const feedbackRouter = createTRPCRouter({
   create: protectedProcedure
     .input(
       z.object({
-        body: z.string(),
+        body: z.string().min(1),
         isPublic: z.boolean().default(false),
       }),
     )
