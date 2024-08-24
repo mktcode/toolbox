@@ -30,36 +30,102 @@ export default function Pricing() {
               keep it simple and not artificially restict any features. Topping
               up your balance as you need is all you need to do. yet.
             </p>
-            <div className="mt-10 flex items-center gap-x-4">
+            <div className="mt-10 grid grid-cols-3 gap-4">
+              <div />
+              <div className="text-sm font-semibold text-gray-600">Pricing</div>
+              <div className="text-sm font-semibold text-gray-600">
+                Batch Pricing
+              </div>
+            </div>
+            <div className="flex items-center gap-x-4">
               <h4 className="flex-none text-sm font-semibold leading-6 text-indigo-600">
-                What’s included
+                OpenAI
               </h4>
               <div className="h-px flex-auto bg-gray-100" />
             </div>
-            <ul
-              role="list"
-              className="mt-8 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-600 sm:grid-cols-2 sm:gap-6"
-            >
-              {includedFeatures.map((feature) => (
-                <li key={feature} className="flex gap-x-3">
-                  <CheckIcon
-                    aria-hidden="true"
-                    className="h-6 w-5 flex-none text-indigo-600"
-                  />
-                  {feature}
-                </li>
-              ))}
-            </ul>
+            <div className="mt-4 grid grid-cols-3 gap-4">
+              <div>GPT-4o-mini</div>
+              <div className="text-sm">
+                $0.23 / 1M input tokens
+                <br />
+                $0.90 / 1M output tokens
+              </div>
+              <div className="text-sm">
+                $0.10 / 1M input tokens
+                <br />
+                $0.45 / 1M output tokens
+              </div>
+              <div>GPT-4o</div>
+              <div className="text-sm">
+                $5.00 / 1M input tokens
+                <br />
+                $15.00 / 1M output tokens
+              </div>
+              <div className="text-sm">
+                $2.50 / 1M input tokens
+                <br />
+                $7.50 / 1M output tokens
+              </div>
+            </div>
+            <div className="mt-4 flex items-center gap-x-4">
+              <h4 className="flex-none text-sm font-semibold leading-6 text-indigo-600">
+                Anthropic
+              </h4>
+              <div className="h-px flex-auto bg-gray-100" />
+            </div>
+            <div className="mt-4 grid grid-cols-3 gap-4">
+              <div>Claude 3.5 Sonnet</div>
+              <div className="text-sm">
+                $5.00 / 1M input tokens
+                <br />
+                $15.00 / 1M output tokens
+              </div>
+              <div className="text-sm">
+                $2.50 / 1M input tokens
+                <br />
+                $7.50 / 1M output tokens
+              </div>
+              <div>Claude 3.5 Opus</div>
+              <div className="text-sm">
+                $5.00 / 1M input tokens
+                <br />
+                $15.00 / 1M output tokens
+              </div>
+              <div className="text-sm">
+                $2.50 / 1M input tokens
+                <br />
+                $7.50 / 1M output tokens
+              </div>
+            </div>
+            <div className="mt-4 flex items-center gap-x-4">
+              <h4 className="flex-none text-sm font-semibold leading-6 text-indigo-600">
+                Groq
+              </h4>
+              <div className="h-px flex-auto bg-gray-100" />
+            </div>
+            <div className="mt-4 grid grid-cols-3 gap-4">
+              <div>Llama 3.1 70b</div>
+              <div className="text-sm">
+                $5.00 / 1M input tokens
+                <br />
+                $15.00 / 1M output tokens
+              </div>
+              <div className="text-sm">
+                $2.50 / 1M input tokens
+                <br />
+                $7.50 / 1M output tokens
+              </div>
+            </div>
           </div>
           <div className="p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
             <div className="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
               <div className="mx-auto max-w-xs px-8">
                 <p className="text-base font-semibold text-gray-600">
-                  Price per 1 Million tokens:
+                  Price per 1 Million tokens starting at:
                 </p>
                 <p className="mt-6 flex flex-col items-center justify-center gap-x-2">
                   <span className="text-5xl font-bold tracking-tight text-gray-900">
-                    $1.00
+                    $0.90
                   </span>
                   <span className="mt-3 text-xs leading-5 text-gray-600">
                     (Could be cheaper than $20 per month.)
