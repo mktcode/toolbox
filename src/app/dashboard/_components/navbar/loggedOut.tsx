@@ -3,7 +3,7 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import NavLink from "./navLink";
@@ -37,15 +37,12 @@ export default async function NavbarLoggedOut() {
               </div>
             </div>
           </div>
-          <div className="hidden md:block">
-            <div className="ml-4 flex items-center md:ml-6">
-              <Link href="/api/auth/signin?callbackUrl=/dashboard">
-                <button className="button">Sign in</button>
-              </Link>
-            </div>
+          <div className="ml-auto mr-3 flex items-center md:mr-0">
+            <Link href="/api/auth/signin?callbackUrl=/dashboard">
+              <button className="button">Sign in</button>
+            </Link>
           </div>
           <div className="-mr-2 flex md:hidden">
-            {/* Mobile menu button */}
             <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
               <span className="absolute -inset-0.5" />
               <span className="sr-only">Open main menu</span>
@@ -69,27 +66,6 @@ export default async function NavbarLoggedOut() {
               {item.name}
             </NavLinkMobile>
           ))}
-        </div>
-        <div className="border-t border-gray-700 pb-3 pt-4">
-          <div className="flex items-center px-5">
-            <div className="flex-shrink-0">
-              <Image
-                alt=""
-                src={"/img/avatar-placeholder.jpg"}
-                className="h-10 w-10 rounded-full"
-                width={40}
-                height={40}
-              />
-            </div>
-            <button
-              type="button"
-              className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-            >
-              <span className="absolute -inset-1.5" />
-              <span className="sr-only">View notifications</span>
-              <BellIcon aria-hidden="true" className="h-6 w-6" />
-            </button>
-          </div>
         </div>
       </DisclosurePanel>
     </Disclosure>
