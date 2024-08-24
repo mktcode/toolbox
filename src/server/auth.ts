@@ -1,3 +1,4 @@
+import Stripe from "stripe";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import {
   getServerSession,
@@ -73,21 +74,56 @@ export const authOptions: NextAuthOptions = {
   ],
   events: {
     createUser: async (message) => {
+      const user = message.user;
+
+      // sanity check (for typescript)
+      if (!user.email) {
+        throw new Error("User email not found");
+      }
+      if (!user.name) {
+        throw new Error("User name not found");
+      }
+
+      // create a free welcome top-up
       const WELCOME_AMOUNT = 1;
       const createTopup = db.topUp.create({
         data: {
           amount: WELCOME_AMOUNT,
           note: "Welcome!",
           confirmedAt: new Date(),
-          userId: message.user.id,
+          userId: user.id,
         },
       });
       const updateBalance = db.user.update({
-        where: { id: message.user.id },
+        where: { id: user.id },
         data: { currentBalance: { increment: WELCOME_AMOUNT } },
       });
 
       await db.$transaction([createTopup, updateBalance]);
+
+      // create stripe customer
+      if (user.stripeCustomerId) {
+        return;
+      }
+
+      const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+      if (!stripeSecretKey) {
+        throw new Error("Stripe secret key not found");
+      }
+
+      const stripe = new Stripe(stripeSecretKey);
+
+      const newCustomer = await stripe.customers.create({
+        email: user.email,
+        name: user.name,
+      });
+
+      await db.user.update({
+        where: { id: user.id },
+        data: {
+          stripeCustomerId: newCustomer.id,
+        },
+      });
     },
   },
 };
