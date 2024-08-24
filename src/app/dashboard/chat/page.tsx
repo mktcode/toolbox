@@ -2,6 +2,7 @@ import { MicrophoneIcon, PaperClipIcon } from "@heroicons/react/20/solid";
 import { redirect } from "next/navigation";
 import { getServerAuthSession } from "~/server/auth";
 import { DashboardHeader, DashboardHeaderH1 } from "./../_components/layout";
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
 
 export default async function DashboardPage() {
   const session = await getServerAuthSession();
@@ -31,7 +32,13 @@ export default async function DashboardPage() {
             <button className="rounded-md px-4 py-2 hover:bg-gray-200">
               <PaperClipIcon className="h-6 w-6 text-gray-400" />
             </button>
-            <button className="button ml-auto">Send</button>
+            <div className="ml-auto flex space-x-2">
+              <button className="button shy">
+                <PencilSquareIcon className="mr-2 h-4 w-4" />
+                No Template
+              </button>
+              <button className="button">Send</button>
+            </div>
           </div>
         </div>
       </main>
