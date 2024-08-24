@@ -1,12 +1,3 @@
-import { CheckIcon } from "@heroicons/react/20/solid";
-
-const includedFeatures = [
-  "Chat with AI",
-  "Chat with me",
-  "Use AI Templates",
-  "Newsletter",
-];
-
 export default function Pricing() {
   return (
     <div className="bg-white py-24 sm:py-32">
