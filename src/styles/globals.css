@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  @apply scroll-smooth;
+}
+
 textarea {
   @apply rounded border bg-gray-50 p-2 focus:bg-white focus:outline-none focus:ring-0;
 }
