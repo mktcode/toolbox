@@ -34,7 +34,7 @@ export default function Feedback({
       </p>
 
       {feedback.length > 0 && (
-        <div className="mt-6 text-center text-gray-500">
+        <div className="mt-12 text-center text-gray-500">
           {regenerate.isPending && (
             <button className="button mx-auto">
               <ArrowPathIcon className="mr-3 h-5 w-5 animate-spin opacity-50" />
@@ -47,6 +47,7 @@ export default function Feedback({
             <button
               className="button mx-auto"
               onClick={() => regenerate.mutate()}
+              disabled={regenerate.isPending}
             >
               <ArrowPathIcon className="mr-3 h-5 w-5 opacity-50" />
               <div className="flex flex-col items-start">
