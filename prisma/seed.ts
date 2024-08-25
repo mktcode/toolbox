@@ -59,7 +59,7 @@ async function main() {
       priceOut: 0.0000006,
       priceInBatch: 0.000000075,
       priceOutBatch: 0.0000003,
-      margin: 200,
+      margin: 250,
       provider: {
         connect: {
           id: llmProvders.id,
