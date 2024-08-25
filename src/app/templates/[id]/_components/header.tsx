@@ -32,6 +32,7 @@ export default function Header({
         </div>
       )}
       <h1>{template.name}</h1>
+      <p className="text-sm text-gray-500">{template.description}</p>
     </>
   );
 }

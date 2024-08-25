@@ -79,6 +79,7 @@ export default function Field({
           ))}
         </ComboboxOptions>
       </Combobox>
+      <div className="mt-1 text-xs text-gray-400">{field.description}</div>
     </div>
   );
 }
