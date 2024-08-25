@@ -17,7 +17,7 @@ export default function Main({
   template,
   session,
 }: {
-  template: RouterOutputs["template"]["getOnePublic"];
+  template: RouterOutputs["template"]["getOnePublicOrOwned"];
 
   session: Session | null;
 }) {
