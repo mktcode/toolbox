@@ -14,10 +14,12 @@ export const tokensRouter = createTRPCRouter({
       z.object({
         input: z.string(),
         output: z.string(),
+        model: z.string(),
       }),
     )
     .query(async ({ input }) => {
-      const encoding = get_encoding(encodings.GPT4o);
+      const modelFamily = input.model === "gpt-4o" ? "GPT4o" : "GPTlegacy";
+      const encoding = get_encoding(encodings[modelFamily]);
       const inputTokens = encoding.encode(input.input);
       const outputTokens = encoding.encode(input.output);
       encoding.free();
