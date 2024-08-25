@@ -122,14 +122,19 @@ export default function PricingCalculator({
                 <tr>
                   <td className="col-span-3 h-3" />
                 </tr>
+                <tr>
+                  <td className="px-3 text-right text-indigo-100" colSpan={4}>
+                    + 50 %
+                  </td>
+                </tr>
                 <tr className="text-xl">
-                  <td className="px-3 text-left">Total</td>
-                  <td className="px-3 py-1">{input.length + output.length}</td>
-                  <td className="px-3 py-1">
+                  <td className="px-3 pb-2 text-left">Total</td>
+                  <td className="px-3 pb-2">{input.length + output.length}</td>
+                  <td className="px-3 pb-2">
                     {price.inputTokens + price.outputTokens}
                   </td>
-                  <td className="px-3 py-1 text-right font-bold">
-                    ${(price.inputPrice + price.outputPrice).toFixed(3)}
+                  <td className="px-3 pb-2 text-right font-bold">
+                    ${((price.inputPrice + price.outputPrice) * 1.5).toFixed(3)}
                   </td>
                 </tr>
               </tbody>
