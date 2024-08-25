@@ -1,5 +1,5 @@
 import { TRPCError } from "@trpc/server";
-import { get_encoding } from "tiktoken";
+import { getEncoding } from "js-tiktoken";
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
@@ -13,10 +13,9 @@ export const tokensRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      const encoding = get_encoding("o200k_base");
+      const encoding = getEncoding("o200k_base");
       const inputTokens = encoding.encode(input.input);
       const outputTokens = encoding.encode(input.output);
-      encoding.free();
 
       const llm = await ctx.db.llm.findUnique({
         where: { id: input.llmId },
