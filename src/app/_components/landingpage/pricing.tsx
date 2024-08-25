@@ -25,12 +25,8 @@ export default function Pricing() {
               </p>
               <div className="mt-10 grid grid-cols-3 gap-4">
                 <div />
-                <div className="text-sm font-semibold text-gray-600">
-                  Pricing
-                </div>
-                <div className="text-sm font-semibold text-gray-600">
-                  Batch Pricing
-                </div>
+                <div className="text-sm font-semibold">Pricing</div>
+                <div className="text-sm font-semibold">Batch Pricing</div>
               </div>
               <div className="flex items-center gap-x-4">
                 <h4 className="flex-none text-sm font-semibold leading-6 text-indigo-600">
@@ -40,23 +36,23 @@ export default function Pricing() {
               </div>
               <div className="mt-4 grid grid-cols-3 gap-4">
                 <div>GPT-4o-mini</div>
-                <div className="text-sm">
+                <div className="text-sm text-gray-600">
                   $0.23 / 1M input tokens
                   <br />
                   $0.90 / 1M output tokens
                 </div>
-                <div className="text-sm">
+                <div className="text-sm text-gray-600">
                   $0.10 / 1M input tokens
                   <br />
                   $0.45 / 1M output tokens
                 </div>
                 <div>GPT-4o</div>
-                <div className="text-sm">
+                <div className="text-sm text-gray-600">
                   $5.00 / 1M input tokens
                   <br />
                   $15.00 / 1M output tokens
                 </div>
-                <div className="text-sm">
+                <div className="text-sm text-gray-600">
                   $2.50 / 1M input tokens
                   <br />
                   $7.50 / 1M output tokens
@@ -70,23 +66,23 @@ export default function Pricing() {
               </div>
               <div className="mt-4 grid grid-cols-3 gap-4">
                 <div>Claude 3.5 Sonnet</div>
-                <div className="text-sm">
+                <div className="text-sm text-gray-600">
                   $5.00 / 1M input tokens
                   <br />
                   $15.00 / 1M output tokens
                 </div>
-                <div className="text-sm">
+                <div className="text-sm text-gray-600">
                   $2.50 / 1M input tokens
                   <br />
                   $7.50 / 1M output tokens
                 </div>
                 <div>Claude 3.5 Opus</div>
-                <div className="text-sm">
+                <div className="text-sm text-gray-600">
                   $5.00 / 1M input tokens
                   <br />
                   $15.00 / 1M output tokens
                 </div>
-                <div className="text-sm">
+                <div className="text-sm text-gray-600">
                   $2.50 / 1M input tokens
                   <br />
                   $7.50 / 1M output tokens
@@ -100,12 +96,12 @@ export default function Pricing() {
               </div>
               <div className="mt-4 grid grid-cols-3 gap-4">
                 <div>Llama 3.1 70b</div>
-                <div className="text-sm">
+                <div className="text-sm text-gray-600">
                   $5.00 / 1M input tokens
                   <br />
                   $15.00 / 1M output tokens
                 </div>
-                <div className="text-sm">
+                <div className="text-sm text-gray-600">
                   $2.50 / 1M input tokens
                   <br />
                   $7.50 / 1M output tokens
