@@ -1,10 +1,11 @@
 import { api } from "~/trpc/server";
 import PricingCalculator from "./pricingCalculator";
 
-function formattedPrice(pricePerToken: number) {
+function formattedPrice(pricePerToken: number, margin: number) {
   const price = pricePerToken * 1_000_000;
-  const decimals = price < 1 ? 3 : 2;
-  return price.toFixed(decimals);
+  const priceWithMargin = price * (1 + margin / 100);
+  const decimals = priceWithMargin < 1 ? 3 : 2;
+  return priceWithMargin.toFixed(decimals);
 }
 
 export default async function Pricing() {
@@ -61,14 +62,19 @@ export default async function Pricing() {
                       <>
                         <div>{llm.label}</div>
                         <div className="text-sm text-gray-600">
-                          ${formattedPrice(llm.priceIn)} / 1M input tokens
-                          <br />${formattedPrice(llm.priceOut)} / 1M output
+                          ${formattedPrice(llm.priceIn, llm.margin)} / 1M input
                           tokens
+                          <br />${formattedPrice(llm.priceOut, llm.margin)} / 1M
+                          output tokens
                         </div>
                         <div className="text-sm text-gray-600">
-                          ${formattedPrice(llm.priceInBatch)} / 1M input tokens
-                          <br />${formattedPrice(llm.priceOutBatch)} / 1M output
-                          tokens
+                          ${formattedPrice(llm.priceInBatch, llm.margin)} / 1M
+                          input tokens
+                          <br />${formattedPrice(
+                            llm.priceOutBatch,
+                            llm.margin,
+                          )}{" "}
+                          / 1M output tokens
                         </div>
                       </>
                     ))}

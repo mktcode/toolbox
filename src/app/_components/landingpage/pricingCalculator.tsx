@@ -14,6 +14,10 @@ import Spinner from "../spinner";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useDebounce } from "@uidotdev/usehooks";
 
+function applyLlmMargin(price: number, margin: number) {
+  return price * (1 + margin / 100);
+}
+
 export default function PricingCalculator({
   llmProviders,
   defaultLlm,
@@ -119,7 +123,11 @@ export default function PricingCalculator({
                   <td className="px-3">{input.length}</td>
                   <td className="px-3">{price.inputTokens}</td>
                   <td className="px-3 text-right font-semibold">
-                    ${price.inputPrice.toFixed(3)}
+                    $
+                    {applyLlmMargin(
+                      price.inputPrice,
+                      selectedLlm.margin,
+                    ).toFixed(3)}
                   </td>
                 </tr>
                 <tr>
@@ -127,16 +135,15 @@ export default function PricingCalculator({
                   <td className="px-3">{output.length}</td>
                   <td className="px-3">{price.outputTokens}</td>
                   <td className="px-3 text-right font-semibold">
-                    ${price.outputPrice.toFixed(3)}
+                    $
+                    {applyLlmMargin(
+                      price.outputPrice,
+                      selectedLlm.margin,
+                    ).toFixed(3)}
                   </td>
                 </tr>
                 <tr>
                   <td className="col-span-3 h-3" />
-                </tr>
-                <tr>
-                  <td className="px-3 text-right text-indigo-100" colSpan={4}>
-                    + {selectedLlm.margin} %
-                  </td>
                 </tr>
                 <tr className="text-xl">
                   <td className="px-3 pb-2 text-left">Total</td>
@@ -146,9 +153,9 @@ export default function PricingCalculator({
                   </td>
                   <td className="px-3 pb-2 text-right font-bold">
                     $
-                    {(
-                      (price.inputPrice + price.outputPrice) *
-                      (1 + selectedLlm.margin / 100)
+                    {applyLlmMargin(
+                      price.inputPrice + price.outputPrice,
+                      selectedLlm.margin,
                     ).toFixed(3)}
                   </td>
                 </tr>
