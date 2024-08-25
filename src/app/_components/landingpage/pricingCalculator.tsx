@@ -8,7 +8,7 @@ import {
   MenuItems,
   Textarea,
 } from "@headlessui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api, type RouterOutputs } from "~/trpc/react";
 import Spinner from "../spinner";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
@@ -29,14 +29,25 @@ export default function PricingCalculator({
 
   const [llmId, setLlmId] = useState(defaultLlm.id);
 
+  const [price, setPrice] =
+    useState<RouterOutputs["tokens"]["calculatePrice"]>();
+
   const llms = llmProviders.flatMap((provider) => provider.llms);
   const selectedLlm = llms.find((llm) => llm.id === llmId);
 
-  const { data: price } = api.tokens.calculatePrice.useQuery({
-    input: debouncedInput,
-    output: debouncedOutput,
-    llmId,
+  const calculatePrice = api.tokens.calculatePrice.useMutation({
+    onSuccess: (data) => {
+      setPrice(data);
+    },
   });
+
+  useEffect(() => {
+    calculatePrice.mutate({
+      input: debouncedInput,
+      output: debouncedOutput,
+      llmId,
+    });
+  }, [debouncedInput, debouncedOutput, llmId]);
 
   return (
     <div className="p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">

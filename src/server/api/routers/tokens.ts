@@ -12,7 +12,7 @@ export const tokensRouter = createTRPCRouter({
         llmId: z.string(),
       }),
     )
-    .query(async ({ ctx, input }) => {
+    .mutation(async ({ ctx, input }) => {
       const encoding = get_encoding("o200k_base");
       const inputTokens = encoding.encode(input.input);
       const outputTokens = encoding.encode(input.output);
