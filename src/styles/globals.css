@@ -37,3 +37,13 @@ h3 {
 .button.mini {
   @apply px-2.5 py-1.5 text-xs;
 }
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
