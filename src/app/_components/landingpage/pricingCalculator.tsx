@@ -102,7 +102,7 @@ export default function PricingCalculator({
             <Spinner />
           </div>
         )}
-        {price && (
+        {price && selectedLlm && (
           <div className="rounded-b-2xl bg-indigo-600 p-3">
             <table className="w-full rounded-lg bg-white/10 text-sm text-white">
               <tbody className="text-center">
@@ -135,7 +135,7 @@ export default function PricingCalculator({
                 </tr>
                 <tr>
                   <td className="px-3 text-right text-indigo-100" colSpan={4}>
-                    + 50 %
+                    + {selectedLlm.margin} %
                   </td>
                 </tr>
                 <tr className="text-xl">
@@ -145,7 +145,11 @@ export default function PricingCalculator({
                     {price.inputTokens + price.outputTokens}
                   </td>
                   <td className="px-3 pb-2 text-right font-bold">
-                    ${((price.inputPrice + price.outputPrice) * 1.5).toFixed(3)}
+                    $
+                    {(
+                      (price.inputPrice + price.outputPrice) *
+                      (1 + selectedLlm.margin / 100)
+                    ).toFixed(3)}
                   </td>
                 </tr>
               </tbody>
