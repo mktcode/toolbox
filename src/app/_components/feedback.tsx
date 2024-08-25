@@ -24,8 +24,11 @@ export default function Feedback({
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <h1 className="text-center text-3xl font-extrabold text-gray-900 sm:text-4xl">
-        Recent Feedback
+        Recent User Feedback
       </h1>
+      <p className="text-center text-base font-semibold leading-7 text-indigo-600">
+        Summarized by an unbiased AI prompt.
+      </p>
       <p className="mt-12 columns-1 text-center text-lg text-gray-500 lg:columns-2 lg:gap-12 lg:text-left">
         {summary ? summary.body : "No feedback yet. :("}
       </p>
