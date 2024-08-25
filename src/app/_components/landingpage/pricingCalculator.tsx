@@ -12,15 +12,20 @@ import { useState } from "react";
 import { api } from "~/trpc/react";
 import Spinner from "../spinner";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { useDebounce } from "@uidotdev/usehooks";
 
 export default function PricingCalculator() {
   const [input, setInput] = useState("");
+  const debouncedInput = useDebounce(input, 500);
+
   const [output, setOutput] = useState("");
+  const debouncedOutput = useDebounce(output, 500);
+
   const [model, setModel] = useState("gpt-4o-mini");
 
   const { data: price } = api.tokens.calculatePrice.useQuery({
-    input,
-    output,
+    input: debouncedInput,
+    output: debouncedOutput,
     model,
   });
 
