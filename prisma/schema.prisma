@@ -150,6 +150,7 @@ model Llm {
   priceOut      Float
   priceInBatch  Float
   priceOutBatch Float
+  margin        Int          @default(50)
   provider      LlmProvider  @relation(fields: [providerId], references: [id])
   tokenUsage    TokenUsage[]
   templates     Template[]

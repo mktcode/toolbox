@@ -34,7 +34,7 @@ async function main() {
     },
   });
 
-  const gpt4o = await prisma.llm.create({
+  await prisma.llm.create({
     data: {
       name: "gpt-4o",
       label: "GPT 4o",
@@ -42,6 +42,7 @@ async function main() {
       priceOut: 0.000015,
       priceInBatch: 0.0000025,
       priceOutBatch: 0.0000075,
+      margin: 50,
       provider: {
         connect: {
           id: llmProvders.id,
@@ -58,6 +59,7 @@ async function main() {
       priceOut: 0.0000006,
       priceInBatch: 0.000000075,
       priceOutBatch: 0.0000003,
+      margin: 100,
       provider: {
         connect: {
           id: llmProvders.id,
