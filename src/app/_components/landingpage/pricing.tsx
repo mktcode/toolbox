@@ -1,6 +1,12 @@
 import { api } from "~/trpc/server";
 import PricingCalculator from "./pricingCalculator";
 
+function formattedPrice(pricePerToken: number) {
+  const price = pricePerToken * 1_000_000;
+  const decimals = price < 1 ? 3 : 2;
+  return price.toFixed(decimals);
+}
+
 export default async function Pricing() {
   const llmProviders = await api.llmProvidersRouter.all();
 
@@ -52,30 +58,20 @@ export default async function Pricing() {
                   </div>
                   <div className="mt-4 grid grid-cols-3 gap-4">
                     {provider.llms.map((llm) => (
-                      <>{llm.name}</>
+                      <>
+                        <div>{llm.label}</div>
+                        <div className="text-sm text-gray-600">
+                          ${formattedPrice(llm.priceIn)} / 1M input tokens
+                          <br />${formattedPrice(llm.priceOut)} / 1M output
+                          tokens
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          ${formattedPrice(llm.priceInBatch)} / 1M input tokens
+                          <br />${formattedPrice(llm.priceOutBatch)} / 1M output
+                          tokens
+                        </div>
+                      </>
                     ))}
-                    <div>GPT-4o-mini</div>
-                    <div className="text-sm text-gray-600">
-                      $0.23 / 1M input tokens
-                      <br />
-                      $0.90 / 1M output tokens
-                    </div>
-                    <div className="text-sm text-gray-600">
-                      $0.10 / 1M input tokens
-                      <br />
-                      $0.45 / 1M output tokens
-                    </div>
-                    <div>GPT-4o</div>
-                    <div className="text-sm text-gray-600">
-                      $5.00 / 1M input tokens
-                      <br />
-                      $15.00 / 1M output tokens
-                    </div>
-                    <div className="text-sm text-gray-600">
-                      $2.50 / 1M input tokens
-                      <br />
-                      $7.50 / 1M output tokens
-                    </div>
                   </div>
                 </>
               ))}

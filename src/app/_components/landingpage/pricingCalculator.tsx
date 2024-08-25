@@ -29,7 +29,8 @@ export default function PricingCalculator({
 
   const [llmId, setLlmId] = useState(defaultLlm.id);
 
-  setLlmId(defaultLlm.id);
+  const llms = llmProviders.flatMap((provider) => provider.llms);
+  const selectedLlm = llms.find((llm) => llm.id === llmId);
 
   const { data: price } = api.tokens.calculatePrice.useQuery({
     input: debouncedInput,
@@ -64,7 +65,7 @@ export default function PricingCalculator({
         </div>
         <Menu as="div" className="bg-indigo-600 p-3 pb-0">
           <MenuButton className="inline-flex w-full items-center gap-2 rounded-md bg-white/10 px-3 py-1.5 text-sm/6 font-semibold text-white focus:outline-none data-[hover]:bg-white/20 data-[open]:bg-white/20 data-[focus]:outline-1 data-[focus]:outline-white">
-            Model: {llmId}
+            {selectedLlm ? selectedLlm.label : "Select AI Model"}
             <ChevronDownIcon className="ml-auto size-4 fill-white/60" />
           </MenuButton>
 
@@ -73,19 +74,15 @@ export default function PricingCalculator({
             anchor="bottom start"
             className="w-52 origin-top-right rounded-xl border border-white/5 bg-indigo-500 p-1 text-sm/6 text-white transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
           >
-            {llmProviders.map(({ id, llms }) => (
-              <div key={id}>
-                {llms.map(({ id: llmId, label }) => (
-                  <MenuItem key={llmId}>
-                    <button
-                      className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-[focus]:bg-white/10"
-                      onClick={() => setLlmId(llmId)}
-                    >
-                      {label}
-                    </button>
-                  </MenuItem>
-                ))}
-              </div>
+            {llms.map(({ id: llmId, label }) => (
+              <MenuItem key={llmId}>
+                <button
+                  className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-[focus]:bg-white/10"
+                  onClick={() => setLlmId(llmId)}
+                >
+                  {label}
+                </button>
+              </MenuItem>
             ))}
           </MenuItems>
         </Menu>
