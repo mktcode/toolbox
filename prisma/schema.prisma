@@ -48,7 +48,8 @@ model Template {
   user     User?   @relation(fields: [userId], references: [id])
   userId   String?
   isPublic Boolean @default(false)
-  aiModel  String  @default("default")
+  llm      Llm     @relation(fields: [llmId], references: [id])
+  llmId    String
 
   @@index([name])
 }
@@ -132,12 +133,38 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+// LLM Providers
+
+model LlmProvider {
+  id        String   @id @default(uuid())
+  name      String
+  llms      Llm[]
+  createdAt DateTime @default(now())
+}
+
+model Llm {
+  id            String       @id @default(uuid())
+  name          String
+  label         String
+  priceIn       Float
+  priceOut      Float
+  priceInBatch  Float
+  priceOutBatch Float
+  provider      LlmProvider  @relation(fields: [providerId], references: [id])
+  tokenUsage    TokenUsage[]
+  templates     Template[]
+  providerId    String
+  createdAt     DateTime     @default(now())
+}
+
 // Billing
 
 model TokenUsage {
   id        String   @id @default(uuid())
   input     Int
   output    Int
+  llm       Llm      @relation(fields: [llmId], references: [id])
+  llmId     String
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id])
   userId    String

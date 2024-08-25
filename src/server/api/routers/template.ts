@@ -1,4 +1,5 @@
 import { TRPCError } from "@trpc/server";
+import OpenAI from "openai";
 import { z } from "zod";
 
 import {
@@ -12,12 +13,136 @@ const defaults = {
   description: "",
   body: "",
   isPublic: false,
-  aiModel: "gpt-4o-mini",
+  llm: "gpt-4o-mini",
   fields: [],
 };
 
 export const templateRouter = createTRPCRouter({
+  run: protectedProcedure
+    .input(
+      z.object({
+        templateId: z.string().min(1),
+        message: z.string().min(1),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const user = ctx.session.user;
+      const template = await ctx.db.template.findUnique({
+        where: { id: input.templateId },
+        include: { llm: true },
+      });
+
+      if (!template) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Template not found.",
+        });
+      }
+
+      if (user.currentBalance <= 0) {
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "Insufficient balance.",
+        });
+      }
+
+      if (!process.env.OPENAI_API_KEY) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "OpenAI API key is not set.",
+        });
+      }
+
+      const openai = new OpenAI({
+        apiKey: process.env.OPENAI_API_KEY,
+      });
+
+      const completion = await openai.chat.completions.create({
+        model: template.llm.name,
+        messages: [
+          {
+            role: "user",
+            content: input.message,
+          },
+        ],
+      });
+
+      const result = completion.choices[0]?.message?.content;
+
+      if (!result) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "OpenAI API did not return a result.",
+        });
+      }
+
+      if (!completion.usage) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "OpenAI API did not return usage information.",
+        });
+      }
+
+      await ctx.db.tokenUsage.create({
+        data: {
+          llm: {
+            connect: {
+              id: template.llm.id,
+            },
+          },
+          user: {
+            connect: {
+              id: user.id,
+            },
+          },
+          input: completion.usage.prompt_tokens,
+          output: completion.usage.completion_tokens,
+        },
+      });
+
+      // update balance
+      const tokenUsage = await ctx.db.tokenUsage.findMany({
+        where: { userId: user.id },
+        include: { llm: true },
+      });
+      const topUps = await ctx.db.topUp.findMany({
+        where: { userId: user.id, confirmedAt: { not: null } },
+      });
+
+      const totalTokenCost = tokenUsage.reduce(
+        (acc, { input, output, llm }) => {
+          return acc + input * llm.priceIn + output * llm.priceOut;
+        },
+        0,
+      );
+
+      const totalTopUp = topUps.reduce((acc, { amount }) => {
+        return acc + (amount ?? 0);
+      }, 0);
+
+      const balance = Math.max(totalTopUp - totalTokenCost, 0);
+
+      await ctx.db.user.update({
+        where: { id: user.id },
+        data: { currentBalance: balance },
+      });
+
+      return {
+        result,
+      };
+    }),
   create: protectedProcedure.mutation(async ({ ctx }) => {
+    const defaultLlm = await ctx.db.llm.findFirst({
+      where: { name: defaults.llm },
+    });
+
+    if (!defaultLlm) {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Default LLM not found.",
+      });
+    }
+
     return ctx.db.template.create({
       data: {
         name: defaults.name,
@@ -25,7 +150,11 @@ export const templateRouter = createTRPCRouter({
         body: defaults.body,
         user: { connect: { id: ctx.session.user.id } },
         isPublic: defaults.isPublic,
-        aiModel: defaults.aiModel,
+        llm: {
+          connect: {
+            id: defaultLlm.id,
+          },
+        },
       },
     });
   }),
@@ -37,7 +166,7 @@ export const templateRouter = createTRPCRouter({
         description: z.string(),
         body: z.string(),
         isPublic: z.boolean(),
-        aiModel: z.string().min(1),
+        llmId: z.string().min(1),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -48,7 +177,7 @@ export const templateRouter = createTRPCRouter({
           body: input.body,
           description: input.description,
           isPublic: input.isPublic,
-          aiModel: input.aiModel,
+          llm: { connect: { id: input.llmId } },
         },
       });
     }),
@@ -75,6 +204,7 @@ export const templateRouter = createTRPCRouter({
       return ctx.db.template.findUnique({
         where: { id: input.id },
         include: {
+          llm: true,
           fields: {
             include: { options: true },
           },

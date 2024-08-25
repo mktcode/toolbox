@@ -1,9 +1,9 @@
 import { createCallerFactory, createTRPCRouter } from "./trpc";
 import { templateRouter } from "./routers/template";
-import { openaiRouter } from "./routers/openai";
 import { balanceRouter } from "./routers/balance";
 import { feedbackRouter } from "./routers/feedback";
 import { tokensRouter } from "./routers/tokens";
+import { llmProvidersRouter } from "./routers/llmProviders";
 
 /**
  * This is the primary router for your server.
@@ -12,10 +12,10 @@ import { tokensRouter } from "./routers/tokens";
  */
 export const appRouter = createTRPCRouter({
   template: templateRouter,
-  openai: openaiRouter,
   balance: balanceRouter,
   feedback: feedbackRouter,
   tokens: tokensRouter,
+  llmProvidersRouter: llmProvidersRouter,
 });
 
 // export type definition of API

@@ -4,7 +4,10 @@ import { type Prisma } from "@prisma/client";
 import { useLocalStorage } from "@uidotdev/usehooks";
 
 export type TemplateWithFields = Prisma.TemplateGetPayload<{
-  include: { fields: { include: { options: true } } };
+  include: {
+    fields: { include: { options: true } };
+    llm: true;
+  };
 }>;
 
 export default function useTemplateForm(template: TemplateWithFields) {
@@ -22,10 +25,7 @@ export default function useTemplateForm(template: TemplateWithFields) {
     key("isPublic"),
     template.isPublic,
   );
-  const [aiModel, setAiModel] = useLocalStorage(
-    key("aiModel"),
-    template.aiModel,
-  );
+  const [llmId, setLlmId] = useLocalStorage(key("llmId"), template.llm.id);
   const [fields, setFields] = useLocalStorage(key("fields"), template.fields);
 
   function resetForm() {
@@ -33,7 +33,7 @@ export default function useTemplateForm(template: TemplateWithFields) {
     setDescription(template.description);
     setBody(template.body);
     setIsPublic(template.isPublic);
-    setAiModel(template.aiModel);
+    setLlmId(template.llm.id);
     setFields(template.fields);
   }
 
@@ -46,8 +46,8 @@ export default function useTemplateForm(template: TemplateWithFields) {
     setBody,
     isPublic,
     setIsPublic,
-    aiModel,
-    setAiModel,
+    llmId,
+    setLlmId,
     fields,
     setFields,
     resetForm,

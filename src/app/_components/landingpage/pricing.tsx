@@ -1,6 +1,18 @@
+import { api } from "~/trpc/server";
 import PricingCalculator from "./pricingCalculator";
 
-export default function Pricing() {
+export default async function Pricing() {
+  const llmProviders = await api.llmProvidersRouter.all();
+
+  const defaultLlmProvider = llmProviders[0];
+  if (!defaultLlmProvider) {
+    return null;
+  }
+  const defaultLlm = defaultLlmProvider.llms[0];
+  if (!defaultLlm) {
+    return null;
+  }
+
   return (
     <>
       <a id="pricing" className="block h-0" />
@@ -30,87 +42,48 @@ export default function Pricing() {
                 <div className="text-sm font-semibold">Pricing</div>
                 <div className="text-sm font-semibold">Batch Pricing</div>
               </div>
-              <div className="flex items-center gap-x-4">
-                <h4 className="flex-none text-sm font-semibold leading-6 text-indigo-600">
-                  OpenAI
-                </h4>
-                <div className="h-px flex-auto bg-gray-100" />
-              </div>
-              <div className="mt-4 grid grid-cols-3 gap-4">
-                <div>GPT-4o-mini</div>
-                <div className="text-sm text-gray-600">
-                  $0.23 / 1M input tokens
-                  <br />
-                  $0.90 / 1M output tokens
-                </div>
-                <div className="text-sm text-gray-600">
-                  $0.10 / 1M input tokens
-                  <br />
-                  $0.45 / 1M output tokens
-                </div>
-                <div>GPT-4o</div>
-                <div className="text-sm text-gray-600">
-                  $5.00 / 1M input tokens
-                  <br />
-                  $15.00 / 1M output tokens
-                </div>
-                <div className="text-sm text-gray-600">
-                  $2.50 / 1M input tokens
-                  <br />
-                  $7.50 / 1M output tokens
-                </div>
-              </div>
-              <div className="mt-4 flex items-center gap-x-4">
-                <h4 className="flex-none text-sm font-semibold leading-6 text-indigo-600">
-                  Anthropic
-                </h4>
-                <div className="h-px flex-auto bg-gray-100" />
-              </div>
-              <div className="mt-4 grid grid-cols-3 gap-4">
-                <div>Claude 3.5 Sonnet</div>
-                <div className="text-sm text-gray-600">
-                  $5.00 / 1M input tokens
-                  <br />
-                  $15.00 / 1M output tokens
-                </div>
-                <div className="text-sm text-gray-600">
-                  $2.50 / 1M input tokens
-                  <br />
-                  $7.50 / 1M output tokens
-                </div>
-                <div>Claude 3.5 Opus</div>
-                <div className="text-sm text-gray-600">
-                  $5.00 / 1M input tokens
-                  <br />
-                  $15.00 / 1M output tokens
-                </div>
-                <div className="text-sm text-gray-600">
-                  $2.50 / 1M input tokens
-                  <br />
-                  $7.50 / 1M output tokens
-                </div>
-              </div>
-              <div className="mt-4 flex items-center gap-x-4">
-                <h4 className="flex-none text-sm font-semibold leading-6 text-indigo-600">
-                  Groq
-                </h4>
-                <div className="h-px flex-auto bg-gray-100" />
-              </div>
-              <div className="mt-4 grid grid-cols-3 gap-4">
-                <div>Llama 3.1 70b</div>
-                <div className="text-sm text-gray-600">
-                  $5.00 / 1M input tokens
-                  <br />
-                  $15.00 / 1M output tokens
-                </div>
-                <div className="text-sm text-gray-600">
-                  $2.50 / 1M input tokens
-                  <br />
-                  $7.50 / 1M output tokens
-                </div>
-              </div>
+              {llmProviders.map((provider) => (
+                <>
+                  <div className="flex items-center gap-x-4">
+                    <h4 className="flex-none text-sm font-semibold leading-6 text-indigo-600">
+                      {provider.name}
+                    </h4>
+                    <div className="h-px flex-auto bg-gray-100" />
+                  </div>
+                  <div className="mt-4 grid grid-cols-3 gap-4">
+                    {provider.llms.map((llm) => (
+                      <>{llm.name}</>
+                    ))}
+                    <div>GPT-4o-mini</div>
+                    <div className="text-sm text-gray-600">
+                      $0.23 / 1M input tokens
+                      <br />
+                      $0.90 / 1M output tokens
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      $0.10 / 1M input tokens
+                      <br />
+                      $0.45 / 1M output tokens
+                    </div>
+                    <div>GPT-4o</div>
+                    <div className="text-sm text-gray-600">
+                      $5.00 / 1M input tokens
+                      <br />
+                      $15.00 / 1M output tokens
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      $2.50 / 1M input tokens
+                      <br />
+                      $7.50 / 1M output tokens
+                    </div>
+                  </div>
+                </>
+              ))}
             </div>
-            <PricingCalculator />
+            <PricingCalculator
+              llmProviders={llmProviders}
+              defaultLlm={defaultLlm}
+            />
           </div>
         </div>
       </div>

@@ -28,13 +28,55 @@ Today you are assisting with {{ Language }} language refinement. Here's the user
 Your response must contain only the refined text; no other commentary is needed. Now respond with the refined text.`;
 
 async function main() {
+  const llmProvders = await prisma.llmProvider.create({
+    data: {
+      name: "OpenAI",
+    },
+  });
+
+  const gpt4o = await prisma.llm.create({
+    data: {
+      name: "gpt-4o",
+      label: "GPT 4o",
+      priceIn: 0.000005,
+      priceOut: 0.000015,
+      priceInBatch: 0.0000025,
+      priceOutBatch: 0.0000075,
+      provider: {
+        connect: {
+          id: llmProvders.id,
+        },
+      },
+    },
+  });
+
+  const gpt4oMini = await prisma.llm.create({
+    data: {
+      name: "gpt-4o-mini",
+      label: "GPT 4o Mini",
+      priceIn: 0.00000015,
+      priceOut: 0.0000006,
+      priceInBatch: 0.000000075,
+      priceOutBatch: 0.0000003,
+      provider: {
+        connect: {
+          id: llmProvders.id,
+        },
+      },
+    },
+  });
+
   await prisma.template.create({
     data: {
       name: "Native Speaker",
       body: nativeSpeakerPrompt,
       description: "Refine text to sound more like a native speaker.",
-      aiModel: "gpt-4o-mini",
       isPublic: true,
+      llm: {
+        connect: {
+          id: gpt4oMini.id,
+        },
+      },
       fields: {
         create: [
           {

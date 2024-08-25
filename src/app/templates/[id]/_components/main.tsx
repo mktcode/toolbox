@@ -33,7 +33,7 @@ export default function Main({
     }, 1000);
   }
 
-  const complete = api.openai.complete.useMutation({
+  const complete = api.template.run.useMutation({
     onSuccess: (data) => {
       setResult(data.result);
     },
@@ -71,6 +71,7 @@ export default function Main({
                 onClick={() => {
                   complete.mutate({
                     message: parsedTemplate,
+                    templateId: template.id,
                   });
                 }}
               >

@@ -4,8 +4,6 @@ import Stripe from "stripe";
 
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 
-import { tokenPrices } from "~/server/tokenPrices";
-
 export const balanceRouter = createTRPCRouter({
   createTopUp: protectedProcedure.mutation(async ({ ctx }) => {
     const user = ctx.session.user;
@@ -154,13 +152,14 @@ export const balanceRouter = createTRPCRouter({
 
     const tokenUsage = await ctx.db.tokenUsage.findMany({
       where: { userId: user.id },
+      include: { llm: true },
     });
     const topUps = await ctx.db.topUp.findMany({
       where: { userId: user.id, confirmedAt: { not: null } },
     });
 
-    const totalTokenCost = tokenUsage.reduce((acc, { input, output }) => {
-      return acc + input * tokenPrices.input + output * tokenPrices.output;
+    const totalTokenCost = tokenUsage.reduce((acc, { input, output, llm }) => {
+      return acc + input * llm.priceIn + output * llm.priceOut;
     }, 0);
 
     const totalTopUp = topUps.reduce((acc, { amount }) => {

@@ -4,6 +4,7 @@ import useTemplateForm, {
   type TemplateWithFields,
 } from "../../_lib/useTemplateForm";
 
+// TODO: Replace with real models from db
 const models = [
   {
     id: "gpt-4o",
@@ -29,7 +30,7 @@ const models = [
 ];
 
 export function AiModel({ template }: { template: TemplateWithFields }) {
-  const { aiModel, setAiModel } = useTemplateForm(template);
+  const { llmId, setLlmId } = useTemplateForm(template);
 
   return (
     <>
@@ -43,8 +44,8 @@ export function AiModel({ template }: { template: TemplateWithFields }) {
         change this setting at any time.
       </p>
       <RadioGroup
-        value={aiModel}
-        onChange={setAiModel}
+        value={llmId}
+        onChange={setLlmId}
         aria-label="AI Model"
         className="flex w-full space-x-2"
       >
