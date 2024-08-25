@@ -27,24 +27,18 @@ export default async function Pricing() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl sm:text-center">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Simple no-tricks pricing
+              No subscription. Pay per use.
             </h2>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              I currently add a 50% margin to the price of the AI providers
-              being used.
+              I do not plan to offer any subscription model. I want to keep it
+              simple and not artificially restrict any features. I take a margin
+              on top of the costs from the LLM providers. Any future price drops
+              will, of course, be passed on to you.
             </p>
           </div>
           <div className="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
             <div className="p-8 sm:p-10 lg:flex-auto">
-              <h3 className="text-2xl font-bold tracking-tight text-gray-900">
-                No subscription. Pay per use.
-              </h3>
-              <p className="mt-6 text-base leading-7 text-gray-600">
-                I do not plan to offer any subscription model, ever. I want to
-                keep it simple and not artificially restict any features.
-                Topping up your balance as you need is all you need to do. yet.
-              </p>
-              <div className="mt-10 grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 gap-4">
                 <div />
                 <div className="text-sm font-semibold">Pricing</div>
                 <div className="text-sm font-semibold">Batch Pricing</div>
