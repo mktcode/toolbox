@@ -105,10 +105,7 @@ export default function FeedbackModal() {
                     <Button
                       className="button"
                       onClick={() => {
-                        createFeedback.mutate({
-                          body: "Your feedback...",
-                          isPublic,
-                        });
+                        createFeedback.mutate({ body, isPublic });
                       }}
                       disabled={createFeedback.isPending || !body}
                     >
