@@ -108,7 +108,7 @@ export default function PricingCalculator({
                   <td className="px-3">{input.length}</td>
                   <td className="px-3">{price.inputTokens}</td>
                   <td className="px-3 text-right font-semibold">
-                    {price.inputPrice.toFixed(3)} €
+                    ${price.inputPrice.toFixed(3)}
                   </td>
                 </tr>
                 <tr>
@@ -116,7 +116,7 @@ export default function PricingCalculator({
                   <td className="px-3">{output.length}</td>
                   <td className="px-3">{price.outputTokens}</td>
                   <td className="px-3 text-right font-semibold">
-                    {price.outputPrice.toFixed(3)} €
+                    ${price.outputPrice.toFixed(3)}
                   </td>
                 </tr>
                 <tr>
@@ -129,7 +129,7 @@ export default function PricingCalculator({
                     {price.inputTokens + price.outputTokens}
                   </td>
                   <td className="px-3 py-1 text-right font-bold">
-                    {(price.inputPrice + price.outputPrice).toFixed(3)} €
+                    ${(price.inputPrice + price.outputPrice).toFixed(3)}
                   </td>
                 </tr>
               </tbody>
