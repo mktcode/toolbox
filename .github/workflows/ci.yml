@@ -28,6 +28,9 @@ jobs:
       SMTP_PASS: ${{ secrets.SMTP_PASS }}
       UNLEASH_SERVER_API_URL: ${{ secrets.UNLEASH_SERVER_API_URL }}
       UNLEASH_SERVER_API_TOKEN: ${{ secrets.UNLEASH_SERVER_API_TOKEN }}
+      LANGCHAIN_TRACING_V2: ${{ secrets.LANGCHAIN_TRACING_V2 }}
+      LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY }}
+      LANGCHAIN_CALLBACKS_BACKGROUND: ${{ secrets.LANGCHAIN_CALLBACKS_BACKGROUND }}
 
     steps:
       - name: Checkout
@@ -67,6 +70,9 @@ jobs:
           echo "SMTP_PASS=\"${{ secrets.SMTP_PASS }}\"" >> .env
           echo "UNLEASH_SERVER_API_URL=\"${{ secrets.UNLEASH_SERVER_API_URL }}\"" >> .env
           echo "UNLEASH_SERVER_API_TOKEN=\"${{ secrets.UNLEASH_SERVER_API_TOKEN }}\"" >> .env
+          LANGCHAIN_TRACING_V2: ${{ secrets.LANGCHAIN_TRACING_V2 }}
+          LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY }}
+          LANGCHAIN_CALLBACKS_BACKGROUND: ${{ secrets.LANGCHAIN_CALLBACKS_BACKGROUND }}
 
       - run: npm ci
       - run: npm run lint:ci

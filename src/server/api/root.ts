@@ -4,6 +4,7 @@ import { balanceRouter } from "./routers/balance";
 import { feedbackRouter } from "./routers/feedback";
 import { tokensRouter } from "./routers/tokens";
 import { llmProvidersRouter } from "./routers/llmProviders";
+import { chatRouter } from "./routers/chat";
 
 /**
  * This is the primary router for your server.
@@ -16,6 +17,7 @@ export const appRouter = createTRPCRouter({
   feedback: feedbackRouter,
   tokens: tokensRouter,
   llmProvidersRouter: llmProvidersRouter,
+  chatRouter: chatRouter,
 });
 
 // export type definition of API
