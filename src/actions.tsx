@@ -101,14 +101,13 @@ export async function updateBalance() {
   // calculate balance
   const tokenUsage = await db.tokenUsage.findMany({
     where: { userId: user.id },
-    include: { llm: true },
   });
   const topUps = await db.topUp.findMany({
     where: { userId: user.id, confirmedAt: { not: null } },
   });
 
-  const totalTokenCost = tokenUsage.reduce((acc, { input, output, llm }) => {
-    return acc + input * llm.priceIn + output * llm.priceOut;
+  const totalTokenCost = tokenUsage.reduce((acc, { inputCost, outputCost }) => {
+    return acc + inputCost + outputCost;
   }, 0);
 
   const totalTopUp = topUps.reduce((acc, { amount }) => {

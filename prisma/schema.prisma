@@ -191,7 +191,9 @@ model ChatMessage {
 model TokenUsage {
   id        String   @id @default(uuid())
   input     Int
+  inputCost Float
   output    Int
+  outputCost Float
   llm       Llm      @relation(fields: [llmId], references: [id])
   llmId     String
   createdAt DateTime @default(now())

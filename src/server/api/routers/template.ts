@@ -86,18 +86,13 @@ export const templateRouter = createTRPCRouter({
 
       await ctx.db.tokenUsage.create({
         data: {
-          llm: {
-            connect: {
-              id: template.llm.id,
-            },
-          },
-          user: {
-            connect: {
-              id: user.id,
-            },
-          },
+          llm: { connect: { id: template.llm.id } },
+          user: { connect: { id: user.id } },
           input: completion.usage.prompt_tokens,
+          inputCost: completion.usage.prompt_tokens * template.llm.priceIn,
           output: completion.usage.completion_tokens,
+          outputCost:
+            completion.usage.completion_tokens * template.llm.priceOut,
         },
       });
 
