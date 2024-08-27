@@ -151,7 +151,11 @@ export default function Hero() {
               world evolve. And implement what's useful.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a href="https://discord.com" className="button shy">
+              <a
+                href="https://github.com/mktcode/senior-react/discussions/22"
+                className="button shy"
+                target="_blank"
+              >
                 Get in touch
               </a>
               <a href="/dashboard" className="button !shadow-lg">
