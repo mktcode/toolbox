@@ -1,6 +1,11 @@
 "use client";
 
-import { MicrophoneIcon, PaperClipIcon } from "@heroicons/react/20/solid";
+import { Field, Checkbox, Label } from "@headlessui/react";
+import {
+  CheckIcon,
+  MicrophoneIcon,
+  PaperClipIcon,
+} from "@heroicons/react/20/solid";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
@@ -10,6 +15,7 @@ export default function NewMessageInput({
   onSubmit: (message: { content: string }) => void;
 }) {
   const [text, setText] = useState("");
+  const [isWebsearchEnabled, setIsWebsearchEnabled] = useState(true);
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-gray-200 to-transparent">
@@ -29,6 +35,18 @@ export default function NewMessageInput({
             <button className="rounded-md px-4 py-2 hover:bg-gray-200">
               <PaperClipIcon className="h-6 w-6 text-gray-400" />
             </button>
+            <Field className="flex !cursor-pointer items-center gap-3 px-2">
+              <Checkbox
+                checked={isWebsearchEnabled}
+                onChange={setIsWebsearchEnabled}
+                className="group block size-6 rounded border-2 border-gray-400 p-0.5 data-[checked]:bg-gray-400"
+              >
+                <CheckIcon className="h-4 w-4 text-gray-200" />
+              </Checkbox>
+              <Label className="flex cursor-pointer flex-col leading-4 text-gray-600">
+                <span>Websearch</span>
+              </Label>
+            </Field>
             <div className="ml-auto flex space-x-2">
               <button className="button shy">
                 <PencilSquareIcon className="mr-2 h-4 w-4" />
