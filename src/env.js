@@ -38,9 +38,6 @@ export const env = createEnv({
     SMTP_PASS: z.string(),
     UNLEASH_SERVER_API_URL: z.string(),
     UNLEASH_SERVER_API_TOKEN: z.string(),
-    LANGCHAIN_TRACING_V2: z.string(),
-    LANGCHAIN_API_KEY: z.string(),
-    LANGCHAIN_CALLBACKS_BACKGROUND: z.string(),
   },
 
   /**
@@ -77,9 +74,6 @@ export const env = createEnv({
     SMTP_PASS: process.env.SMTP_PASS,
     UNLEASH_SERVER_API_URL: process.env.UNLEASH_SERVER_API_URL,
     UNLEASH_SERVER_API_TOKEN: process.env.UNLEASH_SERVER_API_TOKEN,
-    LANGCHAIN_TRACING_V2: process.env.LANGCHAIN_TRACING_V2,
-    LANGCHAIN_API_KEY: process.env.LANGCHAIN_TRACING_V2,
-    LANGCHAIN_CALLBACKS_BACKGROUND: process.env.LANGCHAIN_TRACING_V2,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
