@@ -1,6 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import OpenAI from "openai";
 import { z } from "zod";
+import { updateBalance } from "~/actions";
 
 import {
   createTRPCRouter,
@@ -100,32 +101,7 @@ export const templateRouter = createTRPCRouter({
         },
       });
 
-      // update balance
-      const tokenUsage = await ctx.db.tokenUsage.findMany({
-        where: { userId: user.id },
-        include: { llm: true },
-      });
-      const topUps = await ctx.db.topUp.findMany({
-        where: { userId: user.id, confirmedAt: { not: null } },
-      });
-
-      const totalTokenCost = tokenUsage.reduce(
-        (acc, { input, output, llm }) => {
-          return acc + input * llm.priceIn + output * llm.priceOut;
-        },
-        0,
-      );
-
-      const totalTopUp = topUps.reduce((acc, { amount }) => {
-        return acc + (amount ?? 0);
-      }, 0);
-
-      const balance = Math.max(totalTopUp - totalTokenCost, 0);
-
-      await ctx.db.user.update({
-        where: { id: user.id },
-        data: { currentBalance: balance },
-      });
+      await updateBalance();
 
       return {
         result,
@@ -214,7 +190,6 @@ export const templateRouter = createTRPCRouter({
   getOnePublicOrOwned: publicProcedure
     .input(z.object({ id: z.string().min(1) }))
     .query(async ({ ctx, input }) => {
-      ctx.session?.user;
       const template = await ctx.db.template.findUnique({
         where: {
           id: input.id,

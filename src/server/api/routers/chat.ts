@@ -1,10 +1,11 @@
 import { z } from "zod";
 import { openai } from "@ai-sdk/openai";
-import { type CoreMessage, generateObject, streamText } from "ai";
+import { generateObject, streamText } from "ai";
 
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { TRPCError } from "@trpc/server";
 import { type ChatMessageRole, type Prisma } from "@prisma/client";
+import { updateBalance } from "~/actions";
 
 export const chatRouter = createTRPCRouter({
   getLastEmtpyOrNewSession: protectedProcedure.query(async ({ ctx }) => {
@@ -138,6 +139,19 @@ export const chatRouter = createTRPCRouter({
         });
       }
 
+      const llm = await ctx.db.llm.findFirst({
+        where: { name: "gpt-4o-mini" },
+      });
+
+      if (!llm) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "LLM not found",
+        });
+      }
+
+      const model = openai(llm.name);
+
       await ctx.db.chatMessage.create({
         data: {
           chatSessionId: chatSession.id,
@@ -147,13 +161,23 @@ export const chatRouter = createTRPCRouter({
       });
 
       const result = await streamText({
-        model: openai("gpt-4o-mini"),
+        model,
         messages: [
           {
             role: "user",
             content: input.message.content,
           },
         ],
+        onFinish: async (event) => {
+          await ctx.db.tokenUsage.create({
+            data: {
+              input: event.usage.promptTokens,
+              output: event.usage.completionTokens,
+              llm: { connect: { id: llm.id } },
+              user: { connect: { id: ctx.session.user.id } },
+            },
+          });
+        },
       });
 
       const newAssistantMessage: { role: ChatMessageRole; content: string } = {
@@ -174,8 +198,7 @@ export const chatRouter = createTRPCRouter({
       });
 
       if (chatSession.chatMessages.length === 0) {
-        console.log("Generating chat session title...");
-        const { object } = await generateObject({
+        const { object, usage } = await generateObject({
           model: openai("gpt-4o-mini"),
           system:
             "Given the following chat session, generate a chat session title (~20-80 characters)",
@@ -198,7 +221,14 @@ export const chatRouter = createTRPCRouter({
           ],
         });
 
-        console.log("Generated object:", object);
+        await ctx.db.tokenUsage.create({
+          data: {
+            input: usage.promptTokens,
+            output: usage.completionTokens,
+            llm: { connect: { id: llm.id } },
+            user: { connect: { id: ctx.session.user.id } },
+          },
+        });
 
         await ctx.db.chatSession.update({
           where: { id: chatSession.id },
@@ -207,6 +237,8 @@ export const chatRouter = createTRPCRouter({
           },
         });
       }
+
+      await updateBalance();
     }),
   deleteOwnedSession: protectedProcedure
     .input(
