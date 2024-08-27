@@ -112,6 +112,13 @@ export const chatRouter = createTRPCRouter({
         include: { chatMessages: true };
       }> | null = null;
 
+      if (ctx.session.user.currentBalance <= 0) {
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "Insufficient balance.",
+        });
+      }
+
       if (input.chatSessionId) {
         chatSession = await ctx.db.chatSession.findUnique({
           where: { id: input.chatSessionId },
@@ -172,7 +179,9 @@ export const chatRouter = createTRPCRouter({
           await ctx.db.tokenUsage.create({
             data: {
               input: event.usage.promptTokens,
+              inputCost: event.usage.promptTokens * llm.priceIn,
               output: event.usage.completionTokens,
+              outputCost: event.usage.completionTokens * llm.priceOut,
               llm: { connect: { id: llm.id } },
               user: { connect: { id: ctx.session.user.id } },
             },
@@ -224,7 +233,9 @@ export const chatRouter = createTRPCRouter({
         await ctx.db.tokenUsage.create({
           data: {
             input: usage.promptTokens,
+            inputCost: usage.promptTokens * llm.priceIn,
             output: usage.completionTokens,
+            outputCost: usage.completionTokens * llm.priceOut,
             llm: { connect: { id: llm.id } },
             user: { connect: { id: ctx.session.user.id } },
           },
