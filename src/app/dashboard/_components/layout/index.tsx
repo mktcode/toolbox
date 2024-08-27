@@ -12,7 +12,7 @@ export function DashboardHeader({ children }: PropsWithChildren) {
 
 export function DashboardHeaderH1({ children }: PropsWithChildren) {
   return (
-    <h1 className="flex items-center text-3xl font-bold tracking-tight text-gray-900">
+    <h1 className="flex grow items-center text-3xl font-bold tracking-tight text-gray-900">
       {children}
     </h1>
   );
