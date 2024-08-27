@@ -56,7 +56,7 @@ export default async function Navbar() {
             <FeedbackModal />
           </div>
           <div className="mr-2 text-sm font-medium text-gray-300 md:mr-0">
-            {user.currentBalance.toFixed(2)} €
+            {user.currentBalance.toFixed(3)} €
           </div>
           <div className="hidden md:block">
             <div className="flex items-center">
