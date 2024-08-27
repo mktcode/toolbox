@@ -89,10 +89,15 @@ export const templateRouter = createTRPCRouter({
           llm: { connect: { id: template.llm.id } },
           user: { connect: { id: user.id } },
           input: completion.usage.prompt_tokens,
-          inputCost: completion.usage.prompt_tokens * template.llm.priceIn,
+          inputCost:
+            completion.usage.prompt_tokens *
+            template.llm.priceIn *
+            (1 + template.llm.margin / 100),
           output: completion.usage.completion_tokens,
           outputCost:
-            completion.usage.completion_tokens * template.llm.priceOut,
+            completion.usage.completion_tokens *
+            template.llm.priceOut *
+            (1 + template.llm.margin / 100),
         },
       });
 

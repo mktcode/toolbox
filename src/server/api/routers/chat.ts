@@ -179,9 +179,13 @@ export const chatRouter = createTRPCRouter({
           await ctx.db.tokenUsage.create({
             data: {
               input: event.usage.promptTokens,
-              inputCost: event.usage.promptTokens * llm.priceIn,
+              inputCost:
+                event.usage.promptTokens * llm.priceIn * (1 + llm.margin / 100),
               output: event.usage.completionTokens,
-              outputCost: event.usage.completionTokens * llm.priceOut,
+              outputCost:
+                event.usage.completionTokens *
+                llm.priceOut *
+                (1 + llm.margin / 100),
               llm: { connect: { id: llm.id } },
               user: { connect: { id: ctx.session.user.id } },
             },
@@ -233,9 +237,11 @@ export const chatRouter = createTRPCRouter({
         await ctx.db.tokenUsage.create({
           data: {
             input: usage.promptTokens,
-            inputCost: usage.promptTokens * llm.priceIn,
+            inputCost:
+              usage.promptTokens * llm.priceIn * (1 + llm.margin / 100),
             output: usage.completionTokens,
-            outputCost: usage.completionTokens * llm.priceOut,
+            outputCost:
+              usage.completionTokens * llm.priceOut * (1 + llm.margin / 100),
             llm: { connect: { id: llm.id } },
             user: { connect: { id: ctx.session.user.id } },
           },
