@@ -3,16 +3,13 @@
 import { MicrophoneIcon, PaperClipIcon } from "@heroicons/react/20/solid";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import { api } from "~/trpc/react";
 
 export default function NewMessageInput({
-  chatSessionId,
+  onSubmit,
 }: {
-  chatSessionId: string;
+  onSubmit: (message: { content: string }) => void;
 }) {
   const [text, setText] = useState("");
-
-  const respond = api.chatRouter.respond.useMutation();
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-gray-200 to-transparent">
@@ -40,10 +37,7 @@ export default function NewMessageInput({
               <button
                 className="button"
                 onClick={() => {
-                  respond.mutate({
-                    chatSessionId,
-                    message: { content: text },
-                  });
+                  onSubmit({ content: text });
                   setText("");
                 }}
               >

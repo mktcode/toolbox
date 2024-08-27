@@ -1,19 +1,16 @@
 "use client";
 
-import { api } from "~/trpc/react";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
-export default function Messages({ chatSessionId }: { chatSessionId: string }) {
-  const { data: chatHistory } = api.chatRouter.getHistory.useQuery({
-    chatSessionId,
-  });
-
-  if (!chatHistory) {
-    return <div>Loading...</div>;
-  }
-
+export default function Messages({
+  messages,
+}: {
+  messages: { role: string; content: string }[];
+}) {
   return (
     <div className="flex flex-col space-y-2 pb-80">
-      {chatHistory.map((message, index) => (
+      {messages.map((message, index) => (
         <div
           key={index}
           className={`flex ${
@@ -27,7 +24,9 @@ export default function Messages({ chatSessionId }: { chatSessionId: string }) {
                 : "bg-indigo-500 text-white"
             } rounded-lg p-4 shadow-md`}
           >
-            {message.content}
+            <Markdown remarkPlugins={[remarkGfm]} className="space-y-2">
+              {message.content}
+            </Markdown>
           </div>
         </div>
       ))}
