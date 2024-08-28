@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
+import { type Session } from "next-auth";
 
 const navigation = [
   { name: "The Product", href: "#product" },
@@ -12,7 +12,7 @@ const navigation = [
   { name: "Blog", href: "#blog" },
 ];
 
-export default function Hero() {
+export default function Hero({ session }: { session: Session | null }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -144,7 +144,7 @@ export default function Hero() {
               It might even be cheaper since you pay per use. And I can build
               custom solutions for you too.
             </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
+            <div className="mt-10 flex items-center justify-center gap-x-3">
               <a
                 href="https://github.com/mktcode/senior-react/discussions/22"
                 className="button shy"
@@ -153,7 +153,7 @@ export default function Hero() {
                 Get in touch
               </a>
               <a href="/dashboard" className="button !shadow-lg">
-                Get $1 for free!
+                {session ? "Dashboard" : "Get $1 for free!"}
               </a>
             </div>
           </div>
