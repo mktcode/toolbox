@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 const navigation = [
   { name: "The Product", href: "#product" },
@@ -128,27 +129,20 @@ export default function Hero() {
           />
         </div>
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-          <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-            <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-              Become a beta tester!{" "}
-              <a href="#" className="ml-2 font-semibold text-indigo-600">
-                <span aria-hidden="true" className="absolute inset-0" />
-                Read more <span aria-hidden="true">&rarr;</span>
-              </a>
-            </div>
-          </div>
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              Practical AI Tools
+              My AI Toolbox.
               <br />
-              No hype.
+              You can use it too.
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              In the rapidly evolving world of AI, it's easy to lose time and
-              money on uncertain ventures and experiments. This project aims to
-              mitigate that a bit, by being the experiment and letting you
-              participate. Together we can calmly sit back and watch the AI
-              world evolve. And implement what's useful.
+              Let's be honest. This product is just another wrapper around the
+              major AI providers. It exists because I enjoy building things.
+              It's also an application letter that has escalated a bit, and I
+              don't actually want the job anyway. In terms of features, this
+              product should be able to replace your current subscriptions soon.
+              It might even be cheaper since you pay per use. And I can build
+              custom solutions for you too.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
@@ -159,7 +153,7 @@ export default function Hero() {
                 Get in touch
               </a>
               <a href="/dashboard" className="button !shadow-lg">
-                Start now. Get $1 for free!
+                Get $1 for free!
               </a>
             </div>
           </div>

@@ -1,57 +1,4 @@
-import {
-  ArrowPathIcon,
-  CloudArrowUpIcon,
-  FingerPrintIcon,
-  LockClosedIcon,
-} from "@heroicons/react/24/outline";
 import Link from "next/link";
-
-const features = [
-  {
-    name: "Next.js",
-    description:
-      "React. Oh no. I've been a hater, now I'm an understander. And Next.js... Thank you for server components. It was the right thing to do.",
-    icon: CloudArrowUpIcon,
-    button: (
-      <Link href="https://nextjs.org" target="_blank">
-        <button className="button shy">Learn more</button>
-      </Link>
-    ),
-  },
-  {
-    name: "Stripe",
-    description:
-      "There would probably be no business here without Stripe. Let's be honest.",
-    icon: LockClosedIcon,
-    button: (
-      <Link href="https://stripe.com" target="_blank">
-        <button className="button shy">Learn more</button>
-      </Link>
-    ),
-  },
-  {
-    name: "GitHub",
-    description:
-      "GitHub pulled me so much deeper into software development years ago. It's automating my deployments now.",
-    icon: ArrowPathIcon,
-    button: (
-      <Link href="https://github.com" target="_blank">
-        <button className="button shy">Learn more</button>
-      </Link>
-    ),
-  },
-  {
-    name: "Uberspace",
-    description:
-      "The nicest hoster I've ever had. By admins for admins. It's more for smaller projects but that's what this still is.",
-    icon: FingerPrintIcon,
-    button: (
-      <Link href="https://uberspace.de" target="_blank">
-        <button className="button shy">Learn more</button>
-      </Link>
-    ),
-  },
-];
 
 export default function Features() {
   return (
@@ -68,18 +15,12 @@ export default function Features() {
             </p>
             <p className="mt-6 text-lg leading-8 text-gray-600">
               Yes, I want to make money. But I couldn't look at myself in the
-              mirror if I kept the source code closed. If you want your own
-              private instance, I'll be happy to help you set it up. There will
-              be a Docker image soon.
+              mirror if I kept the source code closed. It's a bit messy
+              currently but I'm a Senior™ developer. I have it under control.
+              If you want your own private instance, I'll be happy to help you
+              set it up. There will be a Docker image soon.
             </p>
             <div className="mt-8 flex justify-center">
-              <Link
-                href="https://github.com/mktcode/senior-react/discussions/22"
-                target="_blank"
-                className="mr-4"
-              >
-                <button className="button shy">Join Community</button>
-              </Link>
               <Link
                 href="https://github.com/mktcode/senior-react"
                 target="_blank"
@@ -104,27 +45,6 @@ export default function Features() {
                 </button>
               </Link>
             </div>
-          </div>
-          <div className="mx-auto mt-20 max-w-2xl sm:mt-24 lg:mt-32 lg:max-w-4xl">
-            <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-              {features.map((feature) => (
-                <div key={feature.name} className="relative pl-16">
-                  <dt className="text-base font-semibold leading-7 text-gray-900">
-                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
-                      <feature.icon
-                        aria-hidden="true"
-                        className="h-6 w-6 text-white"
-                      />
-                    </div>
-                    {feature.name}
-                  </dt>
-                  <dd className="mt-2 text-base leading-7 text-gray-600">
-                    {feature.description}
-                    <div className="mt-4">{feature.button}</div>
-                  </dd>
-                </div>
-              ))}
-            </dl>
           </div>
         </div>
       </div>

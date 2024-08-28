@@ -2,6 +2,7 @@ import {
   CloudArrowUpIcon,
   LockClosedIcon,
   ServerIcon,
+  TableCellsIcon,
 } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import Link from "next/link";
@@ -59,37 +60,11 @@ export default function Philosophy() {
                       Your feedback has real impact. Every day! I don't publish
                       updates, fixes and release notes once a month or worse. I
                       improve my product everyday, a little bit. And you can see
-                      it.{" "}
-                      <Link href={`/`} className="text-indigo-500">
-                        Sign up for beta access
-                      </Link>
-                      .
+                      it.
                     </span>
                   </li>
                   <li className="flex gap-x-3">
-                    <LockClosedIcon
-                      aria-hidden="true"
-                      className="mt-1 h-5 w-5 flex-none text-indigo-600"
-                    />
-                    <span>
-                      <strong className="font-semibold text-gray-900">
-                        One Product. A thousand needs.
-                      </strong>{" "}
-                      I'm adaptive and my software is too. I can implement and
-                      deploy features on a per-customer basis. The product can
-                      look very different depending on your needs.{" "}
-                      <Link
-                        href={"https://discord.com"}
-                        target="_blank"
-                        className="text-indigo-500"
-                      >
-                        Let's talk.
-                      </Link>{" "}
-                      (Yes, it will cost extra.)
-                    </span>
-                  </li>
-                  <li className="flex gap-x-3">
-                    <ServerIcon
+                    <TableCellsIcon
                       aria-hidden="true"
                       className="mt-1 h-5 w-5 flex-none text-indigo-600"
                     />
@@ -112,17 +87,6 @@ export default function Philosophy() {
                     </div>
                   </li>
                 </ul>
-                <p className="text-base font-semibold leading-7 text-indigo-600">
-                  Built with love
-                </p>
-                <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                  Really! I&apos;m a solo dev. I just can&apos;t help it.
-                </h1>
-                <p className="mt-6 text-xl leading-8 text-gray-700">
-                  I have more than 20 years of experience in software
-                  development. But I would never call myself a professional.
-                  I&apos;m a hobbyist. And that&apos;s a good thing.
-                </p>
               </div>
             </div>
           </div>
