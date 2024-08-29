@@ -54,7 +54,7 @@ export default function NewMessageInput({
   onAddMessage,
 }: {
   chatSessionId: string;
-  onSubmit: (messages: CoreMessage[]) => void;
+  onSubmit: (message?: CoreMessage) => void;
   onAddMessage: (message: CoreMessage) => void;
 }) {
   const [text, setText] = useState("");
@@ -167,13 +167,15 @@ export default function NewMessageInput({
                     className="button !rounded-r-none"
                     disabled={!text}
                     onClick={() => {
-                      onSubmit([
-                        {
+                      if (text) {
+                        onSubmit({
                           role: messageType.value,
                           content: text,
-                        },
-                      ]);
-                      setText("");
+                        });
+                        setText("");
+                      } else {
+                        onSubmit();
+                      }
                     }}
                   >
                     <SparklesIcon className="mr-2 h-4 w-4 opacity-40" />

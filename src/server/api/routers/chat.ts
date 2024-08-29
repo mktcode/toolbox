@@ -182,6 +182,12 @@ export const chatRouter = createTRPCRouter({
     .input(
       z.object({
         chatSessionId: z.string(),
+        message: z
+          .object({
+            role: z.enum(["user", "assistant", "system", "tool"]),
+            content: z.string(),
+          })
+          .optional(),
       }),
     )
     .mutation(async function* ({ ctx, input }) {
@@ -193,7 +199,7 @@ export const chatRouter = createTRPCRouter({
       }
 
       const chatSession = await ctx.db.chatSession.findUnique({
-        where: { id: input.chatSessionId },
+        where: { id: input.chatSessionId, userId: ctx.session.user.id },
         include: {
           chatMessages: {
             orderBy: {
@@ -210,8 +216,6 @@ export const chatRouter = createTRPCRouter({
         });
       }
 
-      const generateTitle = chatSession.chatMessages.length === 0;
-
       const llm = await ctx.db.llm.findFirst({
         where: { name: "gpt-4o-mini" },
       });
@@ -224,10 +228,24 @@ export const chatRouter = createTRPCRouter({
       }
 
       const model = openai(llm.name);
+      const titleGenerationModel = openai("gpt-4o-mini");
+      const messages = chatSession.chatMessages as CoreMessage[];
+      const generateTitle = messages.length === 0;
+
+      if (input.message) {
+        await ctx.db.chatMessage.create({
+          data: {
+            chatSessionId: chatSession.id,
+            ...input.message,
+          },
+        });
+
+        messages.push(input.message as CoreMessage);
+      }
 
       const result = await streamText({
         model,
-        messages: chatSession.chatMessages as CoreMessage[],
+        messages,
         onFinish: async (event) => {
           await ctx.db.tokenUsage.create({
             data: {
@@ -265,7 +283,7 @@ export const chatRouter = createTRPCRouter({
 
       if (generateTitle) {
         const { object, usage } = await generateObject({
-          model: openai("gpt-4o-mini"),
+          model: titleGenerationModel,
           system:
             "Given the following chat session, generate a chat session title (~20-80 characters)",
           schema: z.object({
@@ -276,7 +294,7 @@ export const chatRouter = createTRPCRouter({
               .describe("The title of chat session"),
           }),
           messages: [
-            ...(chatSession.chatMessages as CoreMessage[]),
+            ...messages,
             {
               role: "assistant",
               content: newAssistantMessage.content,

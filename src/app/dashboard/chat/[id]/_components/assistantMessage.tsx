@@ -11,7 +11,7 @@ export default function AssistantMessage({
 }) {
   return (
     <div className="flex justify-start">
-      <div className="rounded-lg bg-gray-100 px-4 py-3 text-gray-800 shadow-md">
+      <div className="chat-message rounded-lg bg-gray-100 px-4 py-3 text-gray-800 shadow-md">
         {typeof message.content === "string" && (
           <Markdown remarkPlugins={[remarkGfm]} className="space-y-2">
             {message.content}

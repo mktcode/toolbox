@@ -47,3 +47,7 @@ h3 {
     scrollbar-width: none;
   }
 }
+
+.chat-message pre {
+  @apply rounded-md bg-indigo-950 p-2 text-white;
+}

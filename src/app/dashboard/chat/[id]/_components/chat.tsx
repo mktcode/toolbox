@@ -38,7 +38,7 @@ export default function Chat({
 
   return (
     <main className="mx-auto flex w-full max-w-7xl grow flex-col px-4 py-6 sm:px-6 lg:px-8">
-      <div className="flex flex-col space-y-2 pb-80">
+      <div className="flex flex-col space-y-4 pb-80">
         {messages.map((message, index) => (
           <Transition
             key={index}
@@ -53,10 +53,21 @@ export default function Chat({
       </div>
       <NewMessageInput
         chatSessionId={chatSession.id}
-        onSubmit={() => {
-          respondMutation.mutate({
-            chatSessionId: chatSession.id,
-          });
+        onSubmit={(message?: CoreMessage) => {
+          if (message) {
+            setMessages([...messages, message]);
+            respondMutation.mutate({
+              chatSessionId: chatSession.id,
+              message: {
+                role: message.role,
+                content: message.content as string,
+              },
+            });
+          } else {
+            respondMutation.mutate({
+              chatSessionId: chatSession.id,
+            });
+          }
         }}
         onAddMessage={(message) => {
           setMessages([...messages, message]);
