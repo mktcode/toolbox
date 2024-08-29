@@ -11,21 +11,23 @@ import { PlusIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { useRouter } from "next/navigation";
 
 export default function ChatHeader({
+  templateId,
   chatSessions,
   currentChatSessionId,
 }: {
+  templateId: string;
   chatSessions: ChatSession[];
   currentChatSessionId: string;
 }) {
   const router = useRouter();
   const createChatSession = api.chatRouter.createSession.useMutation({
-    onSuccess: (data) => {
-      router.push(`/dashboard/chat/${data.id}`);
+    onSuccess: (chatSession) => {
+      router.push(`/template/${templateId}/${chatSession.id}`);
     },
   });
   const deleteSession = api.chatRouter.deleteOwnedSession.useMutation({
     onSuccess: () => {
-      router.push("/dashboard/chat");
+      router.push(`/template/${templateId}`);
     },
   });
 
@@ -33,7 +35,7 @@ export default function ChatHeader({
     event: React.ChangeEvent<HTMLSelectElement>,
   ) {
     const chatSessionId = event.target.value;
-    router.push(`/dashboard/chat/${chatSessionId}`);
+    router.push(`/template/${templateId}/${chatSessionId}`);
   }
 
   return (

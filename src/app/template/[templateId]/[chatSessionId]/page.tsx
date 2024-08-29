@@ -29,6 +29,7 @@ export default async function TemplatePage({
   return (
     <>
       <ChatHeader
+        templateId={params.templateId}
         chatSessions={chatSessions}
         currentChatSessionId={chatSession.id}
       />
