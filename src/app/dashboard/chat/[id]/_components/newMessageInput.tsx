@@ -51,9 +51,11 @@ type MessageType = (typeof messageTypeOptions)[number];
 export default function NewMessageInput({
   chatSessionId,
   onSubmit,
+  onAddMessage,
 }: {
   chatSessionId: string;
   onSubmit: (messages: CoreMessage[]) => void;
+  onAddMessage: (message: CoreMessage) => void;
 }) {
   const [text, setText] = useState("");
   const [isWebsearchEnabled, setIsWebsearchEnabled] = useState(true);
@@ -62,7 +64,11 @@ export default function NewMessageInput({
   );
   const [submitMode, setSubmitMode] = useState<"add" | "respond">("add");
 
-  const addMessage = api.chatRouter.addMessage.useMutation();
+  const addMessage = api.chatRouter.addMessage.useMutation({
+    onSuccess(message) {
+      onAddMessage(message as CoreMessage);
+    },
+  });
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-gray-200 to-transparent">

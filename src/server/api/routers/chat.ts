@@ -121,7 +121,7 @@ export const chatRouter = createTRPCRouter({
         });
       }
 
-      await ctx.db.chatMessage.create({
+      const addedMessage = await ctx.db.chatMessage.create({
         data: {
           chatSessionId: input.chatSessionId,
           role: input.role,
@@ -129,7 +129,7 @@ export const chatRouter = createTRPCRouter({
         },
       });
 
-      return true;
+      return addedMessage;
     }),
   updateMessageContent: protectedProcedure
     .input(
