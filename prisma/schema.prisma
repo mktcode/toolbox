@@ -55,9 +55,15 @@ model Template {
   @@index([name])
 }
 
+enum TemplateFieldType {
+  combobox
+  text
+}
+
 model TemplateField {
   id           String                @id @default(cuid())
   name         String
+  type         TemplateFieldType     @default(combobox)
   description  String                @db.Text
   defaultValue String                @default("") @db.Text
   template     Template              @relation(fields: [templateId], references: [id], onDelete: Cascade)
@@ -164,7 +170,7 @@ model Llm {
 
 model ChatSession {
   id           String        @id @default(uuid())
-  title        String        @default("New Chat")
+  title        String        @default("Current Chat")
   template     Template      @relation(fields: [templateId], references: [id])
   templateId   String
   user         User          @relation(fields: [userId], references: [id])

@@ -2,12 +2,19 @@
 
 import {
   CheckIcon,
+  ChevronDownIcon,
   DocumentDuplicateIcon,
   TrashIcon,
 } from "@heroicons/react/20/solid";
 import { api } from "~/trpc/react";
-import { Input, Label, Field as FormField, Textarea } from "@headlessui/react";
-import { type TemplateField } from "@prisma/client";
+import {
+  Input,
+  Label,
+  Field as FormField,
+  Textarea,
+  Select,
+} from "@headlessui/react";
+import { TemplateFieldType, type TemplateField } from "@prisma/client";
 import { useEffect, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { useDebounce } from "@uidotdev/usehooks";
@@ -22,6 +29,8 @@ export function Field({
 }) {
   const [name, setName] = useState(field.name);
   const debouncedName = useDebounce(name, 1000);
+  const [type, setType] = useState(field.type);
+  const debouncedType = useDebounce(type, 1000);
   const [description, setDescription] = useState(field.description);
   const debouncedDescription = useDebounce(description, 1000);
   const [defaultValue, setDefaultValue] = useState(field.defaultValue);
@@ -44,12 +53,18 @@ export function Field({
     updateField.mutate({
       id: field.id,
       name: debouncedName,
+      type: debouncedType,
       description: debouncedDescription,
       defaultValue: debouncedDefaultValue,
       options: [],
     });
     // TODO: This causes an update on initial render. Investigate how to do this correctly.
-  }, [debouncedName, debouncedDescription, debouncedDefaultValue]);
+  }, [
+    debouncedName,
+    debouncedType,
+    debouncedDescription,
+    debouncedDefaultValue,
+  ]);
 
   function indicateSuccessfulCopy() {
     setCopiedPlaceholder(true);
@@ -94,7 +109,26 @@ export function Field({
           </FormField>
         </div>
         <div>
-          <FieldOptions fieldId={field.id} />
+          <FormField className="mb-2">
+            <Label className="text-sm">Type</Label>
+            <div className="relative">
+              <Select
+                className="block w-full appearance-none rounded-md border border-gray-300 px-2 py-1"
+                value={type}
+                onChange={(e) => setType(e.target.value as TemplateFieldType)}
+              >
+                <option value={TemplateFieldType.combobox}>Combobox</option>
+                <option value={TemplateFieldType.text}>Text</option>
+              </Select>
+              <ChevronDownIcon
+                className="group pointer-events-none absolute right-2.5 top-2.5 size-4 fill-white/60"
+                aria-hidden="true"
+              />
+            </div>
+          </FormField>
+          {type === TemplateFieldType.combobox && (
+            <FieldOptions fieldId={field.id} />
+          )}
         </div>
         <div>
           <FormField>

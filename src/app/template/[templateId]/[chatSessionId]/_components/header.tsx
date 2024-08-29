@@ -1,106 +1,102 @@
 "use client";
 
 import { type Template, type ChatSession } from "@prisma/client";
-import {
-  DashboardHeader,
-  DashboardHeaderH1,
-} from "~/app/dashboard/_components/layout";
-import { api } from "~/trpc/react";
-import Spinner from "~/app/_components/spinner";
-import { PlusIcon, TrashIcon } from "@heroicons/react/20/solid";
+import { DashboardHeaderH1 } from "~/app/dashboard/_components/layout";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useRouter } from "next/navigation";
+import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
+import {
+  Button,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+} from "@headlessui/react";
+import { useState } from "react";
+import { type RouterOutputs } from "~/trpc/react";
+import TemplateField from "./templateField";
 
 export default function ChatHeader({
   template,
   chatSessions,
   currentChatSessionId,
 }: {
-  template: Template;
+  template: RouterOutputs["template"]["getOnePublicOrOwned"];
   chatSessions: ChatSession[];
   currentChatSessionId: string;
 }) {
   const router = useRouter();
-  const createChatSession = api.chatRouter.createSession.useMutation({
-    onSuccess: (chatSession) => {
-      router.push(`/template/${template.id}/${chatSession.id}`);
-    },
-  });
-  const deleteSession = api.chatRouter.deleteOwnedSession.useMutation({
-    onSuccess: () => {
-      router.push(`/template/${template.id}`);
-    },
-  });
+  const [showTemplateForm, setShowTemplateForm] = useState(true);
+  const currentChatSession = chatSessions.find(
+    (chatSession) => chatSession.id === currentChatSessionId,
+  );
 
-  function handleChatSessionChange(
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) {
-    const chatSessionId = event.target.value;
+  if (!currentChatSession) {
+    return null;
+  }
+
+  function handleChatSessionChange(chatSessionId: string) {
     router.push(`/template/${template.id}/${chatSessionId}`);
   }
 
   return (
-    <DashboardHeader>
-      <DashboardHeaderH1>
-        <div className="flex flex-col">
-          {template.name}
-          <span className="text-sm font-normal text-gray-500">
-            {template.description}
-          </span>
-        </div>
-      </DashboardHeaderH1>
-      <DashboardHeaderH1>
-        {chatSessions.length > 0 && (
-          <select
-            value={currentChatSessionId}
-            onChange={handleChatSessionChange}
-            className="mr-3 w-full rounded-lg border border-gray-100 py-1 text-xl font-semibold tracking-tight"
+    <header className="sticky top-0 z-10 bg-white shadow-md">
+      <div className="mx-auto flex max-w-7xl items-center px-4 py-3 sm:px-6 lg:px-8">
+        <DashboardHeaderH1>
+          <div className="mr-6 flex flex-col">
+            {template.name}
+            <span className="text-sm font-normal text-gray-500">
+              {template.description}
+            </span>
+          </div>
+          <Menu>
+            <MenuButton className="button shy">
+              <ChatBubbleLeftRightIcon className="mr-2 h-4 w-4 opacity-40" />
+              {currentChatSession.title}
+              <ChevronDownIcon className="ml-2 h-4 w-4 opacity-40" />
+            </MenuButton>
+            <MenuItems
+              anchor="bottom start"
+              className="z-50 !max-w-sm rounded-md bg-white p-1 shadow"
+            >
+              {chatSessions.map((chatSession) => (
+                <MenuItem key={chatSession.id}>
+                  <Button
+                    className="button shy w-full !whitespace-normal border-none py-1"
+                    onClick={() => {
+                      handleChatSessionChange(chatSession.id);
+                    }}
+                  >
+                    <div className="text-left">
+                      <div>{chatSession.title}</div>
+                      <div className="font-normal text-gray-500">
+                        {chatSession.createdAt.toLocaleDateString()}
+                      </div>
+                    </div>
+                  </Button>
+                </MenuItem>
+              ))}
+            </MenuItems>
+          </Menu>
+        </DashboardHeaderH1>
+        <div className="ml-auto flex space-x-2">
+          <button
+            className="button shy border-none"
+            onClick={() => setShowTemplateForm(!showTemplateForm)}
           >
-            {chatSessions.map((chatSession) => (
-              <option key={chatSession.id} value={chatSession.id}>
-                {chatSession.title}
-              </option>
-            ))}
-          </select>
-        )}
-      </DashboardHeaderH1>
-      <div className="ml-auto flex space-x-2">
-        <button
-          className="button shy"
-          onClick={() =>
-            deleteSession.mutate({ chatSessionId: currentChatSessionId })
-          }
-        >
-          {deleteSession.isPending && (
-            <>
-              <Spinner className="mr-2 h-4 w-4" />
-              Delete Chat
-            </>
-          )}
-          {!deleteSession.isPending && (
-            <>
-              <TrashIcon className="mr-2 h-4 w-4 opacity-40" />
-              Delete Chat
-            </>
-          )}
-        </button>
-        <button
-          className="button"
-          onClick={() => createChatSession.mutate({ templateId: template.id })}
-        >
-          {createChatSession.isPending && (
-            <>
-              <Spinner className="mr-2 h-4 w-4" />
-              New Chat
-            </>
-          )}
-          {!createChatSession.isPending && (
-            <>
-              <PlusIcon className="mr-2 h-4 w-4 opacity-40" />
-              New Chat
-            </>
-          )}
-        </button>
+            <ChevronDownIcon className="h-6 w-6 opacity-40" />
+          </button>
+        </div>
       </div>
-    </DashboardHeader>
+      <div className={`border-t ${showTemplateForm ? "" : "hidden"}`}>
+        <div className="mx-auto flex max-w-7xl flex-col space-y-2 px-4 py-3 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {template.fields.map((field) => (
+              <TemplateField key={field.id} field={field} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </header>
   );
 }

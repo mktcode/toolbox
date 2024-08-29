@@ -250,6 +250,7 @@ export const templateRouter = createTRPCRouter({
       z.object({
         id: z.string().min(1),
         name: z.string().min(1),
+        type: z.enum(["text", "combobox"]),
         description: z.string(),
         defaultValue: z.string(),
         options: z.array(
@@ -268,6 +269,7 @@ export const templateRouter = createTRPCRouter({
         },
         data: {
           name: input.name,
+          type: input.type,
           description: input.description,
           defaultValue: input.defaultValue,
           options: {
