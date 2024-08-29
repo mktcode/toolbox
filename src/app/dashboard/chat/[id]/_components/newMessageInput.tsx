@@ -29,20 +29,12 @@ import Spinner from "~/app/_components/spinner";
 import { api } from "~/trpc/react";
 
 const messageTypeOptions = [
-  { value: "user", label: "User", icon: UserIcon, description: "That's you." },
-  {
-    value: "assistant",
-    label: "Assistant",
-    icon: SparklesIcon,
-    description:
-      "Add messages as the assistant. You can also edit the ones in the chat history anytime.",
-  },
+  { value: "user", label: "User", icon: UserIcon, description: "Your input." },
   {
     value: "system",
     label: "Instruction",
     icon: Cog6ToothIcon,
-    description:
-      "Setup for the conversation or inject extra instructions anytime.",
+    description: "Setup for the conversation or extra instructions on the fly.",
   },
 ] as const;
 

@@ -1,9 +1,4 @@
-import {
-  CloudArrowUpIcon,
-  LockClosedIcon,
-  ServerIcon,
-  TableCellsIcon,
-} from "@heroicons/react/20/solid";
+import { CloudArrowUpIcon, TableCellsIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -20,7 +15,7 @@ export default function Philosophy() {
                   Not many features, yet.
                 </p>
                 <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                  Chat, Custom Templates &amp; Batch-Processing
+                  Chat, Search, Custom Templates &amp; Batch-Processing
                 </h1>
                 <p className="mt-6 text-xl leading-8 text-gray-700">
                   As an average AI user you should not miss much. I've
