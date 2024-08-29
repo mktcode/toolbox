@@ -5,6 +5,7 @@ import Pricing from "./_components/landingpage/pricing";
 import Hero from "./_components/landingpage/hero";
 import Feedback from "./_components/feedback";
 import { getServerAuthSession } from "~/server/auth";
+import Footer from "./_components/landingpage/footer";
 
 export default async function HomePage() {
   const session = await getServerAuthSession();
@@ -18,17 +19,7 @@ export default async function HomePage() {
       <Feedback latestSummary={latestSummary} newFeedback={newFeedback} />
       <Pricing />
       <Features />
-
-      <div className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
-        <div className="mt-24 text-center font-light text-gray-400">
-          <p>
-            <span className="inline-block rotate-180">&copy;</span> 2024 Markus
-            Kottländer.
-            <br />
-            All rights reversed.
-          </p>
-        </div>
-      </div>
+      <Footer />
     </div>
   );
 }
