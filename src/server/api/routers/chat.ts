@@ -230,7 +230,8 @@ export const chatRouter = createTRPCRouter({
       const model = openai(llm.name);
       const titleGenerationModel = openai("gpt-4o-mini");
       const messages = chatSession.chatMessages as CoreMessage[];
-      const generateTitle = messages.length === 0;
+      const generateTitle =
+        messages.length > 1 && chatSession.title === "New Chat";
 
       if (input.message) {
         await ctx.db.chatMessage.create({
