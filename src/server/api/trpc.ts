@@ -117,3 +117,18 @@ export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
     },
   });
 });
+
+export const fundedProcedure = protectedProcedure.use(({ ctx, next }) => {
+  if (ctx.session.user.currentBalance <= 0) {
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+      message: "Insufficient balance.",
+    });
+  }
+
+  return next({
+    ctx: {
+      session: ctx.session,
+    },
+  });
+});
