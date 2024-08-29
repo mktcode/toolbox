@@ -70,7 +70,7 @@ export default function NewMessageInput({
         <div className="rounded-md shadow-md transition-all">
           <div className="relative">
             <textarea
-              className="block w-full resize-none rounded-md rounded-b-none border-none p-6 text-lg focus:border-gray-400 focus:ring-gray-400"
+              className="block w-full resize-none rounded-md rounded-b-none border-none p-6 text-lg placeholder:text-gray-400 focus:border-gray-400 focus:ring-gray-400 focus:placeholder:text-gray-300"
               value={text}
               onChange={(e) => setText(e.target.value)}
               rows={4}
