@@ -19,9 +19,7 @@ type FieldWithOptions = Prisma.TemplateFieldGetPayload<{
 
 export default function TemplateField({ field }: { field: FieldWithOptions }) {
   const [query, setQuery] = useState(field.defaultValue);
-  const [selected, setSelected] = useState<
-    FieldWithOptions["options"][0] | null
-  >(null);
+  const [selected, setSelected] = useState<string | null>(null);
 
   return (
     <Field>
@@ -38,9 +36,9 @@ export default function TemplateField({ field }: { field: FieldWithOptions }) {
       )}
       {field.type === "combobox" && (
         <Combobox
-          value={selected}
+          immediate
+          value={selected ?? query}
           onChange={(value) => setSelected(value)}
-          onClose={() => setQuery("")}
         >
           <div className="relative mt-1">
             <ComboboxInput
@@ -50,30 +48,30 @@ export default function TemplateField({ field }: { field: FieldWithOptions }) {
               onChange={(event) => setQuery(event.target.value)}
             />
             <ComboboxButton className="group absolute inset-y-0 right-0 px-2.5">
-              <ChevronDownIcon className="size-4 fill-white/60 group-data-[hover]:fill-white" />
+              <ChevronDownIcon className="size-4 opacity-40" />
             </ComboboxButton>
           </div>
 
           <ComboboxOptions
             anchor="bottom"
             transition
-            className="z-50 w-[var(--input-width)] rounded-xl border border-white/5 bg-white/5 p-1 transition duration-100 ease-in [--anchor-gap:var(--spacing-1)] empty:invisible data-[leave]:data-[closed]:opacity-0"
+            className="z-50 w-[var(--input-width)] rounded-xl border bg-white p-1 transition duration-100 ease-in [--anchor-gap:var(--spacing-1)] empty:invisible data-[leave]:data-[closed]:opacity-0"
           >
-            {query.length > 0 && (
-              <ComboboxOption
-                value={{ id: null, name: query }}
-                className="data-[focus]:bg-blue-100"
-              >
-                {query}
-              </ComboboxOption>
-            )}
+            {query.length > 0 &&
+              !field.options.some((option) => option.value === query) && (
+                <ComboboxOption
+                  value={query}
+                  className="group flex cursor-default select-none items-center gap-2 rounded-md px-2 py-1"
+                >
+                  {query}
+                </ComboboxOption>
+              )}
             {field.options.map((option) => (
               <ComboboxOption
                 key={option.id}
                 value={option.value}
                 className="group flex cursor-default select-none items-center gap-2 rounded-md px-2 py-1"
               >
-                <CheckIcon className="invisible size-4 fill-white group-data-[selected]:visible" />
                 {option.value}
               </ComboboxOption>
             ))}
