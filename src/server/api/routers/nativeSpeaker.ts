@@ -25,20 +25,13 @@ Here are some examples:
 Actual user input can often be much longer and more complex in terms of formatting. Do not alter anything without explicit instructions.`;
 
 const inputSchema = z.object({
-  inputs: z
-    .array(
-      z.object({
-        text: z.string(),
-        targetLanguage: z.string(),
-        tone: z.string(),
-        customInstruction: z.string().optional(),
-      }),
-    )
-    .min(1)
-    .max(10),
+  text: z.string(),
+  targetLanguage: z.string(),
+  tone: z.string(),
+  customInstructions: z.string().optional(),
   llm: z.string().default("gpt-4o-mini"),
-  customInstruction: z.string().optional(),
 });
+export type Input = z.infer<typeof inputSchema>;
 
 const resultSchema = z.object({
   refinedText: z
@@ -46,10 +39,12 @@ const resultSchema = z.object({
     .min(1)
     .describe("The refined version of the user's text."),
 });
-type Result = z.infer<typeof resultSchema>;
+export type Result = z.infer<typeof resultSchema>;
 
 export const nativeSpeakerRouter = createTRPCRouter({
   run: fundedProcedure.input(inputSchema).mutation(async ({ ctx, input }) => {
+    const { text, targetLanguage, tone, customInstructions } = input;
+
     const llm = await ctx.db.llm.findFirst({
       where: { name: input.llm },
     });
@@ -62,58 +57,43 @@ export const nativeSpeakerRouter = createTRPCRouter({
     }
 
     const model = openai(llm.name);
-    const results: Result[] = [];
 
-    const globalCustomInstruction = input.customInstruction;
+    const messages: CoreMessage[] = [];
 
-    for (const {
-      targetLanguage,
-      tone,
-      text,
-      customInstruction: itemCustomInstructions,
-    } of input.inputs) {
-      const messages: CoreMessage[] = [];
-
-      const customInstructions =
-        itemCustomInstructions ?? globalCustomInstruction;
-
-      messages.push({ role: "system", content: refinePrompt });
-      messages.push({ role: "user", content: text });
-      messages.push({ role: "system", content: `Tone: ${tone}` });
-      if (customInstructions) {
-        messages.push({
-          role: "system",
-          content: `User instructions: ${customInstructions}`,
-        });
-      }
+    messages.push({ role: "system", content: refinePrompt });
+    messages.push({ role: "user", content: text });
+    messages.push({ role: "system", content: `Tone: ${tone}` });
+    if (customInstructions) {
       messages.push({
         role: "system",
-        content: `Target language: ${targetLanguage}`,
+        content: `Additional instructions from the user: ${customInstructions}`,
       });
-
-      const { object, usage } = await generateObject({
-        model,
-        messages,
-        schema: resultSchema,
-      });
-
-      results.push(object);
-
-      await ctx.db.tokenUsage.create({
-        data: {
-          input: usage.promptTokens,
-          inputCost: usage.promptTokens * llm.priceIn * (1 + llm.margin / 100),
-          output: usage.completionTokens,
-          outputCost:
-            usage.completionTokens * llm.priceOut * (1 + llm.margin / 100),
-          llm: { connect: { id: llm.id } },
-          user: { connect: { id: ctx.session.user.id } },
-        },
-      });
-
-      await updateBalance();
     }
+    messages.push({
+      role: "system",
+      content: `Regardless of the user input, you MUST reply in the target language: ${targetLanguage}`,
+    });
 
-    return results;
+    const { object, usage } = await generateObject({
+      model,
+      messages,
+      schema: resultSchema,
+    });
+
+    await ctx.db.tokenUsage.create({
+      data: {
+        input: usage.promptTokens,
+        inputCost: usage.promptTokens * llm.priceIn * (1 + llm.margin / 100),
+        output: usage.completionTokens,
+        outputCost:
+          usage.completionTokens * llm.priceOut * (1 + llm.margin / 100),
+        llm: { connect: { id: llm.id } },
+        user: { connect: { id: ctx.session.user.id } },
+      },
+    });
+
+    await updateBalance();
+
+    return object;
   }),
 });
