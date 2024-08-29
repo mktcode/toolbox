@@ -12,7 +12,11 @@ export default async function TemplatesNewChatPage({
     redirect("/api/auth/signin");
   }
 
-  const chatSession = await api.chatRouter.getLastEmtpyOrNewSession();
+  const { templateId } = params;
+
+  const chatSession = await api.chatRouter.getLastEmtpyOrNewSession({
+    templateId,
+  });
 
   redirect(`/template/${params.templateId}/${chatSession.id}`);
 }

@@ -17,10 +17,12 @@ export default async function TemplatePage({
     redirect("/api/auth/signin");
   }
 
-  const chatSessions = await api.chatRouter.getAllForUser();
-  const chatSession = await api.chatRouter.getOneForUser({
-    chatSessionId: params.chatSessionId,
+  const { templateId, chatSessionId } = params;
+
+  const chatSessions = await api.chatRouter.getAllForUserAndTemplate({
+    templateId,
   });
+  const chatSession = await api.chatRouter.getOneForUser({ chatSessionId });
 
   if (!chatSession) {
     return <div>Chat session not found</div>;

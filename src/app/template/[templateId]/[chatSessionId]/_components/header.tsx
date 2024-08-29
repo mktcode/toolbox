@@ -75,7 +75,10 @@ export default function ChatHeader({
             </>
           )}
         </button>
-        <button className="button" onClick={() => createChatSession.mutate()}>
+        <button
+          className="button"
+          onClick={() => createChatSession.mutate({ templateId })}
+        >
           {createChatSession.isPending && (
             <>
               <Spinner className="mr-2 h-4 w-4" />

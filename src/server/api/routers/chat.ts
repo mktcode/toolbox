@@ -8,35 +8,39 @@ import { type ChatMessageRole } from "@prisma/client";
 import { updateBalance } from "~/actions";
 
 export const chatRouter = createTRPCRouter({
-  getLastEmtpyOrNewSession: protectedProcedure.query(async ({ ctx }) => {
-    const lastEmptySession = await ctx.db.chatSession.findFirst({
-      where: {
-        userId: ctx.session.user.id,
-        chatMessages: {
-          none: {},
-        },
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-
-    if (lastEmptySession) {
-      return lastEmptySession;
-    }
-
-    const newSession = await ctx.db.chatSession.create({
-      data: {
-        user: {
-          connect: {
-            id: ctx.session.user.id,
+  getLastEmtpyOrNewSession: protectedProcedure
+    .input(
+      z.object({
+        templateId: z.string(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const lastEmptySession = await ctx.db.chatSession.findFirst({
+        where: {
+          templateId: input.templateId,
+          userId: ctx.session.user.id,
+          chatMessages: {
+            none: {},
           },
         },
-      },
-    });
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
 
-    return newSession;
-  }),
+      if (lastEmptySession) {
+        return lastEmptySession;
+      }
+
+      const newSession = await ctx.db.chatSession.create({
+        data: {
+          template: { connect: { id: input.templateId } },
+          user: { connect: { id: ctx.session.user.id } },
+        },
+      });
+
+      return newSession;
+    }),
   getOneForUser: protectedProcedure
     .input(
       z.object({
@@ -60,28 +64,37 @@ export const chatRouter = createTRPCRouter({
 
       return chatSession;
     }),
-  getAllForUser: protectedProcedure.query(async ({ ctx }) => {
-    const chatSessions = await ctx.db.chatSession.findMany({
-      where: {
-        userId: ctx.session.user.id,
-      },
-    });
-
-    return chatSessions;
-  }),
-  createSession: protectedProcedure.mutation(async ({ ctx }) => {
-    const chatSession = await ctx.db.chatSession.create({
-      data: {
-        user: {
-          connect: {
-            id: ctx.session.user.id,
-          },
+  getAllForUserAndTemplate: protectedProcedure
+    .input(
+      z.object({
+        templateId: z.string(),
+      }),
+    )
+    .query(async ({ ctx }) => {
+      const chatSessions = await ctx.db.chatSession.findMany({
+        where: {
+          userId: ctx.session.user.id,
         },
-      },
-    });
+      });
 
-    return chatSession;
-  }),
+      return chatSessions;
+    }),
+  createSession: protectedProcedure
+    .input(
+      z.object({
+        templateId: z.string(),
+      }),
+    )
+    .mutation(async ({ input, ctx }) => {
+      const chatSession = await ctx.db.chatSession.create({
+        data: {
+          template: { connect: { id: input.templateId } },
+          user: { connect: { id: ctx.session.user.id } },
+        },
+      });
+
+      return chatSession;
+    }),
   getHistory: protectedProcedure
     .input(
       z.object({
