@@ -32,7 +32,7 @@ export default function PublicTemplates({
           <div className="mt-auto flex items-center justify-between space-x-2 bg-gray-50 p-2">
             <Link
               className="button grow"
-              href={`/templates/${template.id}`}
+              href={`/template/${template.id}`}
               target="_blank"
             >
               <span className="pr-1">Open</span>

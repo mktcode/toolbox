@@ -53,7 +53,7 @@ export default function List({ templates }: { templates: Template[] }) {
             </button>
             <Link
               className="button grow"
-              href={`/templates/${template.id}`}
+              href={`/template/${template.id}`}
               target="_blank"
             >
               <span className="pr-1">Open</span>

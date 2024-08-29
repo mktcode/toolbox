@@ -4,7 +4,7 @@ import { type ChatSession } from "@prisma/client";
 import {
   DashboardHeader,
   DashboardHeaderH1,
-} from "./../../../_components/layout";
+} from "~/app/dashboard/_components/layout";
 import { api } from "~/trpc/react";
 import Spinner from "~/app/_components/spinner";
 import { PlusIcon, TrashIcon } from "@heroicons/react/20/solid";

@@ -4,7 +4,7 @@ import { api } from "~/trpc/server";
 import ChatHeader from "./_components/header";
 import Chat from "./_components/chat";
 
-export default async function DashboardChatPage({
+export default async function TemplatePage({
   params,
 }: {
   params: { id: string };

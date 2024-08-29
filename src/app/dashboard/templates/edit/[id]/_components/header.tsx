@@ -39,7 +39,7 @@ export default function EditTemplatePageHeader({
           <button className="button shy">Cancel</button>
         </Link>
         <Link
-          href={`/templates/${template.id}`}
+          href={`/template/${template.id}`}
           className="mr-2"
           target="_blank"
         >
