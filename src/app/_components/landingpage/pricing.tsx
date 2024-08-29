@@ -36,7 +36,7 @@ export default async function Pricing() {
               will, of course, be passed on to you.
             </p>
           </div>
-          <div className="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
+          <div className="mx-auto mt-16 max-w-2xl rounded-3xl shadow-2xl shadow-black/20 ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
             <div className="p-8 sm:p-10 lg:flex-auto">
               <div className="grid grid-cols-3 gap-4">
                 <div />

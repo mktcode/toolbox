@@ -112,14 +112,14 @@ export default function PricingCalculator({
               <tbody className="text-center">
                 <tr>
                   <th></th>
-                  <td className="px-3 py-2 text-indigo-100">Length</td>
-                  <td className="px-3 py-2 text-indigo-100">Tokens</td>
-                  <td className="px-3 py-2 text-right text-indigo-100">
+                  <td className="px-3 py-2 text-indigo-300">Length</td>
+                  <td className="px-3 py-2 text-indigo-300">Tokens</td>
+                  <td className="px-3 py-2 text-right text-indigo-300">
                     Price
                   </td>
                 </tr>
                 <tr>
-                  <td className="px-3 text-left text-indigo-100">Input</td>
+                  <td className="px-3 text-left text-indigo-300">Input</td>
                   <td className="px-3">{input.length}</td>
                   <td className="px-3">{price.inputTokens}</td>
                   <td className="px-3 text-right font-semibold">
@@ -131,7 +131,7 @@ export default function PricingCalculator({
                   </td>
                 </tr>
                 <tr>
-                  <td className="px-3 text-left text-indigo-100">Output</td>
+                  <td className="px-3 text-left text-indigo-300">Output</td>
                   <td className="px-3">{output.length}</td>
                   <td className="px-3">{price.outputTokens}</td>
                   <td className="px-3 text-right font-semibold">

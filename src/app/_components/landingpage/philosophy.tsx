@@ -39,7 +39,7 @@ export default function Philosophy() {
             <Image
               alt=""
               src="/img/light-project-app-screenshot.png"
-              className="w-[48rem] max-w-none rounded-xl shadow-2xl sm:w-[57rem]"
+              className="w-[48rem] max-w-none rounded-xl shadow-2xl shadow-black/20 sm:w-[57rem]"
               width={1080}
               height={640}
             />
