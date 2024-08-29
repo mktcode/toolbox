@@ -6,6 +6,7 @@ import Hero from "./_components/landingpage/hero";
 import Feedback from "./_components/feedback";
 import { getServerAuthSession } from "~/server/auth";
 import Footer from "./_components/landingpage/footer";
+import Blog from "./_components/landingpage/blog";
 
 export default async function HomePage() {
   const session = await getServerAuthSession();
@@ -19,6 +20,7 @@ export default async function HomePage() {
       <Feedback latestSummary={latestSummary} newFeedback={newFeedback} />
       <Pricing />
       <Features />
+      <Blog />
       <Footer />
     </div>
   );
