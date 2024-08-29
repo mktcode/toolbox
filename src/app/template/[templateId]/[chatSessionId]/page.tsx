@@ -19,6 +19,12 @@ export default async function TemplatePage({
 
   const { templateId, chatSessionId } = params;
 
+  const template = await api.template.getOnePublicOrOwned({ templateId });
+
+  if (!template) {
+    return <div>Template not found</div>;
+  }
+
   const chatSessions = await api.chatRouter.getAllForUserAndTemplate({
     templateId,
   });
@@ -31,7 +37,7 @@ export default async function TemplatePage({
   return (
     <>
       <ChatHeader
-        templateId={params.templateId}
+        template={template}
         chatSessions={chatSessions}
         currentChatSessionId={chatSession.id}
       />

@@ -1,6 +1,6 @@
 "use client";
 
-import { type ChatSession } from "@prisma/client";
+import { type Template, type ChatSession } from "@prisma/client";
 import {
   DashboardHeader,
   DashboardHeaderH1,
@@ -11,23 +11,23 @@ import { PlusIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { useRouter } from "next/navigation";
 
 export default function ChatHeader({
-  templateId,
+  template,
   chatSessions,
   currentChatSessionId,
 }: {
-  templateId: string;
+  template: Template;
   chatSessions: ChatSession[];
   currentChatSessionId: string;
 }) {
   const router = useRouter();
   const createChatSession = api.chatRouter.createSession.useMutation({
     onSuccess: (chatSession) => {
-      router.push(`/template/${templateId}/${chatSession.id}`);
+      router.push(`/template/${template.id}/${chatSession.id}`);
     },
   });
   const deleteSession = api.chatRouter.deleteOwnedSession.useMutation({
     onSuccess: () => {
-      router.push(`/template/${templateId}`);
+      router.push(`/template/${template.id}`);
     },
   });
 
@@ -35,17 +35,25 @@ export default function ChatHeader({
     event: React.ChangeEvent<HTMLSelectElement>,
   ) {
     const chatSessionId = event.target.value;
-    router.push(`/template/${templateId}/${chatSessionId}`);
+    router.push(`/template/${template.id}/${chatSessionId}`);
   }
 
   return (
     <DashboardHeader>
       <DashboardHeaderH1>
+        <div className="flex flex-col">
+          {template.name}
+          <span className="text-sm font-normal text-gray-500">
+            {template.description}
+          </span>
+        </div>
+      </DashboardHeaderH1>
+      <DashboardHeaderH1>
         {chatSessions.length > 0 && (
           <select
             value={currentChatSessionId}
             onChange={handleChatSessionChange}
-            className="mr-3 w-full rounded-xl border border-gray-200 py-1 text-3xl font-bold tracking-tight"
+            className="mr-3 w-full rounded-lg border border-gray-100 py-1 text-xl font-semibold tracking-tight"
           >
             {chatSessions.map((chatSession) => (
               <option key={chatSession.id} value={chatSession.id}>
@@ -77,7 +85,7 @@ export default function ChatHeader({
         </button>
         <button
           className="button"
-          onClick={() => createChatSession.mutate({ templateId })}
+          onClick={() => createChatSession.mutate({ templateId: template.id })}
         >
           {createChatSession.isPending && (
             <>
