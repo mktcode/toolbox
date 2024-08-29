@@ -55,7 +55,7 @@ export default function ChatHeader({
       </DashboardHeaderH1>
       <div className="ml-auto flex space-x-2">
         <button
-          className="button"
+          className="button shy"
           onClick={() =>
             deleteSession.mutate({ chatSessionId: currentChatSessionId })
           }

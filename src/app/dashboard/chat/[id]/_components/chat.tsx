@@ -1,10 +1,11 @@
 "use client";
 
-import Messages from "./messages";
 import NewMessageInput from "./newMessageInput";
 import { useState } from "react";
 import { api } from "~/trpc/react";
 import { type Prisma, ChatMessageRole } from "@prisma/client";
+import { type CoreMessage } from "ai";
+import Message from "./message";
 
 export default function Chat({
   chatSession,
@@ -13,8 +14,8 @@ export default function Chat({
     include: { chatMessages: true };
   }>;
 }) {
-  const [messages, setMessages] = useState<{ role: string; content: string }[]>(
-    chatSession.chatMessages,
+  const [messages, setMessages] = useState<CoreMessage[]>(
+    chatSession.chatMessages as CoreMessage[],
   );
 
   const respondMutation = api.chatRouter.respond.useMutation({
@@ -36,19 +37,16 @@ export default function Chat({
 
   return (
     <main className="mx-auto flex w-full max-w-7xl grow flex-col px-4 py-6 sm:px-6 lg:px-8">
-      <Messages messages={messages} />
+      <div className="flex flex-col space-y-2 pb-80">
+        {messages.map((message, index) => (
+          <Message key={index} message={message} />
+        ))}
+      </div>
       <NewMessageInput
-        onSubmit={(message: { content: string }) => {
-          setMessages([
-            ...messages,
-            {
-              role: ChatMessageRole.user,
-              content: message.content,
-            },
-          ]);
+        chatSessionId={chatSession.id}
+        onSubmit={() => {
           respondMutation.mutate({
             chatSessionId: chatSession.id,
-            message,
           });
         }}
       />

@@ -1,10 +1,10 @@
 import { z } from "zod";
 import { openai } from "@ai-sdk/openai";
-import { generateObject, streamText } from "ai";
+import { type CoreMessage, generateObject, streamText } from "ai";
 
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { TRPCError } from "@trpc/server";
-import { type ChatMessageRole, type Prisma } from "@prisma/client";
+import { type ChatMessageRole } from "@prisma/client";
 import { updateBalance } from "~/actions";
 
 export const chatRouter = createTRPCRouter({
@@ -98,20 +98,93 @@ export const chatRouter = createTRPCRouter({
 
       return chatMessages;
     }),
+  addMessage: protectedProcedure
+    .input(
+      z.object({
+        chatSessionId: z.string(),
+        role: z.enum(["user", "assistant", "system", "tool"]),
+        content: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const chatSession = await ctx.db.chatSession.findFirst({
+        where: {
+          id: input.chatSessionId,
+          userId: ctx.session.user.id,
+        },
+      });
+
+      if (!chatSession) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Chat session not found or owned",
+        });
+      }
+
+      await ctx.db.chatMessage.create({
+        data: {
+          chatSessionId: input.chatSessionId,
+          role: input.role,
+          content: input.content,
+        },
+      });
+
+      return true;
+    }),
+  updateMessageContent: protectedProcedure
+    .input(
+      z.object({
+        chatMessageId: z.string(),
+        content: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const chatMessage = await ctx.db.chatMessage.findFirst({
+        where: {
+          id: input.chatMessageId,
+          chatSession: {
+            userId: ctx.session.user.id,
+          },
+        },
+      });
+
+      if (!chatMessage) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Chat message not found or owned",
+        });
+      }
+
+      await ctx.db.chatMessage.update({
+        where: { id: input.chatMessageId },
+        data: { content: input.content },
+      });
+
+      return true;
+    }),
+  deleteMessage: protectedProcedure
+    .input(
+      z.object({
+        chatMessageId: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.db.chatMessage.delete({
+        where: {
+          id: input.chatMessageId,
+          chatSession: {
+            userId: ctx.session.user.id,
+          },
+        },
+      });
+    }),
   respond: protectedProcedure
     .input(
       z.object({
-        chatSessionId: z.string().optional(),
-        message: z.object({
-          content: z.string(),
-        }),
+        chatSessionId: z.string(),
       }),
     )
     .mutation(async function* ({ ctx, input }) {
-      let chatSession: Prisma.ChatSessionGetPayload<{
-        include: { chatMessages: true };
-      }> | null = null;
-
       if (ctx.session.user.currentBalance <= 0) {
         throw new TRPCError({
           code: "UNAUTHORIZED",
@@ -119,25 +192,16 @@ export const chatRouter = createTRPCRouter({
         });
       }
 
-      if (input.chatSessionId) {
-        chatSession = await ctx.db.chatSession.findUnique({
-          where: { id: input.chatSessionId },
-          include: {
-            chatMessages: {
-              orderBy: {
-                createdAt: "asc",
-              },
+      const chatSession = await ctx.db.chatSession.findUnique({
+        where: { id: input.chatSessionId },
+        include: {
+          chatMessages: {
+            orderBy: {
+              createdAt: "asc",
             },
           },
-        });
-      } else {
-        chatSession = await ctx.db.chatSession.create({
-          include: { chatMessages: true },
-          data: {
-            user: { connect: { id: ctx.session.user.id } },
-          },
-        });
-      }
+        },
+      });
 
       if (!chatSession) {
         throw new TRPCError({
@@ -145,6 +209,8 @@ export const chatRouter = createTRPCRouter({
           message: "Chat session not found or created",
         });
       }
+
+      const generateTitle = chatSession.chatMessages.length === 0;
 
       const llm = await ctx.db.llm.findFirst({
         where: { name: "gpt-4o-mini" },
@@ -159,22 +225,9 @@ export const chatRouter = createTRPCRouter({
 
       const model = openai(llm.name);
 
-      await ctx.db.chatMessage.create({
-        data: {
-          chatSessionId: chatSession.id,
-          role: "user",
-          content: input.message.content,
-        },
-      });
-
       const result = await streamText({
         model,
-        messages: [
-          {
-            role: "user",
-            content: input.message.content,
-          },
-        ],
+        messages: chatSession.chatMessages as CoreMessage[],
         onFinish: async (event) => {
           await ctx.db.tokenUsage.create({
             data: {
@@ -210,7 +263,7 @@ export const chatRouter = createTRPCRouter({
         },
       });
 
-      if (chatSession.chatMessages.length === 0) {
+      if (generateTitle) {
         const { object, usage } = await generateObject({
           model: openai("gpt-4o-mini"),
           system:
@@ -223,10 +276,7 @@ export const chatRouter = createTRPCRouter({
               .describe("The title of chat session"),
           }),
           messages: [
-            {
-              role: "user",
-              content: input.message.content,
-            },
+            ...(chatSession.chatMessages as CoreMessage[]),
             {
               role: "assistant",
               content: newAssistantMessage.content,
