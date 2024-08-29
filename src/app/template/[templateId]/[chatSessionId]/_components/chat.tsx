@@ -52,7 +52,6 @@ export default function Chat({
         ))}
       </div>
       <NewMessageInput
-        chatSessionId={chatSession.id}
         onSubmit={(message?: CoreMessage) => {
           if (message) {
             setMessages([...messages, message]);
@@ -68,9 +67,6 @@ export default function Chat({
               chatSessionId: chatSession.id,
             });
           }
-        }}
-        onAddMessage={(message) => {
-          setMessages([...messages, message]);
         }}
       />
     </main>
