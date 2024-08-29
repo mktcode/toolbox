@@ -3,7 +3,7 @@ import { HydrateClient } from "~/trpc/server";
 
 import { type Metadata } from "next";
 
-import Navbar from "../../dashboard/_components/navbar";
+import Navbar from "../../../dashboard/_components/navbar";
 
 export const metadata: Metadata = {
   title: "Senior - Dashboard",

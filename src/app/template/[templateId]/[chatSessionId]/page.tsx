@@ -7,7 +7,10 @@ import Chat from "./_components/chat";
 export default async function TemplatePage({
   params,
 }: {
-  params: { id: string };
+  params: {
+    templateId: string;
+    chatSessionId: string;
+  };
 }) {
   const session = await getServerAuthSession();
   if (!session) {
@@ -16,7 +19,7 @@ export default async function TemplatePage({
 
   const chatSessions = await api.chatRouter.getAllForUser();
   const chatSession = await api.chatRouter.getOneForUser({
-    chatSessionId: params.id,
+    chatSessionId: params.chatSessionId,
   });
 
   if (!chatSession) {
