@@ -9,7 +9,7 @@ function formattedPrice(pricePerToken: number, margin: number) {
 }
 
 export default async function Pricing() {
-  const llmProviders = await api.llmProvidersRouter.all();
+  const llmProviders = await api.llmProviders.all();
 
   const defaultLlmProvider = llmProviders[0];
   if (!defaultLlmProvider) {

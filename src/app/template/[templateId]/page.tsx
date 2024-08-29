@@ -14,7 +14,7 @@ export default async function TemplatesNewChatPage({
 
   const { templateId } = params;
 
-  const chatSession = await api.chatRouter.getLastEmtpyOrNewSession({
+  const chatSession = await api.chat.getLastEmtpyOrNewSession({
     templateId,
   });
 

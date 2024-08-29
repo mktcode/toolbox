@@ -24,10 +24,10 @@ export default async function TemplatePage({
     return <div>Template not found</div>;
   }
 
-  const chatSessions = await api.chatRouter.getAllForUserAndTemplate({
+  const chatSessions = await api.chat.getAllForUserAndTemplate({
     templateId,
   });
-  const chatSession = await api.chatRouter.getOneForUser({ chatSessionId });
+  const chatSession = await api.chat.getOneForUser({ chatSessionId });
 
   if (!chatSession) {
     return <div>Chat session not found</div>;

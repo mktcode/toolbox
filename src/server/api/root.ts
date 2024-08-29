@@ -16,8 +16,8 @@ export const appRouter = createTRPCRouter({
   balance: balanceRouter,
   feedback: feedbackRouter,
   tokens: tokensRouter,
-  llmProvidersRouter: llmProvidersRouter,
-  chatRouter: chatRouter,
+  llmProviders: llmProvidersRouter,
+  chat: chatRouter,
 });
 
 // export type definition of API
