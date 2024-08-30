@@ -11,7 +11,7 @@ import {
 import { useState } from "react";
 import { type Result } from "~/server/api/routers/nativeSpeaker";
 import { api } from "~/trpc/react";
-import Spinner from "../_components/spinner";
+import Spinner from "../../_components/spinner";
 import { CheckIcon } from "@heroicons/react/20/solid";
 import Markdown from "react-markdown";
 

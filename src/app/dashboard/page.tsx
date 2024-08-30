@@ -1,5 +1,26 @@
-import { redirect } from "next/navigation";
+import { Button } from "@headlessui/react";
+import Link from "next/link";
 
 export default async function DashboardPage() {
-  redirect("/dashboard/billing");
+  return (
+    <>
+      <header className="sticky top-0 z-10 bg-white shadow-md">
+        <div className="mx-auto flex max-w-7xl items-center px-4 py-3 sm:px-6 lg:px-8">
+          <h1 className="text-lg font-semibold text-gray-900">Dashboard</h1>
+        </div>
+      </header>
+
+      <main className="mx-auto flex w-full max-w-7xl grow flex-col px-4 py-6 sm:px-6 lg:px-8">
+        <div className="rounded-lg bg-white p-6 shadow-lg">
+          <h2>Native Speaker</h2>
+          <p>
+            Refine your texts and messages with the help of a native speaker.
+          </p>
+          <Link href="/tools/nativeSpeaker">
+            <Button className="button">Native Speaker</Button>
+          </Link>
+        </div>
+      </main>
+    </>
+  );
 }

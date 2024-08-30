@@ -1,1 +1,4 @@
-export const navigation = [{ name: "Billing", href: "/dashboard/billing" }];
+export const navigation = [
+  { name: "Tools", href: "/dashboard" },
+  { name: "Billing", href: "/dashboard/billing" },
+];
