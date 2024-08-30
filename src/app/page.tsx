@@ -1,4 +1,3 @@
-import Philosophy from "./_components/landingpage/philosophy";
 import Features from "./_components/landingpage/features";
 import Pricing from "./_components/landingpage/pricing";
 import Hero from "./_components/landingpage/hero";
@@ -12,7 +11,6 @@ export default async function HomePage() {
   return (
     <div>
       <Hero session={session} />
-      <Philosophy />
       <Pricing />
       <Features />
       <Blog />

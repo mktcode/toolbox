@@ -136,13 +136,11 @@ export default function Hero({ session }: { session: Session | null }) {
               You can use it too.
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Let's be honest. This product is just another wrapper around the
-              major AI providers. It exists because I enjoy building things.
-              It's also an application letter that has escalated a bit, and I
-              don't actually want the job anyway. In terms of features, this
-              product should be able to replace your current subscriptions soon.
-              It might even be cheaper since you pay per use. And I can build
-              custom solutions for you too.
+              I use AI a lot and have built a few tools to speed up tasks I
+              found myself doing repeatedly. You can sign in and start using
+              them right away. If you need custom features or have any questions
+              about AI or software development in general, feel free to reach
+              out.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-3">
               <a
