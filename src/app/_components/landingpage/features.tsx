@@ -13,13 +13,6 @@ export default function Features() {
             <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               It's all free and open source.
             </p>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
-              Yes, I want to make money. But I couldn't look at myself in the
-              mirror if I kept the source code closed. It's a bit messy
-              currently but I'm a Senior™ developer. I have it under control.
-              If you want your own private instance, I'll be happy to help you
-              set it up. There will be a Docker image soon.
-            </p>
             <div className="mt-8 flex justify-center">
               <Link
                 href="https://github.com/mktcode/senior-react"
