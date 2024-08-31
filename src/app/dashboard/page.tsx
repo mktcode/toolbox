@@ -10,15 +10,25 @@ export default async function DashboardPage() {
         </div>
       </header>
 
-      <main className="mx-auto flex w-full max-w-7xl grow flex-col px-4 py-6 sm:px-6 lg:px-8">
-        <div className="rounded-lg bg-white p-6 shadow-lg">
+      <main className="mx-auto flex w-full max-w-7xl grow flex-col space-y-3 px-4 py-6 sm:px-6 lg:px-8">
+        <div className="rounded-lg bg-white p-4 shadow-lg">
           <h2>Native Speaker</h2>
-          <p>
+          <p className="mb-6 text-gray-500">
             Refine your texts and messages with the help of a native speaker.
           </p>
           <Link href="/tools/nativeSpeaker">
-            <Button className="button">Native Speaker</Button>
+            <Button className="button w-full">Use</Button>
           </Link>
+        </div>
+        <div className="rounded-lg bg-white p-6 shadow-lg">
+          <h2>Image Generator</h2>
+          <p className="mb-6 text-gray-500">
+            Generate images for your social media posts, blog articles or
+            landingpages.
+          </p>
+          <Button disabled className="button w-full">
+            Coming soon
+          </Button>
         </div>
       </main>
     </>
