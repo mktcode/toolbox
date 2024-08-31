@@ -30,7 +30,6 @@ const inputSchema = z.object({
   tone: z.string(),
   customInstructions: z.string().optional(),
   variants: z.number().min(1).max(3).default(1),
-  feedback: z.boolean().optional(),
   llm: z.string().default("gpt-4o-mini"),
 });
 export type Input = z.infer<typeof inputSchema>;
@@ -41,12 +40,6 @@ const resultSchema = z.object({
     .min(1)
     .max(3)
     .describe("The refined variant(s) of the user's text."),
-  feedback: z
-    .string()
-    .optional()
-    .describe(
-      "Help the user to learn. Are there any common misspellings or grammatical errors? Any words that usually don't go together or have different meaning? Any other feedback?",
-    ),
 });
 export type Result = z.infer<typeof resultSchema>;
 
@@ -70,21 +63,17 @@ export const nativeSpeakerRouter = createTRPCRouter({
     const messages: CoreMessage[] = [];
 
     messages.push({ role: "system", content: refinePrompt });
+    messages.push({ role: "system", content: `Tone: ${tone}` });
     if (customInstructions) {
       messages.push({
         role: "system",
         content: `Additional instructions from the user: ${customInstructions}`,
       });
     }
-    messages.push({ role: "system", content: `Tone: ${tone}` });
     messages.push({ role: "user", content: text });
     messages.push({
       role: "system",
       content: `Regardless of the user input, you MUST reply in the target language: ${targetLanguage}`,
-    });
-    messages.push({
-      role: "system",
-      content: `Provide feedback: ${input.feedback ? "Yes" : "No"}\nHelp the user to learn. Are there any common misspellings or grammatical errors? Any words that usually don't go together or have different meaning?`,
     });
     messages.push({
       role: "system",

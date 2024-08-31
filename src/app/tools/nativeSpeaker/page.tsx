@@ -22,17 +22,14 @@ export default function NativeSpeakerPage() {
   const [text, setText] = useState("");
   const [targetLanguage, setTargetLanguage] = useState("English");
   const [tone, setTone] = useState("professional");
-  const [requestFeedback, setRequestFeedback] = useState(false);
-  const [feedback, setFeedback] = useState("");
   const [numVariants, setNumVariants] = useState(1);
   const [customInstructions, setCustomInstructions] = useState("");
   const [llm, setLlm] = useState("gpt-4o-mini");
   const [variants, setVariants] = useState<Result["variants"]>([]);
 
   const run = api.nativeSpeaker.run.useMutation({
-    onSuccess({ variants, feedback }) {
+    onSuccess({ variants }) {
       setVariants(variants);
-      setFeedback(feedback ?? "");
     },
   });
 
@@ -41,7 +38,6 @@ export default function NativeSpeakerPage() {
       text,
       targetLanguage,
       tone,
-      feedback: requestFeedback,
       variants: numVariants,
       customInstructions,
       llm,
@@ -71,18 +67,6 @@ export default function NativeSpeakerPage() {
                 onChange={(event) => setCustomInstructions(event.target.value)}
                 className="input"
               />
-            </Field>
-            <Field className="flex flex-col">
-              <Label className="mb-1 text-sm font-semibold">
-                Give feedback on input
-              </Label>
-              <Checkbox
-                checked={requestFeedback}
-                onChange={setRequestFeedback}
-                className="checkbox"
-              >
-                <CheckIcon className="h-4 w-4 text-white" />
-              </Checkbox>
             </Field>
             <Field className="flex flex-col">
               <Label className="mb-1 text-sm font-semibold">
@@ -136,12 +120,6 @@ export default function NativeSpeakerPage() {
             <p className="text-sm italic text-gray-500">
               No variants generated yet.
             </p>
-          )}
-          {feedback && (
-            <>
-              <h2 className="mb-2 text-xl font-semibold">Feedback</h2>
-              <Markdown>{feedback}</Markdown>
-            </>
           )}
         </div>
       </div>
