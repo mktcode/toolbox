@@ -1,4 +1,3 @@
-import Features from "./_components/landingpage/features";
 import Pricing from "./_components/landingpage/pricing";
 import Hero from "./_components/landingpage/hero";
 import { getServerAuthSession } from "~/server/auth";
@@ -12,7 +11,6 @@ export default async function HomePage() {
     <div>
       <Hero session={session} />
       <Pricing />
-      <Features />
       <Blog />
       <Footer />
     </div>

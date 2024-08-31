@@ -1,5 +1,7 @@
 import { api } from "~/trpc/server";
 import PricingCalculator from "./pricingCalculator";
+import Link from "next/link";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/20/solid";
 
 function formattedPrice(pricePerToken: number, margin: number) {
   const price = pricePerToken * 1_000_000;
@@ -30,10 +32,10 @@ export default async function Pricing() {
               No subscription. Pay per use.
             </h2>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              I do not plan to offer any subscription model. I want to keep it
-              simple and not artificially restrict any features. I take a margin
-              on top of the costs from the LLM providers. Any future price drops
-              will, of course, be passed on to you.
+              I take a quite significant margin on top of the costs of the
+              underlying providers. See it as a way of supporting this project
+              and me as a developer. Alternatively, you can set up your own
+              instance and control costs yourself.
             </p>
           </div>
           <div className="mx-auto mt-16 max-w-2xl rounded-3xl shadow-2xl shadow-black/20 ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
@@ -50,6 +52,24 @@ export default async function Pricing() {
                       {provider.name}
                     </h4>
                     <div className="h-px flex-auto bg-gray-100" />
+                  </div>
+                  <div className="space-x-3 text-gray-400">
+                    <Link
+                      href={provider.url}
+                      className="text-sm"
+                      target="_blank"
+                    >
+                      Website
+                      <ArrowTopRightOnSquareIcon className="ml-1 inline-block h-4 w-4 opacity-40" />
+                    </Link>
+                    <Link
+                      href={provider.pricingUrl}
+                      className="text-sm"
+                      target="_blank"
+                    >
+                      Pricing
+                      <ArrowTopRightOnSquareIcon className="ml-1 inline-block h-4 w-4 opacity-40" />
+                    </Link>
                   </div>
                   <div className="mt-4 grid grid-cols-3 gap-4">
                     {provider.llms.map((llm) => (

@@ -2,13 +2,17 @@
 
 import { useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  EnvelopeIcon,
+  WrenchScrewdriverIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { type Session } from "next-auth";
+import Link from "next/link";
 
 const navigation = [
-  { name: "The Product", href: "#product" },
   { name: "Pricing", href: "#pricing" },
-  { name: "Community", href: "#community" },
   { name: "Blog", href: "#blog" },
 ];
 
@@ -24,18 +28,11 @@ export default function Hero({ session }: { session: Session | null }) {
         >
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 flex items-center p-1.5">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-                viewBox="0 0 24 24"
-                className="mr-4 w-10"
-              >
-                <path
-                  d="M14.5 17c0 1.65-1.35 3-3 3s-3-1.35-3-3h2c0 .55.45 1 1 1s1-.45 1-1s-.45-1-1-1H2v-2h9.5c1.65 0 3 1.35 3 3zM19 6.5C19 4.57 17.43 3 15.5 3S12 4.57 12 6.5h2c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5S16.33 8 15.5 8H2v2h13.5c1.93 0 3.5-1.57 3.5-3.5zm-.5 4.5H2v2h16.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5v2c1.93 0 3.5-1.57 3.5-3.5S20.43 11 18.5 11z"
-                  fill="currentColor"
-                />
-              </svg>
-              <h1 className="text-2xl font-bold">Senior</h1>
+              <WrenchScrewdriverIcon
+                aria-hidden="true"
+                className="mr-3 h-6 w-6 text-indigo-600 opacity-40"
+              />
+              <h1 className="text-2xl font-bold text-indigo-950">AI Toolbox</h1>
             </a>
           </div>
           <div className="flex lg:hidden">
@@ -58,14 +55,6 @@ export default function Hero({ session }: { session: Session | null }) {
                 {item.name}
               </a>
             ))}
-          </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a
-              href="/api/auth/signin"
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              Log in <span aria-hidden="true">&rarr;</span>
-            </a>
           </div>
         </nav>
         <Dialog
@@ -136,22 +125,46 @@ export default function Hero({ session }: { session: Session | null }) {
               You can use it too.
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              I use AI a lot and have built a few tools to speed up tasks I
-              found myself doing repeatedly. You can sign in and start using
-              them right away. If you need custom features or have any questions
-              about AI or software development in general, feel free to reach
-              out.
+              I rely on AI frequently and have developed several tools to
+              streamline tasks I found myself doing repeatedly. While it's a
+              paid service, the software is also open-source and free to use. If
+              you need custom features, want to run your own instance, or have
+              any questions about AI or software development in general, don't
+              hesitate to reach out.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-3">
               <a
-                href="https://github.com/mktcode/senior-react/discussions/22"
+                href="mailto:toolbox@markus-kottlaender.de"
                 className="button shy"
-                target="_blank"
               >
+                <EnvelopeIcon className="mr-2 h-4 w-4 opacity-40" />
                 Get in touch
               </a>
+              <Link
+                href="https://github.com/mktcode/senior-react"
+                target="_blank"
+              >
+                <button className="button shy">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    className="mr-2 h-4 w-4 opacity-40"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2c2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2a4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6c-.6.6-.6 1.2-.5 2V21"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></path>
+                  </svg>
+                  Source Code
+                </button>
+              </Link>
               <a href="/dashboard" className="button !shadow-lg">
-                {session ? "Dashboard" : "Get $1 for free!"}
+                {session ? "Dashboard" : "Try out for free!"}
               </a>
             </div>
           </div>

@@ -5,8 +5,23 @@ const posts = [
     href: "#",
     description:
       "Large Language Models (LLMs) have revolutionized natural language processing by excelling in tasks like text generation and comprehension, but they also face significant limitations that impact their practical applications.",
-    date: "Mar 16, 2020",
-    datetime: "2020-03-16",
+    date: "Mar 16, 2024",
+    datetime: "2024-03-16",
+    author: {
+      name: "Markus Kottländer",
+      role: "Founder / CTO",
+      href: "#",
+      imageUrl: "https://avatars.githubusercontent.com/u/6792578?v=4",
+    },
+  },
+  {
+    id: 2,
+    title: "How I use AI",
+    href: "#",
+    description:
+      "I rely on AI pretty heavily. It autocompletes most of the code I write, it makes sure my English sounds like that of a native speaker or spots flaws in my ideas. Many people don't trust AI that much yet.",
+    date: "Mar 10, 2024",
+    datetime: "2024-03-10",
     author: {
       name: "Markus Kottländer",
       role: "Founder / CTO",
