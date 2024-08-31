@@ -32,10 +32,10 @@ export default async function Pricing() {
               No subscription. Pay per use.
             </h2>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              I take a quite significant margin on top of the costs of the
-              underlying providers. See it as a way of supporting this project
-              and me as a developer. Alternatively, you can set up your own
-              instance and control costs yourself.
+              I apply a considerable margin on top of the costs incurred by the
+              underlying providers. Consider it a way to support this project
+              and my work as a developer. Alternatively, you have the option to
+              set up your own instance to manage costs independently.
             </p>
           </div>
           <div className="mx-auto mt-16 max-w-2xl rounded-3xl shadow-2xl shadow-black/20 ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
