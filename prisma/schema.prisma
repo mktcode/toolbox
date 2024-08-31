@@ -27,13 +27,6 @@ model Feedback {
   updatedAt DateTime @updatedAt
 }
 
-model FeedbackSummary {
-  id        String   @id @default(cuid())
-  body      String   @db.Text
-  rating    Int
-  createdAt DateTime @default(now())
-}
-
 // Templates
 
 model Template {
