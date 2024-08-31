@@ -144,10 +144,12 @@ model VerificationToken {
 // LLM Providers
 
 model LlmProvider {
-  id        String   @id @default(uuid())
-  name      String
-  llms      Llm[]
-  createdAt DateTime @default(now())
+  id         String   @id @default(uuid())
+  name       String
+  url        String
+  pricingUrl String
+  llms       Llm[]
+  createdAt  DateTime @default(now())
 }
 
 model Llm {
