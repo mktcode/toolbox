@@ -14,6 +14,7 @@ import { api } from "~/trpc/react";
 import Spinner from "../../_components/spinner";
 import { CheckIcon } from "@heroicons/react/20/solid";
 import Markdown from "react-markdown";
+import LanguageInput from "./_components/languageInput";
 
 export default function NativeSpeakerPage() {
   const [text, setText] = useState("");
@@ -52,14 +53,7 @@ export default function NativeSpeakerPage() {
         Refine your text with the quality of a native speaker.
       </div>
       <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Field className="flex flex-col">
-          <Label className="mb-1 text-sm font-semibold">Target Language</Label>
-          <Input
-            value={targetLanguage}
-            onChange={(event) => setTargetLanguage(event.target.value)}
-            className="input"
-          />
-        </Field>
+        <LanguageInput onChange={setTargetLanguage} />
         <Field className="flex flex-col">
           <Label className="mb-1 text-sm font-semibold">Tone</Label>
           <Input
