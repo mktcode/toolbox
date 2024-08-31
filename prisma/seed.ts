@@ -31,6 +31,8 @@ async function main() {
   const llmProvders = await prisma.llmProvider.create({
     data: {
       name: "OpenAI",
+      url: "https://openai.com",
+      pricingUrl: "https://openai.com/pricing",
     },
   });
 
