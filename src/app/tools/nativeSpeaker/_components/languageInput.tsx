@@ -42,8 +42,8 @@ export default function LanguageInput({
   const filteredLanguages =
     query === ""
       ? top10Languages
-      : top10Languages.filter((person) => {
-          return person.name.toLowerCase().includes(query.toLowerCase());
+      : top10Languages.filter((language) => {
+          return language.name.toLowerCase().includes(query.toLowerCase());
         });
 
   function handleOnChange(language: Language | null) {

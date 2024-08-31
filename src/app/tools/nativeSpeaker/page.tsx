@@ -15,6 +15,8 @@ import Spinner from "../../_components/spinner";
 import { CheckIcon } from "@heroicons/react/20/solid";
 import Markdown from "react-markdown";
 import LanguageInput from "./_components/languageInput";
+import ToneInput from "./_components/toneInput";
+import LlmInput from "./_components/llmInput";
 
 export default function NativeSpeakerPage() {
   const [text, setText] = useState("");
@@ -47,107 +49,101 @@ export default function NativeSpeakerPage() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-screen-xl grow bg-white p-4 shadow-lg">
-      <h1 className="text-2xl font-bold">Native Speaker Refinement</h1>
-      <div className="mb-4 border-b pb-4 font-normal text-gray-500">
-        Refine your text with the quality of a native speaker.
+    <div className="w-full grow bg-white">
+      <div className="border-b p-4">
+        <h1 className="text-2xl font-bold">Native Speaker Refinement</h1>
+        <div className="text-gray-500">
+          Refine your text with the quality of a native speaker.
+        </div>
       </div>
-      <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <LanguageInput onChange={setTargetLanguage} />
-        <Field className="flex flex-col">
-          <Label className="mb-1 text-sm font-semibold">Tone</Label>
-          <Input
-            value={tone}
-            onChange={(event) => setTone(event.target.value)}
-            className="input"
-          />
-        </Field>
-        <Field className="flex flex-col">
-          <Label className="mb-1 text-sm font-semibold">LLM</Label>
-          <Input
-            value={llm}
-            onChange={(event) => setLlm(event.target.value)}
-            className="input"
-          />
-        </Field>
-        <Field className="flex flex-col md:col-span-2 lg:col-span-3">
-          <Label className="mb-1 text-sm font-semibold">
-            Custom Instructions
-          </Label>
-          <Input
-            value={customInstructions}
-            onChange={(event) => setCustomInstructions(event.target.value)}
-            className="input"
-          />
-        </Field>
-        <Field className="flex flex-col md:col-span-2 lg:col-span-3">
-          <Label className="mb-1 text-sm font-semibold">Text</Label>
-          <Textarea
-            value={text}
-            onChange={(event) => setText(event.target.value)}
-            className="input"
-          />
-        </Field>
-        <Field className="flex flex-col">
-          <Label className="mb-1 text-sm font-semibold">
-            Give feedback on input
-          </Label>
-          <Checkbox
-            checked={requestFeedback}
-            onChange={setRequestFeedback}
-            className="checkbox"
-          >
-            <CheckIcon className="h-4 w-4 text-white" />
-          </Checkbox>
-        </Field>
-        <Field className="flex flex-col">
-          <Label className="mb-1 text-sm font-semibold">
-            Number of Variants
-          </Label>
-          <Input
-            type="number"
-            value={numVariants}
-            onChange={(event) => setNumVariants(parseInt(event.target.value))}
-            min={1}
-            max={3}
-            className="input"
-          />
-        </Field>
-      </div>
-      <div className="mb-4">
-        <Button
-          onClick={handleSubmit}
-          className="button"
-          disabled={run.isPending || !text}
-        >
-          {run.isPending && <Spinner className="mr-2 h-5 w-5" />}
-          Submit
-        </Button>
-      </div>
-      <div>
-        <h2 className="mb-2 text-xl font-semibold">Refined Variants</h2>
-        {variants.length > 0 ? (
-          <div className="space-y-2">
-            {variants.map((variant, index) => (
-              <div
-                key={index}
-                className="rounded-md border border-indigo-200 bg-indigo-50 p-3"
+      <div className="grid grid-cols-2">
+        <div className="p-4">
+          <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <LanguageInput onChange={setTargetLanguage} />
+            <ToneInput onChange={setTone} />
+            <LlmInput onChange={setLlm} />
+            <Field className="flex flex-col md:col-span-2 lg:col-span-3">
+              <Label className="mb-1 text-sm font-semibold">
+                Custom Instructions
+              </Label>
+              <Input
+                value={customInstructions}
+                onChange={(event) => setCustomInstructions(event.target.value)}
+                className="input"
+              />
+            </Field>
+            <Field className="flex flex-col">
+              <Label className="mb-1 text-sm font-semibold">
+                Give feedback on input
+              </Label>
+              <Checkbox
+                checked={requestFeedback}
+                onChange={setRequestFeedback}
+                className="checkbox"
               >
-                <p className="text-sm">{variant}</p>
-              </div>
-            ))}
+                <CheckIcon className="h-4 w-4 text-white" />
+              </Checkbox>
+            </Field>
+            <Field className="flex flex-col">
+              <Label className="mb-1 text-sm font-semibold">
+                Number of Variants
+              </Label>
+              <Input
+                type="number"
+                value={numVariants}
+                onChange={(event) =>
+                  setNumVariants(parseInt(event.target.value))
+                }
+                min={1}
+                max={3}
+                className="input"
+              />
+            </Field>
+            <Field className="flex flex-col md:col-span-2 lg:col-span-3">
+              <Label className="mb-1 text-sm font-semibold">Text</Label>
+              <Textarea
+                value={text}
+                onChange={(event) => setText(event.target.value)}
+                className="input"
+              />
+            </Field>
           </div>
-        ) : (
-          <p className="text-sm italic text-gray-500">
-            No variants generated yet.
-          </p>
-        )}
-        {feedback && (
-          <>
-            <h2 className="mb-2 mt-4 text-xl font-semibold">Feedback</h2>
-            <Markdown>{feedback}</Markdown>
-          </>
-        )}
+          <div className="mb-4">
+            <Button
+              onClick={handleSubmit}
+              className="button"
+              disabled={run.isPending || !text}
+            >
+              {run.isPending && <Spinner className="mr-2 h-5 w-5" />}
+              Submit
+            </Button>
+          </div>
+        </div>
+        <div className="border-l p-4">
+          <h2 className="mb-2 text-xl font-semibold">Refined Variants</h2>
+          {variants.length > 0 ? (
+            <div className="space-y-2">
+              {variants.map((variant, index) => (
+                <div
+                  key={index}
+                  className="rounded-md border border-indigo-200 bg-indigo-50 p-3"
+                >
+                  <p className="text-sm">{variant}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm italic text-gray-500">
+              No variants generated yet.
+            </p>
+          )}
+          {feedback && (
+            <>
+              <h2 className="mb-2 text-xl font-semibold">Feedback</h2>
+              <Markdown>{feedback}</Markdown>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ export default async function ProjectsLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <HydrateClient>
-      <div className="flex min-h-screen flex-col bg-gray-200">
+      <div className="flex min-h-screen flex-col">
         <Navbar />
         {children}
       </div>
