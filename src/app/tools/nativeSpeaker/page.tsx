@@ -2,7 +2,7 @@
 
 import {
   Button,
-  Checkbox,
+  Description,
   Field,
   Input,
   Label,
@@ -12,11 +12,10 @@ import { useState } from "react";
 import { type Result } from "~/server/api/routers/nativeSpeaker";
 import { api } from "~/trpc/react";
 import Spinner from "../../_components/spinner";
-import { CheckIcon } from "@heroicons/react/20/solid";
-import Markdown from "react-markdown";
 import LanguageInput from "./_components/languageInput";
 import ToneInput from "./_components/toneInput";
 import LlmInput from "./_components/llmInput";
+import CopyButton from "~/app/_components/copyButton";
 
 export default function NativeSpeakerPage() {
   const [text, setText] = useState("");
@@ -85,6 +84,10 @@ export default function NativeSpeakerPage() {
             </Field>
             <Field className="flex flex-col md:col-span-2 lg:col-span-3">
               <Label className="mb-1 text-sm font-semibold">Text</Label>
+              <Description className="mb-1 text-sm text-gray-500">
+                Enter the text you want to refine. Can be written in any
+                language. Output will be {targetLanguage}.
+              </Description>
               <Textarea
                 value={text}
                 onChange={(event) => setText(event.target.value)}
@@ -113,6 +116,11 @@ export default function NativeSpeakerPage() {
                   className="rounded-md border border-indigo-200 bg-indigo-50 p-3"
                 >
                   <p className="text-sm">{variant}</p>
+                  <CopyButton
+                    text={variant}
+                    classNames="button shy mt-2"
+                    label="Copy to Clipboard"
+                  />
                 </div>
               ))}
             </div>

@@ -64,20 +64,19 @@ export default function LanguageInput({
         <div className="relative">
           <ComboboxInput
             aria-label="Assignee"
-            displayValue={(language: Language) =>
-              `${language.flag} ${language.name}`
-            }
+            displayValue={(language: Language) => language.name}
             onChange={(event) => setQuery(event.target.value)}
             className="input"
           />
-          <ComboboxButton className="group absolute inset-y-0 right-0 px-2.5">
-            <ChevronDownIcon className="size-4 fill-gray-400 group-data-[hover]:fill-gray-600" />
+          <ComboboxButton className="group absolute inset-y-0 right-0 flex items-center px-2.5">
+            {selectedLanguage.flag}
+            <ChevronDownIcon className="ml-1 size-4 fill-gray-400 group-data-[hover]:fill-gray-600" />
           </ComboboxButton>
         </div>
         <ComboboxOptions anchor="bottom end" className="combobox-options">
           {query !== "" && filteredLanguages.length === 0 && (
             <ComboboxOption
-              value={{ id: 0, name: query }}
+              value={{ id: 0, name: query, flag: "" }}
               className="combobox-option"
             >
               {query}
