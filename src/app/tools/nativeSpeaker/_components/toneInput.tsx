@@ -16,7 +16,11 @@ type Tone = {
 };
 
 const defaultTone = { id: 1, name: "Formal" };
-const tones: Tone[] = [defaultTone, { id: 2, name: "Informal" }];
+const tones: Tone[] = [
+  defaultTone,
+  { id: 2, name: "Informal" },
+  { id: 3, name: "Marketing" },
+];
 
 export default function ToneInput({
   onChange,
