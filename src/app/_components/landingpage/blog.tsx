@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const posts = [
   {
     id: 1,
@@ -66,7 +68,7 @@ export default function Blog() {
                 </p>
               </div>
               <div className="relative mt-8 flex items-center gap-x-4">
-                <img
+                <Image
                   alt=""
                   src={post.author.imageUrl}
                   className="h-10 w-10 rounded-full bg-gray-50"
