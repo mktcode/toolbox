@@ -22,8 +22,8 @@ export default function PricingCalculator({
   llmProviders,
   defaultLlm,
 }: {
-  llmProviders: RouterOutputs["llmProvidersRouter"]["all"];
-  defaultLlm: RouterOutputs["llmProvidersRouter"]["all"][0]["llms"][0];
+  llmProviders: RouterOutputs["llmProviders"]["all"];
+  defaultLlm: RouterOutputs["llmProviders"]["all"][0]["llms"][0];
 }) {
   const [input, setInput] = useState("");
   const debouncedInput = useDebounce(input, 500);
