@@ -56,4 +56,11 @@ export const topupRouter = createTRPCRouter({
 
     return checkoutSession.url;
   }),
+  getAllForUser: protectedProcedure.query(async ({ ctx }) => {
+    const user = ctx.session.user;
+
+    return ctx.db.topUp.findMany({
+      where: { userId: user.id },
+    });
+  }),
 });
