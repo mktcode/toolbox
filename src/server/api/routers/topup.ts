@@ -3,7 +3,7 @@ import Stripe from "stripe";
 
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 
-export const balanceRouter = createTRPCRouter({
+export const topupRouter = createTRPCRouter({
   createTopUp: protectedProcedure.mutation(async ({ ctx }) => {
     const user = ctx.session.user;
 

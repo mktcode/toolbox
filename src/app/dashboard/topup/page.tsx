@@ -10,7 +10,7 @@ export default async function TopUpPage() {
     );
   }
 
-  const topupUrl = await api.balance.createTopUp();
+  const topupUrl = await api.topup.createTopUp();
 
   redirect(topupUrl);
 }
