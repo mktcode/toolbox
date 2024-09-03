@@ -41,7 +41,7 @@ const resultSchema = z.object({
     .max(3)
     .describe("The refined variant(s) of the user's text."),
 });
-export type Result = z.infer<typeof resultSchema>;
+export type Output = z.infer<typeof resultSchema>;
 
 export const nativeSpeakerRouter = createTRPCRouter({
   run: fundedProcedure.input(inputSchema).mutation(async ({ ctx, input }) => {

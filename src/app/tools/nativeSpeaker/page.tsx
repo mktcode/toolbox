@@ -1,47 +1,9 @@
-"use client";
+import Form from "./_components/form";
+import { getServerAuthSession } from "~/server/auth";
+import Result from "./_components/result";
 
-import {
-  Button,
-  Description,
-  Field,
-  Input,
-  Label,
-  Textarea,
-} from "@headlessui/react";
-import { useState } from "react";
-import { type Result } from "~/server/api/routers/nativeSpeaker";
-import { api } from "~/trpc/react";
-import Spinner from "../../_components/spinner";
-import LanguageInput from "./_components/languageInput";
-import ToneInput from "./_components/toneInput";
-import LlmInput from "./_components/llmInput";
-import CopyButton from "~/app/_components/copyButton";
-
-export default function NativeSpeakerPage() {
-  const [text, setText] = useState("");
-  const [targetLanguage, setTargetLanguage] = useState("English");
-  const [tone, setTone] = useState("professional");
-  const [numVariants, setNumVariants] = useState(1);
-  const [customInstructions, setCustomInstructions] = useState("");
-  const [llm, setLlm] = useState("gpt-4o-mini");
-  const [variants, setVariants] = useState<Result["variants"]>([]);
-
-  const run = api.nativeSpeaker.run.useMutation({
-    onSuccess({ variants }) {
-      setVariants(variants);
-    },
-  });
-
-  function handleSubmit() {
-    run.mutate({
-      text,
-      targetLanguage,
-      tone,
-      variants: numVariants,
-      customInstructions,
-      llm,
-    });
-  }
+export default async function NativeSpeakerPage() {
+  const session = await getServerAuthSession();
 
   return (
     <div className="w-full grow bg-white">
@@ -52,84 +14,8 @@ export default function NativeSpeakerPage() {
         </div>
       </div>
       <div className="grid grid-cols-2">
-        <div className="p-4">
-          <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <LanguageInput onChange={setTargetLanguage} />
-            <ToneInput onChange={setTone} />
-            <LlmInput onChange={setLlm} />
-            <Field className="flex flex-col md:col-span-2 lg:col-span-3">
-              <Label className="mb-1 text-sm font-semibold">
-                Custom Instructions
-              </Label>
-              <Input
-                value={customInstructions}
-                onChange={(event) => setCustomInstructions(event.target.value)}
-                className="input"
-              />
-            </Field>
-            <Field className="flex flex-col">
-              <Label className="mb-1 text-sm font-semibold">
-                Number of Variants
-              </Label>
-              <Input
-                type="number"
-                value={numVariants}
-                onChange={(event) =>
-                  setNumVariants(parseInt(event.target.value))
-                }
-                min={1}
-                max={3}
-                className="input"
-              />
-            </Field>
-            <Field className="flex flex-col md:col-span-2 lg:col-span-3">
-              <Label className="mb-1 text-sm font-semibold">Text</Label>
-              <Description className="mb-1 text-sm text-gray-500">
-                Enter the text you want to refine. Can be written in any
-                language. Output will be {targetLanguage}.
-              </Description>
-              <Textarea
-                value={text}
-                onChange={(event) => setText(event.target.value)}
-                className="input"
-              />
-            </Field>
-          </div>
-          <div className="mb-4">
-            <Button
-              onClick={handleSubmit}
-              className="button"
-              disabled={run.isPending || !text}
-            >
-              {run.isPending && <Spinner className="mr-2 h-5 w-5" />}
-              Submit
-            </Button>
-          </div>
-        </div>
-        <div className="border-l p-4">
-          <h2 className="mb-2 text-xl font-semibold">Refined Variants</h2>
-          {variants.length > 0 ? (
-            <div className="space-y-2">
-              {variants.map((variant, index) => (
-                <div
-                  key={index}
-                  className="rounded-md border border-indigo-200 bg-indigo-50 p-3"
-                >
-                  <p className="text-sm">{variant}</p>
-                  <CopyButton
-                    text={variant}
-                    classNames="button shy mt-2"
-                    label="Copy to Clipboard"
-                  />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-sm italic text-gray-500">
-              No variants generated yet.
-            </p>
-          )}
-        </div>
+        <Form session={session} />
+        <Result />
       </div>
     </div>
   );
