@@ -6,7 +6,6 @@ import { type Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Toolbox / Billing",
-  description: "AI tools I've built and use every now and then",
 };
 
 export default async function DashboardBillingPage() {

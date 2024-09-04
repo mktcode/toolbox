@@ -7,7 +7,6 @@ import Navbar from "./_components/navbar";
 
 export const metadata: Metadata = {
   title: "Toolbox / Dashboard",
-  description: "AI tools I've built and use every now and then",
 };
 
 export default async function ProjectsLayout({
