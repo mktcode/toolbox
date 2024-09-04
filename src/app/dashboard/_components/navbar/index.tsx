@@ -8,7 +8,6 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, UserIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import Link from "next/link";
 import NavLink from "./navLink";
 import NavLinkMobile from "./navLinkMobile";
 import { navigation } from "./_lib";
