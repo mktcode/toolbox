@@ -31,9 +31,9 @@ export default async function DashboardPage() {
             Let AI search the web for you. Get the most relevant results and
             summarized information, including images and videos.
           </p>
-          <Button disabled className="button w-full">
-            Coming soon
-          </Button>
+          <Link href="/tools/search">
+            <Button className="button w-full">Use</Button>
+          </Link>
         </div>
         <div className="rounded-lg bg-white p-6 shadow-lg">
           <h2>Image Generator</h2>
