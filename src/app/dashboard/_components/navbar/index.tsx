@@ -31,17 +31,6 @@ export default async function Navbar() {
       <div className="px-4 py-2 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <div className="flex-shrink-0">
-              <Link href="/">
-                <Image
-                  alt="Your Company"
-                  src="/img/logo.svg"
-                  className="h-8 w-8"
-                  width={32}
-                  height={32}
-                />
-              </Link>
-            </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
                 {navigation.map((item) => (
