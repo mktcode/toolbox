@@ -8,7 +8,6 @@ import Navbar from "./../../dashboard/_components/navbar";
 export const metadata: Metadata = {
   title: "Toolbox / Native Speaker",
   description: "AI tools I've built and use every now and then",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
 export default async function ProjectsLayout({

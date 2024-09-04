@@ -1,5 +1,11 @@
 import { Button } from "@headlessui/react";
+import { type Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Toolbox / Dashboard",
+  description: "AI tools I've built and use every now and then",
+};
 
 export default async function DashboardPage() {
   return (

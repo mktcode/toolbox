@@ -2,6 +2,12 @@ import { getServerAuthSession } from "~/server/auth";
 import { DashboardHeader, DashboardHeaderH1 } from "./../_components/layout";
 import { redirect } from "next/navigation";
 import { api } from "~/trpc/server";
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Toolbox / Billing",
+  description: "AI tools I've built and use every now and then",
+};
 
 export default async function DashboardBillingPage() {
   const session = await getServerAuthSession();
