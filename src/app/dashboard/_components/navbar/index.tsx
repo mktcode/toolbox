@@ -6,7 +6,7 @@ import {
   Menu,
   MenuButton,
 } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, UserIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import NavLink from "./navLink";
@@ -65,13 +65,18 @@ export default async function Navbar() {
                   <MenuButton className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">Open user menu</span>
-                    <Image
-                      alt=""
-                      src={user.image ?? "/img/avatar-placeholder.jpg"}
-                      className="h-8 w-8 rounded-full"
-                      width={32}
-                      height={32}
-                    />
+                    {user.image && (
+                      <Image
+                        alt=""
+                        src={user.image}
+                        className="h-8 w-8 rounded-full"
+                        width={32}
+                        height={32}
+                      />
+                    )}
+                    {!user.image && (
+                      <UserIcon className="h-6 w-6 rounded-full text-white" />
+                    )}
                   </MenuButton>
                 </div>
                 <UserNav />
@@ -106,13 +111,18 @@ export default async function Navbar() {
         <div className="border-t border-gray-700 pb-3 pt-4">
           <div className="flex items-center px-5">
             <div className="flex-shrink-0">
-              <Image
-                alt=""
-                src={user.image ?? "/img/avatar-placeholder.jpg"}
-                className="h-10 w-10 rounded-full"
-                width={40}
-                height={40}
-              />
+              {user.image && (
+                <Image
+                  alt=""
+                  src={user.image}
+                  className="h-8 w-8 rounded-full"
+                  width={32}
+                  height={32}
+                />
+              )}
+              {!user.image && (
+                <UserIcon className="h-6 w-6 rounded-full text-white" />
+              )}
             </div>
             <div className="ml-3">
               <div className="text-base font-medium leading-none text-white">
