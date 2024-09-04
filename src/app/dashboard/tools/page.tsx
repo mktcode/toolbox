@@ -36,6 +36,18 @@ export default async function DashboardPage() {
           </Link>
         </div>
         <div className="rounded-lg bg-white p-6 shadow-lg">
+          <h2>Feature Shaping</h2>
+          <p className="mb-6 text-gray-500">
+            Helps to shape your product features before implementing them.
+            Evaluate your ideas and clarify what can be clarified, in order to
+            reduce communication friction and increase the chances of creating
+            an actually useful feature.
+          </p>
+          <Button disabled className="button w-full">
+            Coming soon
+          </Button>
+        </div>
+        <div className="rounded-lg bg-white p-6 shadow-lg">
           <h2>Image Generator</h2>
           <p className="mb-6 text-gray-500">
             Generate images for your social media posts, blog articles or

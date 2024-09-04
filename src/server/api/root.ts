@@ -12,12 +12,12 @@ import { nativeSpeakerRouter } from "./routers/nativeSpeaker";
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
-  template: templateRouter,
-  topup: topupRouter,
   feedback: feedbackRouter,
-  tokens: tokensRouter,
   llmProviders: llmProvidersRouter,
   nativeSpeaker: nativeSpeakerRouter,
+  template: templateRouter,
+  tokens: tokensRouter,
+  topup: topupRouter,
 });
 
 // export type definition of API
