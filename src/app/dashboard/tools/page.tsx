@@ -21,6 +21,16 @@ export default async function DashboardPage() {
           </Link>
         </div>
         <div className="rounded-lg bg-white p-6 shadow-lg">
+          <h2>Search</h2>
+          <p className="mb-6 text-gray-500">
+            Let AI search the web for you. Get the most relevant results and
+            summarized information, including images and videos.
+          </p>
+          <Button disabled className="button w-full">
+            Coming soon
+          </Button>
+        </div>
+        <div className="rounded-lg bg-white p-6 shadow-lg">
           <h2>Image Generator</h2>
           <p className="mb-6 text-gray-500">
             Generate images for your social media posts, blog articles or
