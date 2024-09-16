@@ -15,7 +15,7 @@ export default async function DashboardPage() {
         </div>
       </header>
 
-      <main className="mx-auto flex w-full max-w-7xl grow flex-col space-y-3 px-4 py-6 sm:px-6 lg:px-8">
+      <main className="mx-auto my-16 grid w-full max-w-7xl grow grid-cols-1 flex-col gap-3 md:grid-cols-2">
         <div className="rounded-lg bg-white p-4 shadow-lg">
           <h2>Native Speaker</h2>
           <p className="mb-6 text-gray-500">
