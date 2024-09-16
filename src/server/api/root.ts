@@ -5,6 +5,7 @@ import { feedbackRouter } from "./routers/feedback";
 import { tokensRouter } from "./routers/tokens";
 import { llmProvidersRouter } from "./routers/llmProviders";
 import { nativeSpeakerRouter } from "./routers/nativeSpeaker";
+import { shaperRouter } from "./routers/shaper";
 
 /**
  * This is the primary router for your server.
@@ -15,6 +16,7 @@ export const appRouter = createTRPCRouter({
   feedback: feedbackRouter,
   llmProviders: llmProvidersRouter,
   nativeSpeaker: nativeSpeakerRouter,
+  shaper: shaperRouter,
   template: templateRouter,
   tokens: tokensRouter,
   topup: topupRouter,
