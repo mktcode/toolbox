@@ -132,10 +132,7 @@ export default function Hero({ session }: { session: Session | null }) {
                 <EnvelopeIcon className="mr-2 h-4 w-4 opacity-40" />
                 Get in touch
               </a>
-              <Link
-                href="https://github.com/mktcode/senior-react"
-                target="_blank"
-              >
+              <Link href="https://github.com/mktcode/toolbox" target="_blank">
                 <button className="button shy">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
