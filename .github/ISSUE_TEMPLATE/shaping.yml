@@ -73,12 +73,15 @@ body:
       placeholder: ex. 10% increase in user engagement
     validations:
       required: false
-  - type: checkboxes
+  - type: dropdown
     id: prioritization
     attributes:
       label: Prioritization
-      description: How urgent is this feature? (Select as many as apply)
+      description: How urgent is this feature?
       options:
-        - label: High Priority
-        - label: Medium Priority
         - label: Low Priority
+        - label: Medium Priority
+        - label: High Priority
+      default: 0
+    validations:
+      required: true
