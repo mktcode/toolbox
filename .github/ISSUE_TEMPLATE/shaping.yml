@@ -1,0 +1,94 @@
+name: Feature Shaping
+description: Help shape a product feature before implementation.
+title: "[Feature]: "
+labels: ["enhancement", "discussion"]
+assignees:
+  - mktcode
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to help shape your feature idea. All fields are optional, but the more detail you provide, the more effective the shaping process will be.
+  - type: input
+    id: feature-name
+    attributes:
+      label: Feature Name
+      description: Give a name to your feature.
+      placeholder: ex. User Authentication Improvement
+    validations:
+      required: false
+  - type: textarea
+    id: problem-definition
+    attributes:
+      label: Problem Definition
+      description: What problem does this feature solve?
+      placeholder: Describe the problem your feature will address.
+    validations:
+      required: false
+  - type: textarea
+    id: audience
+    attributes:
+      label: Audience
+      description: Who is this feature for? (Specific users, personas, or roles)
+      placeholder: ex. Admins, Regular Users
+    validations:
+      required: false
+  - type: textarea
+    id: desired-outcome
+    attributes:
+      label: Desired Outcome
+      description: What do you want to achieve with this feature?
+      placeholder: Describe the expected impact or benefit.
+    validations:
+      required: false
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints
+      description: Are there any time, resource, or technical constraints to consider?
+      placeholder: ex. Limited development time, compatibility issues.
+    validations:
+      required: false
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks/Uncertainties
+      description: What are the potential risks or uncertainties with this feature?
+      placeholder: ex. May not scale well, unclear user demand.
+    validations:
+      required: false
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed Solution
+      description: Briefly describe how the feature might work.
+      placeholder: Outline your initial thoughts on a solution.
+    validations:
+      required: false
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: Does this feature depend on any other features or systems?
+      placeholder: ex. Requires integration with authentication API.
+    validations:
+      required: false
+  - type: input
+    id: success-metrics
+    attributes:
+      label: Success Metrics
+      description: How will success be measured? (Optional)
+      placeholder: ex. 10% increase in user engagement
+    validations:
+      required: false
+  - type: checkboxes
+    id: prioritization
+    attributes:
+      label: Prioritization
+      description: How urgent is this feature? (Select as many as apply)
+      options:
+        - label: High Priority
+        - label: Medium Priority
+        - label: Low Priority
+      validations:
+        required: false
