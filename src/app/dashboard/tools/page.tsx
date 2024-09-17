@@ -64,6 +64,15 @@ export default async function DashboardPage() {
                 Coming soon
               </Button>
             </div>
+            <div className="rounded-lg bg-white p-4 shadow-lg">
+              <h2>Voice Generator</h2>
+              <p className="mb-6 text-gray-500">
+                Generate professional voice recordings from your text.
+              </p>
+              <Button disabled className="button w-full">
+                Coming soon
+              </Button>
+            </div>
           </div>
         </div>
       </main>
