@@ -1,7 +1,7 @@
 name: Feature Shaping
 description: Help shape a product feature before implementation.
 title: "[Feature]: "
-labels: ["enhancement", "discussion"]
+labels: ["shaping"]
 assignees:
   - mktcode
 body:
@@ -9,14 +9,6 @@ body:
     attributes:
       value: |
         Use this form to help shape your feature idea. All fields are optional, but the more detail you provide, the more effective the shaping process will be.
-  - type: input
-    id: feature-name
-    attributes:
-      label: Feature Name
-      description: Give a name to your feature.
-      placeholder: ex. User Authentication Improvement
-    validations:
-      required: false
   - type: textarea
     id: problem-definition
     attributes:
