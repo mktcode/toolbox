@@ -79,9 +79,9 @@ body:
       label: Prioritization
       description: How urgent is this feature?
       options:
-        - label: Low Priority
-        - label: Medium Priority
-        - label: High Priority
+        - Low
+        - Medium
+        - High
       default: 0
     validations:
       required: true
