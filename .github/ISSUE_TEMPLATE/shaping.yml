@@ -90,5 +90,3 @@ body:
         - label: High Priority
         - label: Medium Priority
         - label: Low Priority
-      validations:
-        required: false
