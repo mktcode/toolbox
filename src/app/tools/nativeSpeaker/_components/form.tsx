@@ -17,14 +17,19 @@ import { useState } from "react";
 import { type Output } from "~/server/api/routers/nativeSpeaker";
 import { api } from "~/trpc/react";
 
-export default function Form({ session }: { session: Session | null }) {
+export default function Form({
+  session,
+  setVariants,
+}: {
+  session: Session | null;
+  setVariants: (variants: Output["variants"]) => void;
+}) {
   const [text, setText] = useState("");
   const [targetLanguage, setTargetLanguage] = useState("English");
   const [tone, setTone] = useState("professional");
   const [numVariants, setNumVariants] = useState(1);
   const [customInstructions, setCustomInstructions] = useState("");
   const [llm, setLlm] = useState("gpt-4o-mini");
-  const [variants, setVariants] = useState<Output["variants"]>([]);
 
   const run = api.nativeSpeaker.run.useMutation({
     onSuccess({ variants }) {

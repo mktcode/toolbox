@@ -1,12 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { type Output } from "~/server/api/routers/nativeSpeaker";
 import CopyButton from "~/app/_components/copyButton";
 
-export default async function Result() {
-  const [variants, setVariants] = useState<Output["variants"]>([]);
-
+export default function Result({ variants }: { variants: Output["variants"] }) {
   return (
     <div className="border-l p-4">
       <h2 className="mb-2 text-xl font-semibold">Refined Variants</h2>
