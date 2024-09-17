@@ -14,16 +14,21 @@ import { useState } from "react";
 import { type Output } from "~/server/api/routers/shaper";
 import { api } from "~/trpc/react";
 
-export default function Form({ session }: { session: Session | null }) {
+export default function Form({
+  session,
+  setOutput,
+}: {
+  session: Session | null;
+  setOutput: (output: Output) => void;
+}) {
   const [productContext, setProductContext] = useState("");
   const [featureIdea, setFeatureIdea] = useState("");
   const [customInstruction, setCustomInstruction] = useState("");
   const [llm, setLlm] = useState("gpt-4o-mini");
-  const [results, setResults] = useState<Output[]>([]);
 
   const run = api.shaper.run.useMutation({
     onSuccess(results) {
-      setResults(results);
+      setOutput(results);
     },
   });
 

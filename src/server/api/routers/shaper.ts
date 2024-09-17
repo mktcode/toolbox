@@ -40,7 +40,6 @@ export const shaperRouter = createTRPCRouter({
     }
 
     const model = openai(llm.name);
-    const results: Output[] = [];
 
     const messages: CoreMessage[] = [];
 
@@ -66,8 +65,6 @@ export const shaperRouter = createTRPCRouter({
       schema: outputSchema,
     });
 
-    results.push(object);
-
     await ctx.db.tokenUsage.create({
       data: {
         input: usage.promptTokens,
@@ -82,6 +79,6 @@ export const shaperRouter = createTRPCRouter({
 
     await updateBalance();
 
-    return results;
+    return object;
   }),
 });

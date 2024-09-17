@@ -1,6 +1,6 @@
 import { getServerAuthSession } from "~/server/auth";
 
-import Form from "./_components/form";
+import Main from "./_components/main";
 
 export default async function NativeSpeakerPage() {
   const session = await getServerAuthSession();
@@ -13,9 +13,7 @@ export default async function NativeSpeakerPage() {
           Meaningful feature planning. Your developers will appreciate it.
         </div>
       </div>
-      <div className="grid grid-cols-2">
-        <Form session={session} />
-      </div>
+      <Main session={session} />
     </div>
   );
 }
