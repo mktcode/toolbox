@@ -29,16 +29,10 @@ export default async function Pricing() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl sm:text-center">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              No subscription. Pay per use.
+              Pricing
             </h2>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
-              I apply a considerable margin on top of the costs incurred by the
-              underlying providers. Consider it a way to support this project
-              and my work as a developer. Alternatively, you have the option to
-              set up your own instance to manage costs independently.
-            </p>
           </div>
-          <div className="mx-auto mt-16 max-w-2xl rounded-3xl shadow-2xl shadow-black/20 ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
+          <div className="mx-auto mt-16 max-w-2xl rounded-3xl sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
             <div className="p-8 sm:p-10 lg:flex-auto">
               <div className="grid grid-cols-3 gap-4">
                 <div />

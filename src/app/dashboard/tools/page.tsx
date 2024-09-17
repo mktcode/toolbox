@@ -15,47 +15,56 @@ export default async function DashboardPage() {
         </div>
       </header>
 
-      <main className="mx-auto my-16 grid w-full max-w-7xl grow grid-cols-1 flex-col gap-3 md:grid-cols-2">
-        <div className="rounded-lg bg-white p-4 shadow-lg">
-          <h2>Native Speaker</h2>
-          <p className="mb-6 text-gray-500">
-            Refine your texts and messages with the help of a native speaker.
-          </p>
-          <Link href="/tools/nativeSpeaker">
-            <Button className="button w-full">Use</Button>
-          </Link>
-        </div>
-        <div className="rounded-lg bg-white p-6 shadow-lg">
-          <h2>Search</h2>
-          <p className="mb-6 text-gray-500">
-            Let AI search the web for you. Get the most relevant results and
-            summarized information, including images and videos.
-          </p>
-          <Link href="/tools/search">
-            <Button className="button w-full">Use</Button>
-          </Link>
-        </div>
-        <div className="rounded-lg bg-white p-6 shadow-lg">
-          <h2>Feature Shaping</h2>
-          <p className="mb-6 text-gray-500">
-            Helps to shape your product features before implementing them.
-            Evaluate your ideas and clarify what can be clarified, in order to
-            reduce communication friction and increase the chances of creating
-            an actually useful feature.
-          </p>
-          <Button disabled className="button w-full">
-            Coming soon
-          </Button>
-        </div>
-        <div className="rounded-lg bg-white p-6 shadow-lg">
-          <h2>Image Generator</h2>
-          <p className="mb-6 text-gray-500">
-            Generate images for your social media posts, blog articles or
-            landingpages.
-          </p>
-          <Button disabled className="button w-full">
-            Coming soon
-          </Button>
+      <main className="mx-auto my-16 w-full max-w-7xl grow flex-col px-12">
+        <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2">
+          <div>
+            <div className="rounded-lg bg-white p-4 shadow-lg">
+              <div className="mb-3 h-56 rounded-md bg-gray-200 shadow-inner"></div>
+              <h2>Native Speaker</h2>
+              <p className="mb-6 text-gray-500">
+                Refine your texts and messages with the help of a native
+                speaker. Get suggestions for better wording and grammar and
+                learn the language on the go.
+              </p>
+              <Link href="/tools/nativeSpeaker">
+                <Button className="button w-full">Use</Button>
+              </Link>
+            </div>
+          </div>
+          <div className="space-y-6">
+            <div className="rounded-lg bg-white p-4 shadow-lg">
+              <h2>Search</h2>
+              <p className="mb-6 text-gray-500">
+                Let AI search the web for you. Get the most relevant results and
+                summarized information, including images and videos.
+              </p>
+              <Button disabled className="button w-full">
+                Coming soon
+              </Button>
+            </div>
+            <div className="rounded-lg bg-white p-4 shadow-lg">
+              <h2>Feature Shaping</h2>
+              <p className="mb-6 text-gray-500">
+                Helps to shape your product features before implementing them.
+                Evaluate your ideas and clarify what can be clarified, in order
+                to reduce communication friction and increase the chances of
+                creating an actually useful feature.
+              </p>
+              <Button disabled className="button w-full">
+                Coming soon
+              </Button>
+            </div>
+            <div className="rounded-lg bg-white p-4 shadow-lg">
+              <h2>Image Generator</h2>
+              <p className="mb-6 text-gray-500">
+                Generate images for your social media posts, blog articles or
+                landingpages.
+              </p>
+              <Button disabled className="button w-full">
+                Coming soon
+              </Button>
+            </div>
+          </div>
         </div>
       </main>
     </>

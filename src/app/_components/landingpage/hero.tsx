@@ -11,10 +11,10 @@ import {
 import { type Session } from "next-auth";
 import Link from "next/link";
 
-const navigation = [
-  { name: "Pricing", href: "#pricing" },
-  { name: "Blog", href: "#blog" },
-];
+const navigation: {
+  name: string;
+  href: string;
+}[] = [];
 
 export default function Hero({ session }: { session: Session | null }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -118,16 +118,11 @@ export default function Hero({ session }: { session: Session | null }) {
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
               My AI Toolbox.
-              <br />
-              You can use it too.
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              I rely on AI frequently and have developed several tools to
-              streamline tasks I found myself doing repeatedly. While it's a
-              paid service, the software is also open-source and free to use. If
-              you need custom features, want to run your own instance, or have
-              any questions about AI or software development in general, don't
-              hesitate to reach out.
+              I use language models a lot and develop tools to streamline tasks.
+              If you need custom features or have any questions about AI or
+              software development in general, don't hesitate to reach out.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-3">
               <a
