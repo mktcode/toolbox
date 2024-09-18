@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { type Session } from "next-auth";
 import Link from "next/link";
+import InstallPrompt from "../installPrompt";
 
 const navigation: {
   name: string;
@@ -125,6 +126,7 @@ export default function Hero({ session }: { session: Session | null }) {
               software development in general, don't hesitate to reach out.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-3">
+              <InstallPrompt />
               <a
                 href="mailto:toolbox@markus-kottlaender.de"
                 className="button shy"
