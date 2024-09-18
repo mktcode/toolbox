@@ -9,7 +9,7 @@ export default async function NativeSpeakerPage() {
       <div className="border-b p-4">
         <h1 className="text-2xl font-bold">Native Speaker Refinement</h1>
         <div className="text-gray-500">
-          Refine your text with the quality of a native speaker.
+          Translate and refine your texts with the quality of a native speaker.
         </div>
       </div>
       <Main session={session} />
