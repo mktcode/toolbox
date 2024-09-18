@@ -2,6 +2,7 @@
 
 import { type Output } from "~/server/api/routers/nativeSpeaker";
 import CopyButton from "~/app/_components/copyButton";
+import Markdown from "react-markdown";
 
 export default function Result({ variants }: { variants: Output["variants"] }) {
   return (
@@ -14,7 +15,9 @@ export default function Result({ variants }: { variants: Output["variants"] }) {
               key={index}
               className="rounded-md border border-indigo-200 bg-indigo-50 p-3"
             >
-              <p className="text-sm">{variant}</p>
+              <p className="text-sm">
+                <Markdown>{variant}</Markdown>
+              </p>
               <CopyButton
                 text={variant}
                 classNames="button shy mt-2"
