@@ -17,9 +17,8 @@ export default async function DashboardPage() {
 
       <main className="mx-auto my-16 w-full max-w-7xl grow flex-col px-12">
         <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2">
-          <div>
+          <div className="space-y-6">
             <div className="rounded-lg bg-white p-4 shadow-lg">
-              <div className="mb-3 h-56 rounded-md bg-gray-200 shadow-inner"></div>
               <h2>Native Speaker</h2>
               <p className="mb-6 text-gray-500">
                 Refine your texts and messages with the help of a native
@@ -27,6 +26,18 @@ export default async function DashboardPage() {
                 learn the language on the go.
               </p>
               <Link href="/tools/nativeSpeaker">
+                <Button className="button w-full">Use</Button>
+              </Link>
+            </div>
+            <div className="rounded-lg bg-white p-4 shadow-lg">
+              <h2>Don't Forget</h2>
+              <p className="mb-6 text-gray-500">
+                A simple tool to help you remember important details in your
+                planning. Just share a topic and some text, and it will guide
+                you through refining your ideas and ensuring nothing gets
+                missed.
+              </p>
+              <Link href="/tools/dontForget">
                 <Button className="button w-full">Use</Button>
               </Link>
             </div>

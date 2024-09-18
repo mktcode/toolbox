@@ -7,7 +7,7 @@ import Markdown from "react-markdown";
 export default function Result({ output }: { output: Output | undefined }) {
   return (
     <div className="border-l p-4">
-      <h2 className="mb-2 text-xl font-semibold">Refined Variants</h2>
+      <h2 className="mb-2 text-xl font-semibold">Response</h2>
       {output ? (
         <div className="space-y-2">
           <div className="rounded-md border border-indigo-200 bg-indigo-50 p-3">
