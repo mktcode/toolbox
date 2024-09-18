@@ -26,14 +26,14 @@ export default async function Pricing() {
     <>
       <a id="pricing" className="block h-0" />
       <div className="bg-white py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-2xl sm:text-center">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               Pricing
             </h2>
           </div>
           <div className="mx-auto mt-16 max-w-2xl rounded-3xl sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
-            <div className="p-8 sm:p-10 lg:flex-auto">
+            <div className="pb-6 sm:pr-3 lg:flex-auto">
               <div className="grid grid-cols-3 gap-4">
                 <div />
                 <div className="text-sm font-semibold">Pricing</div>
@@ -68,14 +68,14 @@ export default async function Pricing() {
                   <div className="mt-4 grid grid-cols-3 gap-4">
                     {provider.llms.map((llm) => (
                       <>
-                        <div>{llm.label}</div>
-                        <div className="text-sm text-gray-600">
+                        <div className="text-xs lg:text-base">{llm.label}</div>
+                        <div className="text-xs text-gray-600 lg:text-base">
                           ${formattedPrice(llm.priceIn, llm.margin)} / 1M input
                           tokens
                           <br />${formattedPrice(llm.priceOut, llm.margin)} / 1M
                           output tokens
                         </div>
-                        <div className="text-sm text-gray-600">
+                        <div className="text-xs text-gray-600 lg:text-base">
                           ${formattedPrice(llm.priceInBatch, llm.margin)} / 1M
                           input tokens
                           <br />${formattedPrice(

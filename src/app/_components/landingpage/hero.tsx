@@ -114,9 +114,9 @@ export default function Hero({ session }: { session: Session | null }) {
             className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
           />
         </div>
-        <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+        <div className="mx-auto max-w-2xl py-28 sm:py-32 lg:py-56">
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-6xl">
               My AI Toolbox.
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
@@ -124,7 +124,7 @@ export default function Hero({ session }: { session: Session | null }) {
               If you need custom features or have any questions about AI or
               software development in general, don't hesitate to reach out.
             </p>
-            <div className="mt-10 flex items-center justify-center gap-x-3">
+            <div className="mt-10 flex flex-col items-center justify-center gap-x-3 space-y-3 md:flex-row md:space-y-0">
               <a
                 href="mailto:toolbox@markus-kottlaender.de"
                 className="button shy"
@@ -153,6 +153,7 @@ export default function Hero({ session }: { session: Session | null }) {
                 </button>
               </Link>
               <a href="/dashboard" className="button !shadow-lg">
+                <WrenchScrewdriverIcon className="mr-3 h-4 w-4 opacity-40" />
                 {session ? "Dashboard" : "Try out for free!"}
               </a>
             </div>

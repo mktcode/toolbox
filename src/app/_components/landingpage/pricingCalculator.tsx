@@ -54,7 +54,7 @@ export default function PricingCalculator({
   }, [debouncedInput, debouncedOutput, llmId]);
 
   return (
-    <div className="p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
+    <div className="lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
       <div className="flex flex-col rounded-2xl ring-1 ring-inset ring-gray-200">
         <div className="p-3 text-sm font-semibold text-white">
           <Field>
@@ -108,7 +108,7 @@ export default function PricingCalculator({
         )}
         {price && selectedLlm && (
           <div className="rounded-b-2xl bg-indigo-600 p-3">
-            <table className="w-full rounded-lg bg-white/10 text-sm text-white">
+            <table className="w-full rounded-lg bg-white/10 text-xs text-white lg:text-sm">
               <tbody className="text-center">
                 <tr>
                   <th></th>
@@ -145,7 +145,7 @@ export default function PricingCalculator({
                 <tr>
                   <td className="col-span-3 h-3" />
                 </tr>
-                <tr className="text-xl">
+                <tr className="text-lg lg:text-xl">
                   <td className="px-3 pb-2 text-left">Total</td>
                   <td className="px-3 pb-2">{input.length + output.length}</td>
                   <td className="px-3 pb-2">
