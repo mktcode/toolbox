@@ -6,6 +6,7 @@ import { tokensRouter } from "./routers/tokens";
 import { llmProvidersRouter } from "./routers/llmProviders";
 import { nativeSpeakerRouter } from "./routers/nativeSpeaker";
 import { shaperRouter } from "./routers/shaper";
+import { dontForgetRouter } from "./routers/dontForget";
 
 /**
  * This is the primary router for your server.
@@ -13,6 +14,7 @@ import { shaperRouter } from "./routers/shaper";
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
+  dontForget: dontForgetRouter,
   feedback: feedbackRouter,
   llmProviders: llmProvidersRouter,
   nativeSpeaker: nativeSpeakerRouter,

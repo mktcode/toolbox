@@ -3,6 +3,7 @@
 import Stripe from "stripe";
 import { PrismaClient, type TopUp } from "@prisma/client";
 import { getServerAuthSession } from "./server/auth";
+import { type CompletionTokenUsage } from "ai";
 
 export async function updateBalance() {
   // sanity checks
@@ -128,4 +129,28 @@ export async function updateBalance() {
     balance,
     formattedBalance: balance.toFixed(3),
   };
+}
+
+export async function updateTokenUsage(
+  usage: CompletionTokenUsage,
+  llm: { id: string; priceIn: number; priceOut: number; margin: number },
+) {
+  const session = await getServerAuthSession();
+  if (!session) {
+    throw new Error("Unauthorized");
+  }
+
+  const db = new PrismaClient();
+
+  await db.tokenUsage.create({
+    data: {
+      input: usage.promptTokens,
+      inputCost: usage.promptTokens * llm.priceIn * (1 + llm.margin / 100),
+      output: usage.completionTokens,
+      outputCost:
+        usage.completionTokens * llm.priceOut * (1 + llm.margin / 100),
+      llm: { connect: { id: llm.id } },
+      user: { connect: { id: session.user.id } },
+    },
+  });
 }
