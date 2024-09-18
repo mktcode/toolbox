@@ -21,9 +21,9 @@ export default async function DashboardPage() {
             <div className="rounded-lg bg-white p-4 shadow-lg">
               <h2>Native Speaker</h2>
               <p className="mb-6 text-gray-500">
-                Refine your texts and messages with the help of a native
-                speaker. Get suggestions for better wording and grammar and
-                learn the language on the go.
+                Translate and refine your texts and messages with the help of a
+                native speaker. Get suggestions for better wording and grammar
+                and learn the language on the go.
               </p>
               <Link href="/tools/nativeSpeaker">
                 <Button className="button w-full">Use</Button>
