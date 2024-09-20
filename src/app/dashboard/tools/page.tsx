@@ -49,6 +49,21 @@ export default async function DashboardPage() {
                 Let AI search the web for you. Get the most relevant results and
                 summarized information, including images and videos.
               </p>
+              <div className="flex space-x-4">
+                <Button disabled className="button w-full">
+                  Coming soon
+                </Button>
+                <Link href="https://markus-kottlaender.de" target="_blank">
+                  <Button className="button w-full">Meanwhile...</Button>
+                </Link>
+              </div>
+            </div>
+            <div className="rounded-lg bg-white p-4 shadow-lg">
+              <h2>Digitizer</h2>
+              <p className="mb-6 text-gray-500">
+                Upload documents and images and extract structured data, to
+                import them into your favorite tools.
+              </p>
               <Button disabled className="button w-full">
                 Coming soon
               </Button>
