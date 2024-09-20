@@ -5,6 +5,7 @@ import { Dialog, DialogPanel } from "@headlessui/react";
 import {
   Bars3Icon,
   EnvelopeIcon,
+  ExclamationTriangleIcon,
   WrenchScrewdriverIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -116,6 +117,10 @@ export default function Hero({ session }: { session: Session | null }) {
         </div>
         <div className="mx-auto max-w-2xl py-28 sm:py-32 lg:py-56">
           <div className="text-center">
+            <span className="mb-12 inline-flex items-center rounded-full border border-indigo-300 px-4 py-2 text-gray-500">
+              <ExclamationTriangleIcon className="mr-2 h-5 w-5 opacity-60" />
+              Unstable beta release!
+            </span>
             <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-6xl">
               My AI Toolbox.
             </h1>
@@ -153,7 +158,7 @@ export default function Hero({ session }: { session: Session | null }) {
                 </button>
               </Link>
               <a href="/dashboard" className="button !shadow-lg">
-                <WrenchScrewdriverIcon className="mr-3 h-4 w-4 opacity-40" />
+                <WrenchScrewdriverIcon className="mr-3 h-4 w-4 opacity-60" />
                 {session ? "Dashboard" : "Try out for free!"}
               </a>
             </div>
