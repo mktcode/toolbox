@@ -1,5 +1,4 @@
 import { createCallerFactory, createTRPCRouter } from "./trpc";
-import { templateRouter } from "./routers/template";
 import { topupRouter } from "./routers/topup";
 import { feedbackRouter } from "./routers/feedback";
 import { tokensRouter } from "./routers/tokens";
@@ -20,7 +19,6 @@ export const appRouter = createTRPCRouter({
   llmProviders: llmProvidersRouter,
   nativeSpeaker: nativeSpeakerRouter,
   shaper: shaperRouter,
-  template: templateRouter,
   tokens: tokensRouter,
   topup: topupRouter,
   voice: voiceRouter,
