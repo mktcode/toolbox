@@ -29,7 +29,7 @@ export default async function DashboardPage() {
         <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2">
           <div className="space-y-6">
             <div className="rounded-lg bg-white p-4 shadow-lg">
-              <h2>Native Speaker</h2>
+              <h2 className="mb-3">Native Speaker</h2>
               <p className="mb-6 text-gray-500">
                 Translate and refine your texts and messages with the help of a
                 native speaker. Get suggestions for better wording and grammar
@@ -40,7 +40,7 @@ export default async function DashboardPage() {
               </Link>
             </div>
             <div className="rounded-lg bg-white p-4 shadow-lg">
-              <h2>Don't Forget</h2>
+              <h2 className="mb-3">Don't Forget</h2>
               <p className="mb-6 text-gray-500">
                 A simple tool to help you remember important details in your
                 planning. Just share a topic and some text, and it will guide
@@ -52,7 +52,7 @@ export default async function DashboardPage() {
               </Link>
             </div>
             <div className="rounded-lg bg-white p-4 shadow-lg">
-              <h2>Voice Generator</h2>
+              <h2 className="mb-3">Voice Generator</h2>
               <p className="mb-6 text-gray-500">
                 Generate professional voice recordings from your text.
               </p>
@@ -63,7 +63,7 @@ export default async function DashboardPage() {
           </div>
           <div className="space-y-6">
             <div className="rounded-lg bg-white p-4 shadow-lg">
-              <h2>Search</h2>
+              <h2 className="mb-3">Search</h2>
               <p className="mb-6 text-gray-500">
                 Let AI search the web for you. Get the most relevant results and
                 summarized information, including images and videos.
@@ -78,7 +78,7 @@ export default async function DashboardPage() {
               </div>
             </div>
             <div className="rounded-lg bg-white p-4 shadow-lg">
-              <h2>Digitizer</h2>
+              <h2 className="mb-3">Digitizer</h2>
               <p className="mb-6 text-gray-500">
                 Upload documents and images and extract structured data, to
                 import them into your favorite tools.
@@ -88,7 +88,7 @@ export default async function DashboardPage() {
               </Button>
             </div>
             <div className="rounded-lg bg-white p-4 shadow-lg">
-              <h2>Feature Shaping</h2>
+              <h2 className="mb-3">Feature Shaping</h2>
               <p className="mb-6 text-gray-500">
                 Helps to shape your product features before implementing them.
                 Evaluate your ideas and clarify what can be clarified, in order
@@ -100,7 +100,7 @@ export default async function DashboardPage() {
               </Button>
             </div>
             <div className="rounded-lg bg-white p-4 shadow-lg">
-              <h2>Image Generator</h2>
+              <h2 className="mb-3">Image Generator</h2>
               <p className="mb-6 text-gray-500">
                 Generate images for your social media posts, blog articles or
                 landingpages.
