@@ -44,3 +44,7 @@ yarn-error.log*
 
 # idea files
 .idea
+
+# Generated Data (Audio, Images, etc.)
+/data
+/public/data

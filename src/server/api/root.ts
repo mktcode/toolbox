@@ -7,6 +7,7 @@ import { llmProvidersRouter } from "./routers/llmProviders";
 import { nativeSpeakerRouter } from "./routers/nativeSpeaker";
 import { shaperRouter } from "./routers/shaper";
 import { dontForgetRouter } from "./routers/dontForget";
+import { voiceRouter } from "./routers/voice";
 
 /**
  * This is the primary router for your server.
@@ -22,6 +23,7 @@ export const appRouter = createTRPCRouter({
   template: templateRouter,
   tokens: tokensRouter,
   topup: topupRouter,
+  voice: voiceRouter,
 });
 
 // export type definition of API

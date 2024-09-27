@@ -41,6 +41,15 @@ export default async function DashboardPage() {
                 <Button className="button w-full">Use</Button>
               </Link>
             </div>
+            <div className="rounded-lg bg-white p-4 shadow-lg">
+              <h2>Voice Generator</h2>
+              <p className="mb-6 text-gray-500">
+                Generate professional voice recordings from your text.
+              </p>
+              <Link href="/tools/voice">
+                <Button className="button w-full">Use</Button>
+              </Link>
+            </div>
           </div>
           <div className="space-y-6">
             <div className="rounded-lg bg-white p-4 shadow-lg">
@@ -85,15 +94,6 @@ export default async function DashboardPage() {
               <p className="mb-6 text-gray-500">
                 Generate images for your social media posts, blog articles or
                 landingpages.
-              </p>
-              <Button disabled className="button w-full">
-                Coming soon
-              </Button>
-            </div>
-            <div className="rounded-lg bg-white p-4 shadow-lg">
-              <h2>Voice Generator</h2>
-              <p className="mb-6 text-gray-500">
-                Generate professional voice recordings from your text.
               </p>
               <Button disabled className="button w-full">
                 Coming soon
