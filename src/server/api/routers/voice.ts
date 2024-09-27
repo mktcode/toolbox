@@ -48,8 +48,6 @@ export const voiceRouter = createTRPCRouter({
       apiKey: process.env.OPENAI_API_KEY,
     });
 
-    console.log(speed);
-
     const mp3 = await openai.audio.speech.create({
       model: "tts-1",
       voice: voice,
