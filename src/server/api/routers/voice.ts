@@ -60,7 +60,7 @@ export const voiceRouter = createTRPCRouter({
     // await updateTokenUsage(usage, llm);
     // await updateBalance();
 
-    const randomHash = Math.random().toString(36).substring(7);
+    const randomHash = Math.random().toString(36).substring(12);
     const speechDir = path.resolve(`${process.env.DATA_DIR}/voice`);
     const speechFile = path.resolve(`${speechDir}/${randomHash}.mp3`);
     await fs.promises.mkdir(speechDir, { recursive: true });
