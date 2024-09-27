@@ -28,9 +28,7 @@ export default function Result({ output }: { output: Output | undefined }) {
           </a>
         </>
       ) : (
-        <p className="text-sm italic text-gray-500">
-          No response generated yet.
-        </p>
+        <p className="text-sm italic text-gray-500">No audio generated yet.</p>
       )}
     </div>
   );
