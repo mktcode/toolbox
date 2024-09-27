@@ -6,6 +6,7 @@ import { TRPCError } from "@trpc/server";
 import { updateBalance, updateTokenUsage } from "~/actions";
 import OpenAI from "openai";
 import { availableVoices } from "~/app/tools/voice/_lib";
+import { type CompletionTokenUsage } from "ai";
 
 const inputSchema = z.object({
   text: z.string(),
@@ -20,8 +21,19 @@ const resultSchema = z.object({
 export type Output = z.infer<typeof resultSchema>;
 
 export const voiceRouter = createTRPCRouter({
-  run: fundedProcedure.input(inputSchema).mutation(async ({ input }) => {
+  run: fundedProcedure.input(inputSchema).mutation(async ({ input, ctx }) => {
     const { text, voice, speed } = input;
+
+    const ttsModel = await ctx.db.llm.findFirst({
+      where: { name: "tts" },
+    });
+
+    if (!ttsModel) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "TTS Model not found",
+      });
+    }
 
     if (!process.env.OPENAI_API_KEY) {
       throw new TRPCError({
@@ -55,8 +67,15 @@ export const voiceRouter = createTRPCRouter({
       speed: speed,
     });
 
-    // await updateTokenUsage(usage, llm);
-    // await updateBalance();
+    const promptTokens = text.length / 4;
+    const usage: CompletionTokenUsage = {
+      promptTokens,
+      completionTokens: 0,
+      totalTokens: promptTokens,
+    };
+
+    await updateTokenUsage(usage, ttsModel);
+    await updateBalance();
 
     const randomHash = Math.random().toString(36).substring(12);
     const speechDir = path.resolve(`${process.env.DATA_DIR}/voice`);
