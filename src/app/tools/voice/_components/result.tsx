@@ -18,7 +18,12 @@ export default function Result({ output }: { output: Output | undefined }) {
             classNames="button shy mt-2"
             label="Copy URL"
           />
-          <a href={output.url} download className="button mt-2 w-full">
+          <a
+            href={output.url}
+            download
+            className="button mt-2 w-full"
+            target="_blank"
+          >
             Download
           </a>
         </>
