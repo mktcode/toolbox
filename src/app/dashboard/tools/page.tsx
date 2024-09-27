@@ -1,4 +1,5 @@
 import { Button } from "@headlessui/react";
+import { SparklesIcon } from "@heroicons/react/24/outline";
 import { type Metadata } from "next";
 import Link from "next/link";
 
@@ -16,6 +17,15 @@ export default async function DashboardPage() {
       </header>
 
       <main className="mx-auto my-6 w-full max-w-7xl grow flex-col px-4 lg:my-16 lg:px-12">
+        <div className="mb-6 rounded-lg border border-gray-300 p-4 text-gray-500">
+          Some input fields have a{" "}
+          <SparklesIcon className="inline-block h-5 w-5 text-indigo-500" /> icon
+          to refine your input. This will help you to improve the quality of
+          your input and get better results. It consumes your credits but it's
+          pretty cheap and saves some time... sometimes. Quickly enter some
+          words, don't worry about typos or grammar, and let the context-aware
+          AI guess what you actually meant.
+        </div>
         <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2">
           <div className="space-y-6">
             <div className="rounded-lg bg-white p-4 shadow-lg">
