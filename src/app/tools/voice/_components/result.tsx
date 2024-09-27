@@ -9,7 +9,7 @@ export default function Result({ output }: { output: Output | undefined }) {
       <h2 className="mb-2 text-xl font-semibold">Generated Audio</h2>
       {output ? (
         <>
-          <audio controls className="mb-2 w-full">
+          <audio key={output.url} controls className="mb-2 w-full">
             <source src={output.url} type="audio/mpeg" />
             Your browser does not support the audio element.
           </audio>

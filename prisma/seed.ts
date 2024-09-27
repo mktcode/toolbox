@@ -47,11 +47,28 @@ async function main() {
 
   await prisma.llm.create({
     data: {
-      name: "tts",
+      name: "tts-1",
       label: "Text to Speech",
       priceIn: 0.00006,
       priceOut: 0,
       priceInBatch: 0.00006,
+      priceOutBatch: 0,
+      margin: 25,
+      provider: {
+        connect: {
+          id: llmProvder.id,
+        },
+      },
+    },
+  });
+
+  await prisma.llm.create({
+    data: {
+      name: "tts-1-hd",
+      label: "Text to Speech",
+      priceIn: 0.00012,
+      priceOut: 0,
+      priceInBatch: 0.00012,
       priceOutBatch: 0,
       margin: 25,
       provider: {

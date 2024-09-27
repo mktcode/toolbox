@@ -5,13 +5,15 @@ import { createTRPCRouter, fundedProcedure } from "~/server/api/trpc";
 import { TRPCError } from "@trpc/server";
 import { updateBalance, updateTokenUsage } from "~/actions";
 import OpenAI from "openai";
-import { availableVoices } from "~/app/tools/voice/_lib";
+import { availableTTSModels, availableVoices } from "~/app/tools/voice/_lib";
 import { type CompletionTokenUsage } from "ai";
+import { randomUUID } from "crypto";
 
 const inputSchema = z.object({
   text: z.string(),
   voice: z.enum(availableVoices),
   speed: z.number(),
+  model: z.enum(availableTTSModels),
 });
 export type Input = z.infer<typeof inputSchema>;
 
@@ -22,10 +24,10 @@ export type Output = z.infer<typeof resultSchema>;
 
 export const voiceRouter = createTRPCRouter({
   run: fundedProcedure.input(inputSchema).mutation(async ({ input, ctx }) => {
-    const { text, voice, speed } = input;
+    const { text, voice, speed, model } = input;
 
     const ttsModel = await ctx.db.llm.findFirst({
-      where: { name: "tts" },
+      where: { name: model },
     });
 
     if (!ttsModel) {
@@ -61,7 +63,7 @@ export const voiceRouter = createTRPCRouter({
     });
 
     const mp3 = await openai.audio.speech.create({
-      model: "tts-1",
+      model: ttsModel.name,
       voice: voice,
       input: text,
       speed: speed,
@@ -77,14 +79,15 @@ export const voiceRouter = createTRPCRouter({
     await updateTokenUsage(usage, ttsModel);
     await updateBalance();
 
-    const randomHash = Math.random().toString(36).substring(12);
+    // uuid
+    const uuid = randomUUID();
     const speechDir = path.resolve(`${process.env.DATA_DIR}/voice`);
-    const speechFile = path.resolve(`${speechDir}/${randomHash}.mp3`);
+    const speechFile = path.resolve(`${speechDir}/${uuid}.mp3`);
     await fs.promises.mkdir(speechDir, { recursive: true });
     const buffer = Buffer.from(await mp3.arrayBuffer());
     await fs.promises.writeFile(speechFile, buffer);
 
-    const url = `${process.env.DATA_URL}/voice/${randomHash}.mp3`;
+    const url = `${process.env.DATA_URL}/voice/${uuid}.mp3`;
 
     return { url };
   }),
