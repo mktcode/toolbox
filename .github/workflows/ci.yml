@@ -123,6 +123,8 @@ jobs:
           echo "SMTP_PASS=\"${{ secrets.SMTP_PASS }}\"" >> .env
           echo "UNLEASH_SERVER_API_URL=\"${{ secrets.UNLEASH_SERVER_API_URL }}\"" >> .env
           echo "UNLEASH_SERVER_API_TOKEN=\"${{ secrets.UNLEASH_SERVER_API_TOKEN }}\"" >> .env
+          echo "DATA_DIR=\"${{ secrets.DATA_DIR }}\"" >> .env
+          echo "DATA_URL=\"${{ secrets.DATA_URL }}\"" >> .env
 
       - run: npm run db:tunnel & sleep 5
 
