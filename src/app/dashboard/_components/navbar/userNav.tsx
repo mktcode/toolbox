@@ -3,7 +3,6 @@
 import { MenuItems } from "@headlessui/react";
 import Link from "next/link";
 import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/20/solid";
-import { BanknotesIcon } from "@heroicons/react/24/outline";
 
 export default function UserNav() {
   return (
