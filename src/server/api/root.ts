@@ -7,6 +7,7 @@ import { nativeSpeakerRouter } from "./routers/nativeSpeaker";
 import { shaperRouter } from "./routers/shaper";
 import { dontForgetRouter } from "./routers/dontForget";
 import { voiceRouter } from "./routers/voice";
+import { refineInputRouter } from "./routers/refineInput";
 
 /**
  * This is the primary router for your server.
@@ -22,6 +23,7 @@ export const appRouter = createTRPCRouter({
   tokens: tokensRouter,
   topup: topupRouter,
   voice: voiceRouter,
+  refineInput: refineInputRouter,
 });
 
 // export type definition of API
