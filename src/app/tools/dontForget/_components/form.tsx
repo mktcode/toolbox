@@ -14,6 +14,7 @@ import { type Session } from "next-auth";
 import { useState } from "react";
 import { type Output } from "~/server/api/routers/dontForget";
 import { api } from "~/trpc/react";
+import RefineInputButton from "../../_components/refineInputButton";
 
 export default function Form({
   session,
@@ -58,11 +59,20 @@ export default function Form({
           <Label className="mb-1 text-sm font-semibold">
             Custom Instructions
           </Label>
-          <Input
-            value={customInstructions}
-            onChange={(event) => setCustomInstructions(event.target.value)}
-            className="input"
-          />
+          <div className="relative">
+            <Input
+              value={customInstructions}
+              onChange={(event) => setCustomInstructions(event.target.value)}
+              className="input pr-8"
+            />
+            <RefineInputButton
+              text={customInstructions}
+              context="Don't Forget: A simple tool to help you remember important details in your planning."
+              label="Custom Instructions"
+              setter={setCustomInstructions}
+              className="absolute right-2 top-1/2 -translate-y-1/2 transform text-indigo-500"
+            />
+          </div>
         </Field>
         <Field className="flex flex-col md:col-span-2 lg:col-span-3">
           <Label className="mb-1 text-sm font-semibold">Text</Label>
