@@ -46,7 +46,7 @@ export default function RefineInputButton({
       disabled={!text || run.isPending}
     >
       {run.isPending ? (
-        <Spinner className="h-5 w-5 text-indigo-500" />
+        <Spinner className="h-5 w-5 !text-indigo-500" />
       ) : (
         <SparklesIcon className="h-5 w-5" />
       )}
