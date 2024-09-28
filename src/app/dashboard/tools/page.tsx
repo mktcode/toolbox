@@ -29,7 +29,12 @@ export default async function DashboardPage() {
         <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2">
           <div className="space-y-6">
             <div className="rounded-lg bg-white p-4 shadow-lg">
-              <h2 className="mb-3">Native Speaker</h2>
+              <h2 className="mb-3 flex items-center justify-between">
+                Native Speaker
+                <div className="ml-2 inline-block rounded-full border border-indigo-300 px-2 py-1 text-xs font-normal text-gray-500">
+                  Beta
+                </div>
+              </h2>
               <p className="mb-6 text-gray-500">
                 Translate and refine your texts and messages with the help of a
                 native speaker. Get suggestions for better wording and grammar
@@ -40,7 +45,12 @@ export default async function DashboardPage() {
               </Link>
             </div>
             <div className="rounded-lg bg-white p-4 shadow-lg">
-              <h2 className="mb-3">Don't Forget</h2>
+              <h2 className="mb-3 flex items-center justify-between">
+                Don't Forget
+                <div className="ml-2 inline-block rounded-full border border-indigo-300 px-2 py-1 text-xs font-normal text-gray-500">
+                  Beta
+                </div>
+              </h2>
               <p className="mb-6 text-gray-500">
                 A simple tool to help you remember important details in your
                 planning. Just share a topic and some text, and it will guide
@@ -52,7 +62,12 @@ export default async function DashboardPage() {
               </Link>
             </div>
             <div className="rounded-lg bg-white p-4 shadow-lg">
-              <h2 className="mb-3">Voice Generator</h2>
+              <h2 className="mb-3 flex items-center justify-between">
+                Voice Generator
+                <div className="ml-2 inline-block rounded-full border border-indigo-300 px-2 py-1 text-xs font-normal text-gray-500">
+                  Beta
+                </div>
+              </h2>
               <p className="mb-6 text-gray-500">
                 Generate professional voice recordings from your text.
               </p>
@@ -76,6 +91,17 @@ export default async function DashboardPage() {
                   <Button className="button w-full">Meanwhile...</Button>
                 </Link>
               </div>
+            </div>
+            <div className="rounded-lg bg-white p-4 shadow-lg">
+              <h2 className="mb-3">Prompt Engineer</h2>
+              <p className="mb-6 text-gray-500">
+                Optimize your prompts for various AI models. Generate examples
+                and make your prompts as explicit as possible, following the
+                guidelines and best practices for each model and use case.
+              </p>
+              <Button disabled className="button w-full">
+                Coming soon
+              </Button>
             </div>
             <div className="rounded-lg bg-white p-4 shadow-lg">
               <h2 className="mb-3">Digitizer</h2>
