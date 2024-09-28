@@ -1,3 +1,4 @@
+# TODO: Rename to "deploy.yml" and add a "ci.yml" for the CI workflow
 name: CI
 
 on:
