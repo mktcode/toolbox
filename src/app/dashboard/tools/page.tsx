@@ -30,6 +30,21 @@ export default async function DashboardPage() {
           <div className="space-y-6">
             <div className="rounded-lg bg-white p-4 shadow-lg">
               <h2 className="mb-3 flex items-center justify-between">
+                Proofreader
+                <div className="ml-2 inline-block rounded-full border border-indigo-300 px-2 py-1 text-xs font-normal text-gray-500">
+                  Beta
+                </div>
+              </h2>
+              <p className="mb-6 text-gray-500">
+                Get your text proofread by AI. Fix typos, grammar, and style
+                issues. Get suggestions for better wording and readability.
+              </p>
+              <Link href="/tools/proofreader">
+                <Button className="button w-full">Use</Button>
+              </Link>
+            </div>
+            <div className="rounded-lg bg-white p-4 shadow-lg">
+              <h2 className="mb-3 flex items-center justify-between">
                 Native Speaker
                 <div className="ml-2 inline-block rounded-full border border-indigo-300 px-2 py-1 text-xs font-normal text-gray-500">
                   Beta

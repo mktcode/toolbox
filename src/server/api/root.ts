@@ -8,6 +8,7 @@ import { shaperRouter } from "./routers/shaper";
 import { dontForgetRouter } from "./routers/dontForget";
 import { voiceRouter } from "./routers/voice";
 import { refineInputRouter } from "./routers/refineInput";
+import { proofreaderRouter } from "./routers/proofreader";
 
 /**
  * This is the primary router for your server.
@@ -24,6 +25,7 @@ export const appRouter = createTRPCRouter({
   topup: topupRouter,
   voice: voiceRouter,
   refineInput: refineInputRouter,
+  proofreader: proofreaderRouter,
 });
 
 // export type definition of API
