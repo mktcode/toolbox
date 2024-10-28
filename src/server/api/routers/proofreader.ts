@@ -19,13 +19,9 @@ const resultSchema = z.object({
   language: z.string().describe("The language of the text"),
   corrections: z
     .array(z.string())
-    .min(1)
-    .max(3)
     .describe("Mistakes in the text and their corrections"),
   suggestions: z
     .array(z.string())
-    .min(1)
-    .max(3)
     .describe("Suggestions for improving the text"),
   correctedText: z.string().describe("The corrected text"),
 });
