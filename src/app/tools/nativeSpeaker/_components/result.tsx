@@ -15,9 +15,9 @@ export default function Result({ variants }: { variants: Output["variants"] }) {
               key={index}
               className="rounded-md border border-indigo-200 bg-indigo-50 p-3"
             >
-              <p className="text-sm">
+              <div className="text-sm">
                 <Markdown>{variant}</Markdown>
-              </p>
+              </div>
               <CopyButton
                 text={variant}
                 classNames="button shy mt-2"

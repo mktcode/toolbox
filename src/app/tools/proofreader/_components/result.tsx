@@ -17,9 +17,9 @@ export default function Result({ output }: { output: Output }) {
               key={index}
               className="rounded-md border border-indigo-200 bg-indigo-50 p-3"
             >
-              <p className="text-sm">
+              <div className="text-sm">
                 <Markdown>{correction}</Markdown>
-              </p>
+              </div>
             </div>
           ))}
         </div>
@@ -34,9 +34,9 @@ export default function Result({ output }: { output: Output }) {
               key={index}
               className="rounded-md border border-indigo-200 bg-indigo-50 p-3"
             >
-              <p className="text-sm">
+              <div className="text-sm">
                 <Markdown>{suggestion}</Markdown>
-              </p>
+              </div>
             </div>
           ))}
         </div>

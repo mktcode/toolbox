@@ -11,9 +11,9 @@ export default function Result({ output }: { output: Output | undefined }) {
       {output ? (
         <div className="space-y-2">
           <div className="rounded-md border border-indigo-200 bg-indigo-50 p-3">
-            <p className="text-sm">
+            <div className="text-sm">
               <Markdown>{output.response}</Markdown>
-            </p>
+            </div>
             <CopyButton
               text={output.response}
               classNames="button shy mt-2"
