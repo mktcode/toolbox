@@ -17,9 +17,9 @@
     "lint:ci": "next lint",
     "format": "prettier . --write",
     "start": "next start",
-    "prod:update": "rsync -avz -e 'ssh -i ~/.ssh/uberspace-mktcode' .next/standalone/ mktcode@alnilam.uberspace.de:/home/mktcode/projects/senior.markus-kottlaender.de",
-    "prod:start": "ssh -i ~/.ssh/uberspace-mktcode mktcode@alnilam.uberspace.de 'supervisorctl start senior.markus-kottlaender.de'",
-    "prod:stop": "ssh -i ~/.ssh/uberspace-mktcode mktcode@alnilam.uberspace.de 'supervisorctl stop senior.markus-kottlaender.de'",
+    "prod:update": "rsync -avz -e 'ssh -i ~/.ssh/uberspace-mktcode' .next/standalone/ mktcode@alnilam.uberspace.de:/home/mktcode/projects/toolbox.markus-kottlaender.de",
+    "prod:start": "ssh -i ~/.ssh/uberspace-mktcode mktcode@alnilam.uberspace.de 'supervisorctl start toolbox.markus-kottlaender.de'",
+    "prod:stop": "ssh -i ~/.ssh/uberspace-mktcode mktcode@alnilam.uberspace.de 'supervisorctl stop toolbox.markus-kottlaender.de'",
     "deploy": "npm ci && npm run build && npm run prod:stop && npm run db:push --accept-data-loss && npm run prod:update && npm run prod:start",
     "prepare": "husky"
   },
