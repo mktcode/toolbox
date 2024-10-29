@@ -87,7 +87,6 @@ export const nativeSpeakerRouter = createTRPCRouter({
       model,
       messages,
       schema: resultSchema,
-      temperature: 0.5,
     });
 
     await ctx.db.tokenUsage.create({

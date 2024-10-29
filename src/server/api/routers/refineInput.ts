@@ -95,7 +95,6 @@ Now it's your turn to refine the user input based on the provided context.`,
       model,
       messages,
       schema: resultSchema,
-      temperature: 0.5,
     });
 
     await updateTokenUsage(usage, llm);

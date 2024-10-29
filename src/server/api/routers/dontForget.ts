@@ -59,7 +59,6 @@ export const dontForgetRouter = createTRPCRouter({
       model,
       messages,
       schema: resultSchema,
-      temperature: 0.5,
     });
 
     await updateTokenUsage(usage, llm);
