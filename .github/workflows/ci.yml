@@ -84,7 +84,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: prod
-      url: https://senior.markus-kottlaender.de
+      url: https://toolbox.markus-kottlaender.de
 
     steps:
       - name: Checkout
