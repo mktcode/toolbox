@@ -2,6 +2,7 @@ import { Button } from "@headlessui/react";
 import { SparklesIcon } from "@heroicons/react/24/outline";
 import { type Metadata } from "next";
 import Link from "next/link";
+import Flag from "~/app/_components/flag";
 
 export const metadata: Metadata = {
   title: "Toolbox / Dashboard",
@@ -114,9 +115,19 @@ export default async function DashboardPage() {
                 and make your prompts as explicit as possible, following the
                 guidelines and best practices for each model and use case.
               </p>
-              <Button disabled className="button w-full">
-                Coming soon
-              </Button>
+              <Flag
+                name="toolbox.promptengineer"
+                enabled={
+                  <Link href="/tools/promptEngineer">
+                    <Button className="button w-full">Use</Button>
+                  </Link>
+                }
+                disabled={
+                  <Button disabled className="button w-full">
+                    Coming soon
+                  </Button>
+                }
+              />
             </div>
             <div className="rounded-lg bg-white p-4 shadow-lg">
               <h2 className="mb-3">Digitizer</h2>
