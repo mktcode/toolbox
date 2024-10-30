@@ -28,8 +28,8 @@ import { getFlags } from "../unleash";
  * @see https://trpc.io/docs/server/context
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
-  const flags = await getFlags();
   const session = await getServerAuthSession();
+  const flags = await getFlags(session);
 
   return {
     db,

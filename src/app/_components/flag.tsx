@@ -1,3 +1,4 @@
+import { getServerAuthSession } from "~/server/auth";
 import { getFlags } from "~/server/unleash";
 
 export default async function Flag({
@@ -9,7 +10,8 @@ export default async function Flag({
   enabled?: React.ReactNode;
   disabled?: React.ReactNode;
 }) {
-  const flags = await getFlags();
+  const session = await getServerAuthSession();
+  const flags = await getFlags(session);
 
   if (flags.isEnabled(name) && enabled) {
     return <>{enabled}</>;
