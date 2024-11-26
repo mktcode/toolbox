@@ -40,7 +40,7 @@ export default async function Pricing() {
                 <div className="text-sm font-semibold">Batch Pricing</div>
               </div>
               {llmProviders.map((provider) => (
-                <>
+                <div key={provider.id}>
                   <div className="flex items-center gap-x-4">
                     <h4 className="flex-none text-sm font-semibold leading-6 text-indigo-600">
                       {provider.name}
@@ -67,7 +67,7 @@ export default async function Pricing() {
                   </div>
                   <div className="mt-4 grid grid-cols-3 gap-4">
                     {provider.llms.map((llm) => (
-                      <>
+                      <div key={llm.id}>
                         <div className="text-xs lg:text-base">{llm.label}</div>
                         <div className="text-xs text-gray-600 lg:text-base">
                           ${formattedPrice(llm.priceIn, llm.margin)} / 1M input
@@ -84,10 +84,10 @@ export default async function Pricing() {
                           )}{" "}
                           / 1M output tokens
                         </div>
-                      </>
+                      </div>
                     ))}
                   </div>
-                </>
+                </div>
               ))}
             </div>
             <PricingCalculator
